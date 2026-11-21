@@ -79,7 +79,7 @@ Gambar yang dipakai berasal dari lampiran proposal (peta denah lokasi, gambar ke
 
 ## Deploy
 
-Repositori: `https://github.com/saybaads3/ARUTALA`. Branch produksi: `main`.
+Repositori: `https://github.com/sayba-ads2/ARUTALA`. Branch produksi: `main`.
 
 Vercel: import repo, framework terdeteksi Next.js, lalu tambahkan variabel environment
 (lihat `.env.local.example` atau `VERCEL-ENV-ARUTALA.txt` di folder induk proyek).
