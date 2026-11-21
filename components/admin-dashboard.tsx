@@ -191,7 +191,7 @@ export default function AdminDashboard({ email }: { email: string }) {
           ARUTALA ADMIN
         </p>
         {TABS.map((t) => (
-          <button key={t.id} type="button" aria-current={tab === t.id} onClick={() => { setTab(t.id); reset(); }}>
+          <button key={t.id} type="button" aria-current={tab === t.id} onClick={() => { setTab(t.id); reset(); window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }); }}>
             {t.label}
           </button>
         ))}

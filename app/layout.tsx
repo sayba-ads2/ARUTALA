@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import SiteAmbience from "@/components/site-ambience";
+import ScrollManager from "@/components/scroll-manager";
 import Gestures from "@/components/gestures";
 import ClickSpark from "@/components/bits/click-spark";
 import { site } from "@/lib/content";
@@ -142,6 +143,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Lompat ke konten utama
         </a>
         <SiteAmbience />
+        <ScrollManager />
         <Gestures />
         <ClickSpark />
         <SiteHeader />
