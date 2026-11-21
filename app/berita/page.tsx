@@ -38,7 +38,7 @@ export default async function BeritaPage() {
               <aside className="card aside-rubrik">
                 <p className="eyebrow" style={{ margin: 0 }}>Tentang rubrik ini</p>
                 <p style={{ margin: 0, color: "var(--ink-soft)" }}>
-                  Berita ditulis oleh Divisi Humas dan dapat langsung ditayangkan lewat panel admin —
+                  Berita ditulis oleh Divisi Humas dan dapat langsung ditayangkan lewat panel admin,
                   tanpa perlu menyentuh kode. Kategori: Kabar, Lapangan, Pasca, Kemitraan, Merch.
                 </p>
                 <p className="small muted" style={{ margin: 0 }}>

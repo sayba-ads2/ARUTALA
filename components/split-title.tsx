@@ -1,4 +1,4 @@
-/** Judul yang tersusun per huruf lalu naik bergelombang. Murni CSS — jalan bahkan sebelum hydrate. */
+/** Judul yang tersusun per huruf lalu naik bergelombang. Murni CSS, jalan bahkan sebelum hydrate. */
 export default function SplitTitle({ text, className = "" }: { text: string; className?: string }) {
   return (
     <h1 className={`hero__title split ${className}`.trim()}>
