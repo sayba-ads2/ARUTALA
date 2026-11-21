@@ -31,7 +31,6 @@ export default async function Home() {
       <section className="hero">
         <BetangBackdrop />
 
-
         <div className="wrap hero__inner">
           <div className="hero__top">
             <span><ShinyText text="PMKM ARUTALA 2027" /></span>
@@ -167,25 +166,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section section--betang" aria-labelledby="betang-judul" id="betang">
-        <div className="wrap">
-          <div className="betang-head" data-reveal>
-            <p className="eyebrow">Rumah Betang</p>
-            <h2 className="section-title" id="betang-judul">
-              Satu rumah panjang, satu ruang untuk semua kabar.
-            </h2>
-            <p className="lede" style={{ marginTop: "1.25rem", maxWidth: "62ch" }}>
-              Di Dusun Sungai Utik, rumah betang adalah pusat musyawarah: tiap tiangnya ditopang banyak keluarga,
-              ruang tengahnya tidak pernah dipakai satu pihak sendirian. Versi garis penuh bangunan ini
-              menjadi latar pada hero di puncak halaman.
-            </p>
-          </div>
-          <div style={{ marginTop: "1.5rem", display: "flex", flexWrap: "wrap", gap: "0.8rem" }}>
-            <Link className="btn btn--gold" href="/tentang#betang">Cerita betang lengkap</Link>
-            <Link className="btn btn--ghost" href="/dokumentasi">Arsip rumah betang</Link>
-          </div>
-        </div>
-      </section>
+      
 
       <section className="section section--paper2" aria-labelledby="program-judul">
         <div className="wrap">
