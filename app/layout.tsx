@@ -159,7 +159,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){if(!('IntersectionObserver' in window))return;var els=document.querySelectorAll('[data-reveal]');if(!els.length)return;var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-in');io.unobserve(en.target);}});},{rootMargin:'0px 0px -8% 0px'});els.forEach(function(el){io.observe(el);});})();`,
+            __html: `(function(){
+var els=[].slice.call(document.querySelectorAll('[data-reveal]'));
+if(!els.length)return;
+function show(el){el.classList.add('is-in')}
+if(!('IntersectionObserver' in window)){els.forEach(show);return;}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+if(e.isIntersecting){show(e.target);io.unobserve(e.target);}});},
+{rootMargin:'0px 0px -6% 0px',threshold:0.08});
+els.forEach(function(el){io.observe(el)});
+// safety net: sebagian browser/ekstensi tidak pernah memicu callback IO
+setTimeout(function(){
+var any=els.some(function(el){return el.classList.contains('is-in')});
+if(any)return;
+var check=function(){els.forEach(function(el){
+if(!el.classList.contains('is-in')&&el.getBoundingClientRect().top<innerHeight*1.02)show(el);});};
+check();
+addEventListener('scroll',check,{passive:true});addEventListener('resize',check);
+},900);
+})()`,
           }}
         />
       </body>

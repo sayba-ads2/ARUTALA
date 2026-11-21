@@ -38,7 +38,11 @@ export default function Reveal({
       { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
     );
     io.observe(el);
-    return () => io.disconnect();
+    const fb = setTimeout(() => setShown(true), 1600);
+    return () => {
+      clearTimeout(fb);
+      io.disconnect();
+    };
   }, []);
 
   const Comp = Tag as React.ElementType;

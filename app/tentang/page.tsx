@@ -1,7 +1,6 @@
 import Link from "next/link";
 import PageHead from "@/components/page-head";
 import TenunBand from "@/components/tenun-band";
-import BetangIllustration from "@/components/betang";
 import { funding, panitia, site } from "@/lib/content";
 import { percentLabel, rupiah } from "@/lib/format";
 
@@ -238,7 +237,7 @@ export default function TentangPage() {
           </div>
         </div>
       </section>
-      <section className="section section--betang" aria-labelledby="betang-tentang">
+      <section className="section section--paper" id="betang" aria-labelledby="betang-tentang">
         <div className="wrap">
           <div className="betang-head" data-reveal>
             <p className="eyebrow">Rumah Betang</p>
@@ -249,7 +248,6 @@ export default function TentangPage() {
               tempat program diuji apakah benar berguna.
             </p>
           </div>
-          <BetangIllustration />
         </div>
       </section>
 

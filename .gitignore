@@ -28,3 +28,6 @@ _qa_out.json
 __pycache__/
 _libsupa.py
 tools_sync_db.py
+
+# QA artefak lokal
+_qa*.json

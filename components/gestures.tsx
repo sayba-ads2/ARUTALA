@@ -71,28 +71,7 @@ export default function Gestures() {
       });
     }
 
-    /* ---- hero river sway mengikuti pointer ---- */
-    const river = document.querySelector<SVGSVGElement>(".hero__river");
-    const hero = document.querySelector<HTMLElement>(".hero");
-    if (river && hero) {
-      const onMove = (e: PointerEvent) => {
-        const r = hero.getBoundingClientRect();
-        const nx = (e.clientX - r.left) / r.width - 0.5;
-        const ny = (e.clientY - r.top) / r.height - 0.5;
-        river.style.setProperty("--sway-x", (nx * 26).toFixed(1) + "px");
-        river.style.setProperty("--sway-y", (ny * 14).toFixed(1) + "px");
-      };
-      const onLeave = () => {
-        river.style.setProperty("--sway-x", "0px");
-        river.style.setProperty("--sway-y", "0px");
-      };
-      hero.addEventListener("pointermove", onMove);
-      hero.addEventListener("pointerleave", onLeave);
-      cleanups.push(() => {
-        hero.removeEventListener("pointermove", onMove);
-        hero.removeEventListener("pointerleave", onLeave);
-      });
-    }
+    /* hero river effect diganti BetangBackdrop (lihat components/betang-backdrop.tsx) */
 
     return () => cleanups.forEach((fn) => fn());
   }, []);

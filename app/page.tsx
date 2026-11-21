@@ -12,7 +12,7 @@ import GoogleMapsEmbed from "@/components/bits/google-maps-embed";
 import Reveal from "@/components/reveal";
 import MagneticLink from "@/components/magnetic-link";
 import { NewsCard } from "@/components/news";
-import BetangIllustration from "@/components/betang";
+import BetangBackdrop from "@/components/betang-backdrop";
 import { programs, site, tiers } from "@/lib/content";
 import { listSponsors, listBerita } from "@/lib/repo";
 import { compactRupiah, formatDate } from "@/lib/format";
@@ -29,13 +29,8 @@ export default async function Home() {
   return (
     <>
       <section className="hero">
-        <svg className="hero__river" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
-          <g fill="none" stroke="currentColor" strokeWidth="1.1">
-            <path d="M-40 620C220 560 330 700 560 640S920 470 1160 540s280 30 340-10" />
-            <path d="M-40 680C240 620 350 760 580 700s360-170 600-100 300 30 360-10" opacity=".6" />
-            <path d="M-40 740C260 680 380 820 600 760s340-170 580-100 320 30 380-10" opacity=".16" />
-          </g>
-        </svg>
+        <BetangBackdrop />
+
 
         <div className="wrap hero__inner">
           <div className="hero__top">
@@ -172,7 +167,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="section section--betang" aria-labelledby="betang-judul">
+      <section className="section section--betang" aria-labelledby="betang-judul" id="betang">
         <div className="wrap">
           <div className="betang-head" data-reveal>
             <p className="eyebrow">Rumah Betang</p>
@@ -181,11 +176,14 @@ export default async function Home() {
             </h2>
             <p className="lede" style={{ marginTop: "1.25rem", maxWidth: "62ch" }}>
               Di Dusun Sungai Utik, rumah betang adalah pusat musyawarah: tiap tiangnya ditopang banyak keluarga,
-              ruang tengahnya tidak pernah dipakai satu pihak sendirian. Ilustrasi garis di bawah merujuk denah dan
-              foto betang pada lampiran proposal.
+              ruang tengahnya tidak pernah dipakai satu pihak sendirian. Versi garis penuh bangunan ini
+              menjadi latar pada hero di puncak halaman.
             </p>
           </div>
-          <BetangIllustration />
+          <div style={{ marginTop: "1.5rem", display: "flex", flexWrap: "wrap", gap: "0.8rem" }}>
+            <Link className="btn btn--gold" href="/tentang#betang">Cerita betang lengkap</Link>
+            <Link className="btn btn--ghost" href="/dokumentasi">Arsip rumah betang</Link>
+          </div>
         </div>
       </section>
 
