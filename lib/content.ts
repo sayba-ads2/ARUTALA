@@ -340,7 +340,120 @@ export const panitia = {
 export const nav = [
   { href: "/program", label: "Program" },
   { href: "/sponsor", label: "Sponsor" },
+  { href: "/berita", label: "Berita" },
   { href: "/dokumentasi", label: "Dokumentasi" },
   { href: "/merch", label: "Merch" },
   { href: "/tentang", label: "Tentang" },
+];
+
+// ---------------------------------------------------------------- berita
+// Seed editorial: seluruh fakta berasal dari proposal (rundown, program, panitia).
+// Setelah panel admin menayangkan berita pertama, isi Supabase menjadi sumber.
+export type BeritaSeed = {
+  slug: string;
+  judul: string;
+  ringkasan: string;
+  konten: string;
+  kategori: "Kabar" | "Lapangan" | "Pasca" | "Kemitraan" | "Merch";
+  gambar_url: string | null;
+  penulis: string;
+  tanggal: string;
+  unggulan: boolean;
+  tampil: boolean;
+};
+
+export const beritaSeed: BeritaSeed[] = [
+  {
+    slug: "pmkm-arutala-2027-ditetapkan",
+    judul: "PMKM ARUTALA 2027 Resmi Ditetapkan: Bakti Teknik Lingkungan ke Desa Batu Lintang",
+    ringkasan:
+      "Tiga puluh delapan mahasiswa Teknik Lingkungan Untan akan bekerja 15 hari di Dusun Sungai Utik, Kapuas Hulu, pada 7 sampai 21 Januari 2027.",
+    konten: `## Apa yang akan dikerjakan
+    ARUTALA 2027 adalah Program Pengabdian Kepada Masyarakat Mahasiswa Teknik Lingkungan Universitas Tanjungpura.
+    Tahun ini sasaran kegiatan ada dua desa di Kecamatan Embaloh Hulu, Kabupaten Kapuas Hulu: Desa Batu Lintang
+    (khususnya Dusun Sungai Utik) dan Desa Sebindang.
+
+    Empat program kerja menjadi inti kegiatan: pemetaan digital dan desa wisata, edukasi lingkungan di sekolah,
+    penghijauan dan perbaikan sanitasi, serta penyediaan alat pengolahan air bersih Sebindang.
+
+    ## Kenapa desa ini
+    Sungai Utik dikenal luas karena Rumah Betang dan komitmen masyarakat adat menjaga hutan. Data ruang desa
+    itu belum terdigitalisasi, sementara persoalan sampah, sanitasi, dan air bersih menunggu sentuhan teknis.
+    Di titik pertemuan itulah mahasiswa Teknik Lingkungan hadir: membawa metode, belajar dari warga.
+
+    ## Jadwal besar
+    Tim awal bertolak lebih dulu pada 7 Januari untuk menyiapkan sambutan dan teknis lapangan, disusul
+    keberangkatan peserta pada 9 Januari. Rangkaian ditutup malam puncak dan kembali ke Pontianak pada 21 Januari.
+    Detail harian dapat dibaca di halaman Program.`,
+    kategori: "Kabar",
+    gambar_url: "/img/og-arutala.jpg",
+    penulis: "Sekretaris ARUTALA 2027",
+    tanggal: "2026-11-25",
+    unggulan: true,
+    tampil: true,
+  },
+  {
+    slug: "survei-awal-jejak-menuju-hulu-kapuas",
+    judul: "Tim Survei Menjejak Jalan ke Hulu Kapuas, Denah Lokasi Disiapkan",
+    ringkasan:
+      "Survei awal memetakan akses, titik kegiatan, dan denah lokasi skala 1:1.000 sebagai dasar kerja lapangan.",
+    konten: `## Denah 1:1.000
+    Tim survei menyusun peta denah lokasi kegiatan dengan basemap citra satelit: jalan, rumah warga, lahan,
+    pekarangan, posyandu, dan rumah ibadah ditandai satu per satu. Denah inilah yang menjadi acuan letak
+    tugu, plang, titik perbaikan TPS, dan lokasi penanaman bibit.
+
+    ## Jalur darat lintas provinsi
+    Perjalanan dari Pontianak memakai bus perintis melalui jalur darat lintas Kalimantan Barat. Waktu tempuh
+    dan biaya transportasi ini menjadi pos anggaran terbesar, sehingga jadwal keberangkatan disusun presisi.
+
+    ## Apa berikutnya
+    Hasil survei dibahas dalam persiapan tim awal sebelum peserta berangkat. Catatan lapangan versi foto akan
+    ditambahkan ke halaman Dokumentasi setelah tim awal tiba di Sungai Utik.`,
+    kategori: "Kabar",
+    gambar_url: "/img/peta-lokasi.jpg",
+    penulis: "Divisi Survey Awal",
+    tanggal: "2026-12-05",
+    unggulan: false,
+    tampil: true,
+  },
+  {
+    slug: "pamflet-unduhan-kampanye-dana-dibuka",
+    judul: "Pamflet dan Proposal Unduhan Dibuka untuk Calon Mitra",
+    ringkasan:
+      "Matriks fasilitas sponsor, simulasi peletakan logo di rompi panitia, dan tautan unduh proposal tersedia publik.",
+    konten: `## Kemudahan bagi mitra
+    Halaman Sponsor kini menampilkan empat tingkatan dukungan, matriks fasilitas yang jelas per tingkatan,
+    serta simulasi tata letak logo mitra pada rompi panitia. Kapasitas slot logo dibatasi empat puluh posisi
+    agar setiap mitra mendapat tempat yang terbaca.
+
+    ## Kanal resmi
+    Dokumen proposal dapat diunduh langsung dari situs. Setiap penawaran resmi selalu mencantumkan kontak
+    panitia yang tercantum di halaman Tautan; di luar kanal itu bukan wewenang kepanitiaan.`,
+    kategori: "Kemitraan",
+    gambar_url: null,
+    penulis: "Divisi Usaha Dana",
+    tanggal: "2026-12-12",
+    unggulan: false,
+    tampil: true,
+  },
+  {
+    slug: "merch-arutala-dikonsep",
+    judul: "Merch ARUTALA Dikonsep: Sebagian Hasil Menyokong Kegiatan",
+    ringkasan:
+      "Katalog merchandise disiapkan sebagai salah satu jalur dana; pesanan diproses panitia dan dikonfirmasi via WhatsApp.",
+    konten: `## Cara kerjanya
+    Katalog merch menampilkan produk yang dijual untuk mendukung pendanaan kegiatan. Pemesanan lewat keranjang
+    situs, lalu panitia menghubungi pembeli untuk konfirmasi stok dan pembayaran. Kode pesanan yang diberikan
+    simpan baik-baik sebagai rujukan.
+
+    ## Catatan desain
+    Identitas visual merch memakai palet dan motif tenun yang sama dengan situs ini: kertas hangat, tinta
+    hijau sungai, dan aksen oker.`,
+    kategori: "Merch",
+    gambar_url: null,
+    penulis: "Divisi Perlengkapan",
+    tanggal: "2026-12-20",
+    unggulan: false,
+    tampil: true,
+  },
 ];

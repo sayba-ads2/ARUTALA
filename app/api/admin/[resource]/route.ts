@@ -3,9 +3,9 @@ import { z } from "zod";
 import { requireAdmin } from "@/lib/admin-auth";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
-type Res = "sponsors" | "programs" | "produk" | "pesanan" | "dokumentasi";
+type Res = "sponsors" | "programs" | "produk" | "pesanan" | "dokumentasi" | "berita";
 
-const TABLES: Res[] = ["sponsors", "programs", "produk", "pesanan", "dokumentasi"];
+const TABLES: Res[] = ["sponsors", "programs", "produk", "pesanan", "dokumentasi", "berita"];
 
 const sponsorSchema = z.object({
   nama_sponsor: z.string().trim().min(1).max(160),
@@ -49,6 +49,19 @@ const dokumentasiSchema = z.object({
   tampil: z.coerce.boolean().optional().default(true),
 });
 
+const beritaSchema = z.object({
+  slug: z.string().trim().max(160).optional(),
+  judul: z.string().trim().min(1).max(220),
+  ringkasan: z.string().trim().min(1).max(400),
+  konten: z.string().trim().min(1).max(20000),
+  kategori: z.string().trim().min(1).max(60).optional().default("Kabar"),
+  gambar_url: z.string().trim().max(500).nullable().optional(),
+  penulis: z.string().trim().max(120).nullable().optional(),
+  tanggal: z.string().trim().min(8).max(12),
+  unggulan: z.coerce.boolean().optional().default(false),
+  tampil: z.coerce.boolean().optional().default(true),
+});
+
 const pesananPatch = z.object({
   status: z.enum(["baru", "dikonfirmasi", "dikirim", "selesai", "batal"]),
 });
@@ -58,6 +71,7 @@ const SCHEMAS: Record<string, z.ZodTypeAny> = {
   programs: programSchema,
   produk: produkSchema,
   dokumentasi: dokumentasiSchema,
+  berita: beritaSchema,
   pesanan: pesananPatch,
 };
 
@@ -66,6 +80,7 @@ const PATCH_SCHEMAS: Record<string, z.ZodTypeAny> = {
   programs: programSchema.partial(),
   produk: produkSchema.partial(),
   dokumentasi: dokumentasiSchema.partial(),
+  berita: beritaSchema.partial(),
   pesanan: pesananPatch,
 };
 
@@ -98,7 +113,7 @@ export async function GET(_req: Request, ctx: Params) {
   if (g.resource === "sponsors") q = q.order("nominal_akumulasi", { ascending: false });
   else if (g.resource === "programs") q = q.order("no", { ascending: true });
   else if (g.resource === "pesanan") q = q.order("created_at", { ascending: false });
-  else if (g.resource === "dokumentasi") q = q.order("tanggal", { ascending: false });
+  else if (g.resource === "dokumentasi" || g.resource === "berita") q = q.order("tanggal", { ascending: false });
   else q = q.order("created_at", { ascending: false });
 
   const { data, error } = await q;
@@ -125,6 +140,10 @@ export async function POST(req: Request, ctx: Params) {
     const nama = row.nama as string;
     row.slug = row.slug || nama.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     row.aktif = row.aktif ?? true;
+  }
+  if (g.resource === "berita") {
+    const judul = row.judul as string;
+    row.slug = row.slug || judul.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 90);
   }
 
   const { data, error } = await g.db!.from(g.resource!).insert(row).select().single();

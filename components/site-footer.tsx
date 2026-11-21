@@ -22,6 +22,7 @@ export default function SiteFooter() {
             <div className="footer-list">
               <Link href="/program">Program kerja</Link>
               <Link href="/sponsor">Sponsor dan mitra</Link>
+              <Link href="/berita">Berita &amp; kabar</Link>
               <Link href="/dokumentasi">Dokumentasi lapangan</Link>
               <Link href="/merch">Merchandise</Link>
               <Link href="/tentang">Tentang dan anggaran</Link>

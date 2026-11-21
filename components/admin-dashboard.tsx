@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { rupiah } from "@/lib/format";
 
-type Tab = "ringkasan" | "sponsors" | "produk" | "pesanan" | "programs" | "dokumentasi";
+type Tab = "ringkasan" | "sponsors" | "produk" | "pesanan" | "programs" | "dokumentasi" | "berita";
 type Row = Record<string, unknown>;
 
 type Field = {
@@ -24,6 +24,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "pesanan", label: "Pesanan" },
   { id: "programs", label: "Program" },
   { id: "dokumentasi", label: "Dokumentasi" },
+  { id: "berita", label: "Berita" },
 ];
 
 const FIELDS: Record<Exclude<Tab, "ringkasan" | "pesanan">, Field[]> = {
@@ -65,6 +66,17 @@ const FIELDS: Record<Exclude<Tab, "ringkasan" | "pesanan">, Field[]> = {
     { key: "gambar_url", label: "URL gambar", type: "text", half: true },
     { key: "tampil", label: "Tampilkan di halaman dokumentasi", type: "checkbox" },
   ],
+  berita: [
+    { key: "judul", label: "Judul berita", type: "text", required: true },
+    { key: "kategori", label: "Kategori", type: "select", options: ["Kabar", "Lapangan", "Pasca", "Kemitraan", "Merch"], half: true },
+    { key: "tanggal", label: "Tanggal terbit", type: "date", required: true, half: true },
+    { key: "ringkasan", label: "Ringkasan (tampil di kartu)", type: "textarea", required: true },
+    { key: "konten", label: "Isi berita (baris kosong = paragraf baru; awali baris dengan ## untuk subjudul, > untuk kutipan)", type: "textarea" },
+    { key: "penulis", label: "Penulis / divisi", type: "text", half: true, placeholder: "Humas ARUTALA" },
+    { key: "gambar_url", label: "URL gambar utama", type: "text", half: true, placeholder: "/img/berita/nama.jpg" },
+    { key: "unggulan", label: "Jadwalkan sebagai berita utama", type: "checkbox" },
+    { key: "tampil", label: "Tampilkan di halaman berita", type: "checkbox" },
+  ],
 };
 
 const DEFAULTS: Record<string, Row> = {
@@ -72,6 +84,7 @@ const DEFAULTS: Record<string, Row> = {
   produk: { nama: "", kategori: "", slug: "", harga: 0, stok: 0, gambar_url: "", deskripsi: "", aktif: true },
   programs: { no: "05", slug: "", title: "", faction: "", lead: "", body: "", output: "", publikasi: true },
   dokumentasi: { tanggal: "", fase: "Lapangan", judul: "", keterangan: "", program_slug: "", gambar_url: "", tampil: true },
+  berita: { judul: "", kategori: "Kabar", tanggal: "", ringkasan: "", konten: "", penulis: "Humas ARUTALA", gambar_url: "", unggulan: false, tampil: true },
 };
 
 export default function AdminDashboard({ email }: { email: string }) {
@@ -426,6 +439,7 @@ export default function AdminDashboard({ email }: { email: string }) {
                         {tab === "produk" && `${rupiah(Number(r.harga))} · stok ${String(r.stok)} · ${r.aktif ? "aktif" : "nonaktif"}`}
                         {tab === "programs" && `${String(r.slug)} · ${r.publikasi ? "publik" : "draf"}`}
                         {tab === "dokumentasi" && `${String(r.tanggal)} · ${String(r.fase)} · ${r.tampil ? "tampil" : "disembunyikan"}`}
+                        {tab === "berita" && `${String(r.tanggal)} · ${String(r.kategori)}${r.unggulan ? " · unggulan" : ""} · ${r.tampil ? "tampil" : "disembunyikan"}`}
                       </small>
                     </div>
                     <div className="admin-actions">

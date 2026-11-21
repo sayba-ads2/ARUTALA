@@ -44,3 +44,6 @@ export const formatDate = (iso: string) => {
 export const orderCode = () =>
   "ART-" + Date.now().toString(36).toUpperCase().slice(-6) +
   Math.floor(Math.random() * 90 + 10);
+
+export const estimateMinutes = (teks: string) =>
+  Math.max(1, Math.round(teks.split(/\s+/).length / 180));

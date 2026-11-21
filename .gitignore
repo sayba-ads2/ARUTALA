@@ -12,3 +12,6 @@ next-env.d.ts
 .tmpcheck
 .tmp2
 .nextstart.log
+
+.pptr-*.js
+.tmp-home.html

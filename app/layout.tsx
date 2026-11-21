@@ -2,6 +2,7 @@ import type React from "react";
 import type { Metadata, Viewport } from "next";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
+import SiteAmbience from "@/components/site-ambience";
 import { site } from "@/lib/content";
 import "./globals.css";
 
@@ -57,7 +58,10 @@ export const metadata: Metadata = {
     images: ["/img/og-arutala.jpg"],
   },
   robots: { index: true, follow: true },
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    types: { rss: "/rss.xml" },
+  },
 };
 
 const eventSchema = {
@@ -100,6 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#isi" className="sr-only">
           Lompat ke konten utama
         </a>
+        <SiteAmbience />
         <SiteHeader />
         <main id="isi">{children}</main>
         <SiteFooter />

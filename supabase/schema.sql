@@ -78,12 +78,29 @@ create table if not exists public.dokumentasi (
   created_at timestamptz not null default now()
 );
 
+
+-- ---------------------------------------------------------------- berita
+create table if not exists public.berita (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  judul text not null,
+  ringkasan text not null,
+  konten text not null,
+  kategori text not null default 'Kabar',
+  gambar_url text,
+  penulis text,
+  tanggal date not null default current_date,
+  unggulan boolean not null default false,
+  tampil boolean not null default true,
+  created_at timestamptz not null default now()
+);
 -- ---------------------------------------------------------------- RLS
 alter table public.sponsors enable row level security;
 alter table public.programs enable row level security;
 alter table public.produk enable row level security;
 alter table public.pesanan enable row level security;
 alter table public.dokumentasi enable row level security;
+alter table public.berita enable row level security;
 
 -- Baca publik hanya untuk konten yang dipublikasikan.
 drop policy if exists "sponsors read" on public.sponsors;
@@ -94,6 +111,9 @@ create policy "programs read publik" on public.programs for select using (publik
 
 drop policy if exists "produk read aktif" on public.produk;
 create policy "produk read aktif" on public.produk for select using (aktif = true);
+
+drop policy if exists "berita read tampil" on public.berita;
+create policy "berita read tampil" on public.berita for select using (tampil = true);
 
 drop policy if exists "dokumentasi read tampil" on public.dokumentasi;
 create policy "dokumentasi read tampil" on public.dokumentasi for select using (tampil = true);

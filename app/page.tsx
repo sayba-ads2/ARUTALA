@@ -2,15 +2,24 @@ import Link from "next/link";
 import TenunBand from "@/components/tenun-band";
 import ProgramList from "@/components/program-list";
 import FundingPanel from "@/components/funding-panel";
+import Ticker from "@/components/ticker";
+import SplitTitle from "@/components/split-title";
+import CountUp from "@/components/count-up";
+import Reveal from "@/components/reveal";
+import MagneticLink from "@/components/magnetic-link";
+import { NewsCard } from "@/components/news";
 import { programs, site, tiers } from "@/lib/content";
-import { listSponsors } from "@/lib/repo";
-import { compactRupiah } from "@/lib/format";
+import { listSponsors, listBerita } from "@/lib/repo";
+import { compactRupiah, formatDate } from "@/lib/format";
 
 export const revalidate = 300;
 
 export default async function Home() {
   const sponsors = await listSponsors();
   const top = sponsors.slice(0, 3);
+  const berita = await listBerita();
+  const latest = [...berita].sort((a, b) => (a.tanggal < b.tanggal ? 1 : -1)).slice(0, 3);
+  const beritaCards = latest.map((b) => ({ ...b, tanggal: formatDate(b.tanggal) }));
 
   return (
     <>
@@ -30,7 +39,7 @@ export default async function Home() {
             <span>{site.dates.label}</span>
           </div>
 
-          <h1 className="hero__title">Arutala</h1>
+          <SplitTitle text="Arutala" />
           <p className="hero__tagline">Menjejak bakti, menjaga lestari.</p>
 
           <div className="hero__grid">
@@ -81,23 +90,32 @@ export default async function Home() {
         <TenunBand variant="dark" />
       </section>
 
+      <Ticker
+        items={[
+          { strong: "Pendaftaran mitra", label: "empat tingkat dukungan dibuka sampai keberangkatan", href: "/sponsor" },
+          { strong: "Kabar terbaru", label: latest[0]?.judul ?? "ruang kabar redaksi humas", href: "/berita" },
+          { strong: "Logbook", label: "15 hari dijadwalkan, foto menyusul dari lapangan", href: "/dokumentasi" },
+          { strong: "Merch", label: "sebagian hasil penjualan menyokong kegiatan", href: "/merch" },
+        ]}
+      />
+
       <section className="section--tight">
         <div className="wrap">
           <div className="stats">
             <div className="stat">
-              <b>38</b>
+              <b><CountUp to={38} pad={2} /></b>
               <span>Mahasiswa peserta</span>
             </div>
             <div className="stat">
-              <b>15</b>
+              <b><CountUp to={15} pad={2} /></b>
               <span>Hari di lapangan</span>
             </div>
             <div className="stat">
-              <b>04</b>
+              <b><CountUp to={4} pad={2} /></b>
               <span>Program kerja</span>
             </div>
             <div className="stat">
-              <b>02</b>
+              <b><CountUp to={2} pad={2} /></b>
               <span>Desa binaan</span>
             </div>
           </div>
@@ -285,6 +303,71 @@ export default async function Home() {
                 <figcaption>Laporan dampak</figcaption>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="berita-judul">
+        <div className="wrap">
+          <div className="section-head">
+            <div data-reveal>
+              <p className="eyebrow">Ruang kabar</p>
+              <h2 className="section-title" id="berita-judul">Kabar dari panitia, langsung dari sumbernya.</h2>
+            </div>
+            <p className="lede" data-reveal>
+              Ditulis Divisi Humas: persiapan, catatan lapangan, kemitraan, dan merch. Berita baru dari panel
+              admin muncul di sini tanpa perlu mengubah kode.
+            </p>
+          </div>
+
+          {beritaCards.length > 0 && (
+            <div className="news-grid">
+              {beritaCards.map((n, i) => (
+                <Reveal key={n.slug} delay={i * 90}>
+                  <NewsCard item={n} />
+                </Reveal>
+              ))}
+            </div>
+          )}
+          <div style={{ marginTop: "1.9rem", display: "flex", gap: "0.8rem", flexWrap: "wrap" }}>
+            <MagneticLink href="/berita" className="btn btn--ghost btn--sm">
+              Semua berita
+            </MagneticLink>
+            <MagneticLink href="/links" className="btn btn--ghost btn--sm" strength={0.16}>
+              Kanal resmi
+            </MagneticLink>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--paper2" aria-labelledby="ekosistem-judul">
+        <div className="wrap">
+          <div data-reveal style={{ maxWidth: "60ch", marginBottom: "2rem" }}>
+            <p className="eyebrow">Satu ekosistem</p>
+            <h2 className="section-title" id="ekosistem-judul">Enam ruang yang saling menghidupi program.</h2>
+          </div>
+          <div className="eco-grid">
+            {[
+              { no: "01", t: "Program", p: "Empat kerja nyata dengan indikator yang bisa diperiksa.", d: "Rundown 15 hari, divisi, dan luaran terukur.", h: "/program" },
+              { no: "02", t: "Kemitraan", p: "Tingkatan sponsor adil: logo, fasilitas, dan slot rompi.", d: "Matriks fasilitas dan papan peringkat mitra.", h: "/sponsor" },
+              { no: "03", t: "Berita", p: "Kabar resmi tertulis, bukan berantai dari grup tak jelas.", d: "Kategori Kabar hingga Pasca, dikelola Humas.", h: "/berita" },
+              { no: "04", t: "Dokumentasi", p: "Logbook harian dan bukti foto sebelum–sesudah.", d: "Sinkron dengan status pekerjaan lapangan.", h: "/dokumentasi" },
+              { no: "05", t: "Merch", p: "Penjualan mendukung dana kegiatan, konfirmasi via panitia.", d: "Keranjang, kode pesanan, dan status pengiriman.", h: "/merch" },
+              { no: "06", t: "Tentang", p: "Anggaran terbuka dan susunan panitia penuh.", d: "Semua angka dari proposal resmi.", h: "/tentang" },
+            ].map((c) => (
+              <Link key={c.no} href={c.h} className="eco-card">
+                <span className="eco-card__no">{c.no} · ARUTALA</span>
+                <h3>{c.t}</h3>
+                <p>{c.p}</p>
+                <p className="small muted" style={{ margin: 0 }}>{c.d}</p>
+                <span className="eco-card__go">
+                  Masuk
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 12h15m0 0-6-6m6 6-6 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                  </svg>
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
