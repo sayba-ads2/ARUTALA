@@ -37,44 +37,54 @@
 
 @theme {
   --color-paper: #f4f1e7;
-  --color-paper2: #ebe6d6;
-  --color-raise: #fbf8f0;
-  --color-ink: #141d18;
-  --color-inksoft: #4c564d;
-  --color-river: #0e2e38;
-  --color-river2: #092028;
-  --color-forest: #1b4635;
-  --color-ochre: #9e621a;
-  --color-ochreink: #8a5315;
-  --color-ochrebright: #d8a055;
+  --color-paper2: #16304b;
+  --color-raise: #14304a;
+  --color-ink: #eaf1f8;
+  --color-inksoft: #9fb3c8;
+  --color-river: #0b2342;
+  --color-forest: #123f34;
+  --color-ochre: #e0a23c;
+  --color-ochreink: #f2c266;
+  --color-night: #0a1a2f;
+  --color-surface: #0e2238;
+  --color-surface2: #12293f;
+  --color-river2: #081d36;
+  --color-ochrebright: #f2c266;
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
   --font-body: "Jakarta", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Plex Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
 :root {
-  /* Palet mengikuti identitas logo ARUTALA: biru dongkel + emas */
+  /* ARUTALA -- Ekspedisi malam di hulu Kapuas.
+     Permukaan gelap bertingkat; teks krem; aksen kuningan.
+     --paper kini warna TEKS krem, bukan latar kertas. */
+  --night: #0a1a2f;
+  --surface: #0e2238;
+  --surface-2: #12293f;
   --paper: #f4f1e7;
-  --paper-2: #ebe6d6;
-  --raise: #fbf8f0;
-  --ink: #131a24;
-  --ink-soft: #4b5563;
+  --paper-2: #16304b;
+  --raise: #14304a;
+  --ink: #eaf1f8;
+  --ink-soft: #9fb3c8;
+  --muted: #9fb3c8;
   --river: #0b2342;
-  --river-2: #071a30;
-  --forest: #1a4a6e;
-  --ochre: #a97615;
-  --ochre-ink: #8a6414;
-  --ochre-bright: #d9a83f;
-  --gold: #d9a83f;
-  --gold-deep: #b8860b;
-  --line: rgba(20, 29, 24, 0.14);
-  --line-strong: rgba(20, 29, 24, 0.3);
+  --river-2: #081d36;
+  --forest: #123f34;
+  --ochre: #e0a23c;
+  --ochre-ink: #f2c266;
+  --ochre-bright: #f2c266;
+  --gold: #e0a23c;
+  --gold-deep: #a87c22;
+  --line: rgba(234, 241, 248, 0.13);
+  --line-strong: rgba(234, 241, 248, 0.32);
   --on-dark: rgba(244, 241, 231, 0.84);
   --on-dark-line: rgba(244, 241, 231, 0.16);
+  --glass: rgba(8, 24, 43, 0.66);
   --gutter: clamp(20px, 5vw, 64px);
   --section-y: clamp(56px, 8vw, 112px);
   --max: 1240px;
-  --r: 3px;
+  --r: 14px;
 }
 
 *,
@@ -91,7 +101,11 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background:
+    radial-gradient(1200px 560px at 86% -8%, rgba(224, 162, 60, 0.09), transparent 62%),
+    radial-gradient(1000px 720px at -14% 30%, rgba(18, 63, 52, 0.3), transparent 58%),
+    var(--night);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: "Jakarta", ui-sans-serif, system-ui, sans-serif;
   font-size: 16px;
@@ -151,7 +165,7 @@ button {
   padding-block: clamp(36px, 5vw, 64px);
 }
 .section--paper2 {
-  background: var(--paper-2);
+  background: var(--surface-2);
 }
 .section--river {
   background: var(--river);
@@ -290,20 +304,20 @@ button {
   background: var(--ochre-ink);
 }
 .btn--dark {
-  background: var(--river);
-  color: var(--paper);
+  background: var(--paper);
+  color: #0a1a2f;
 }
 .btn--dark:hover {
-  background: var(--river-2);
+  background: #fffdf6;
 }
 .btn--ghost {
-  border-color: var(--line-strong);
-  color: var(--ink);
+  border-color: rgba(244, 241, 231, 0.34);
+  color: var(--paper);
   background: transparent;
 }
 .btn--ghost:hover {
-  border-color: var(--ink);
-  background: rgba(20, 29, 24, 0.04);
+  border-color: var(--paper);
+  background: rgba(244, 241, 231, 0.08);
 }
 .btn--on-dark {
   border-color: rgba(244, 241, 231, 0.34);
@@ -337,19 +351,36 @@ button {
 }
 
 /* ---------- header ---------- */
+/* --- Header: kapsul melayang di atas hero (ala Sayba Arc, adaptasi ARUTALA) --- */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 60;
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
+  left: 0;
+  right: 0;
+  z-index: 70;
+  background: transparent;
+  border-bottom: 0;
+  padding-top: max(12px, env(safe-area-inset-top));
+}
+
+.site-header .wrap {
+  max-width: calc(var(--max) + 32px);
 }
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.25rem;
-  min-height: 64px;
+  gap: 1rem;
+  min-height: 54px;
+  padding: 0.3rem 0.4rem 0.3rem 0.8rem;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 8px 30px -14px rgba(0, 0, 0, 0.7);
+  transition: background-color 0.35s ease, border-color 0.35s ease,
+    box-shadow 0.35s ease, transform 0.35s ease;
 }
 .brand {
   display: inline-flex;
@@ -586,7 +617,8 @@ button {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.1;
+  opacity: 0.17;
+  mask-image: radial-gradient(120% 90% at 50% 62%, #000 30%, rgba(0, 0, 0, 0.35) 72%, transparent 100%);
 }
 .hero__betang svg {
   display: block;
@@ -727,7 +759,7 @@ button {
 .figure img {
   width: 100%;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--surface-2);
 }
 .figure figcaption {
   margin-top: 0.7rem;
@@ -1143,12 +1175,12 @@ button {
 }
 .tbl .dash {
   text-align: center;
-  color: rgba(20, 29, 24, 0.62);
+  color: var(--ink-soft);
 }
 
 /* ---------- cards / notices ---------- */
 .card {
-  background: var(--raise);
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
   padding: 1.35rem;
@@ -1171,7 +1203,7 @@ button {
 .notice {
   border: 1px solid var(--line);
   border-left: 3px solid var(--ochre);
-  background: var(--raise);
+  background: var(--surface);
   padding: 1rem 1.15rem;
   border-radius: 0 var(--r) var(--r) 0;
   font-size: 0.9375rem;
@@ -1232,7 +1264,7 @@ button {
 .textarea {
   width: 100%;
   padding: 0.6rem 0.7rem;
-  background: #fff;
+  background: #0d2540;
   border: 1px solid var(--line-strong);
   border-radius: var(--r);
   font-size: 0.9375rem;
@@ -1482,7 +1514,7 @@ button {
   border: 1px solid var(--line-strong);
   background: repeating-linear-gradient(
     135deg,
-    rgba(20, 29, 24, 0.045) 0 8px,
+    rgba(234, 241, 248, 0.05) 0 8px,
     transparent 8px 16px
   );
   display: grid;
@@ -1542,7 +1574,7 @@ button {
   padding: 0.85rem 1rem;
   border: 1px solid var(--line-strong);
   border-radius: var(--r);
-  background: var(--raise);
+  background: var(--surface);
   transition: border-color 0.16s ease, transform 0.16s ease;
 }
 .link-btn:hover {
@@ -1575,7 +1607,7 @@ button {
 }
 .admin-side {
   border-right: 1px solid var(--line);
-  background: var(--paper-2);
+  background: var(--surface-2);
   padding: 1.25rem 1rem;
   position: sticky;
   top: 0;
@@ -1608,7 +1640,7 @@ button {
 }
 .admin-side a:hover,
 .admin-side button:hover {
-  background: rgba(20, 29, 24, 0.06);
+  background: rgba(234, 241, 248, 0.07);
 }
 .admin-main {
   padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem;
@@ -1858,7 +1890,7 @@ button {
 .ticker {
   overflow: hidden;
   border-block: 1px solid var(--line);
-  background: var(--raise);
+  background: var(--surface);
 }
 .ticker__track {
   display: flex;
@@ -1893,7 +1925,7 @@ button {
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--raise);
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r);
   overflow: hidden;
@@ -1913,7 +1945,7 @@ button {
 .news-card:hover::after { opacity: 1; }
 /* bungkus SpotlightCard: jangan menambah kotak layout, var pointer diwarisi .news-card */
 .news-spot { display: contents; }
-.news-card__media { aspect-ratio: 16 / 9; overflow: hidden; background: var(--paper-2); position: relative; }
+.news-card__media { aspect-ratio: 16 / 9; overflow: hidden; background: var(--surface-2); position: relative; }
 .news-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1); }
 .news-card:hover .news-card__media img { transform: scale(1.045); }
 .news-card__body { padding: 1.1rem 1.25rem 1.3rem; display: flex; flex-direction: column; gap: 0.55rem; flex: 1; }
@@ -1966,7 +1998,7 @@ button {
 .article__head { max-width: var(--measure); margin-inline: auto; }
 .article__cover {
   max-width: 1080px; margin: clamp(1.4rem, 3vw, 2.2rem) auto;
-  aspect-ratio: 21 / 9; overflow: hidden; border-radius: var(--r); background: var(--paper-2);
+  aspect-ratio: 21 / 9; overflow: hidden; border-radius: var(--r); background: var(--surface-2);
 }
 .article__cover img { width: 100%; height: 100%; object-fit: cover; }
 .article__body { max-width: var(--measure); margin-inline: auto; }
@@ -1997,7 +2029,7 @@ button {
 @media (max-width: 640px) { .eco-grid { grid-template-columns: 1fr; } }
 .eco-card {
   position: relative; display: flex; flex-direction: column; gap: 0.5rem;
-  padding: 1.35rem 1.4rem 1.5rem; background: var(--raise); border: 1px solid var(--line); border-radius: var(--r);
+  padding: 1.35rem 1.4rem 1.5rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
   overflow: hidden; transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s, border-color 0.3s;
 }
 .eco-card::before {
@@ -2050,7 +2082,7 @@ button {
 }
 .news-card__ph span {
   font-family: "Plex Mono", ui-monospace, monospace; font-size: 0.66rem; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--river); background: rgba(251,248,240,.85);
+  text-transform: uppercase; color: #0a1a2f; background: rgba(244,241,231,.92);
   padding: 0.3rem 0.7rem; border: 1px solid rgba(14,46,56,.25); border-radius: 999px;
 }
 .news-hero { align-items: start; }
@@ -2069,7 +2101,7 @@ button {
   height: 40px;
   border-radius: 4px;
   object-fit: cover;
-  box-shadow: 0 0 0 1px var(--line-strong), 0 2px 10px rgba(11, 35, 66, 0.22);
+  box-shadow: 0 0 0 1px var(--line-strong), 0 2px 10px rgba(234, 241, 248, 0.22);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
 }
 .brand:hover .brand__logo,
@@ -2256,57 +2288,88 @@ button {
 /* --- watermark Sayba Arc di footer --- */
 .footer-watermark {
   margin-top: 2.5rem;
-  padding-top: 1.25rem;
+  padding: 4.2rem 0 3.6rem;
   border-top: 1px solid var(--on-dark-line);
   display: flex;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.footer-watermark .watermark-ghost {
-  font-size: clamp(2.4rem, 11vw, 6.5rem);
-}
-.watermark-link {
-  position: relative;
-  display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  text-decoration: none;
+  justify-content: center;
+  gap: 1.7rem;
+  position: relative;
+  overflow: visible;
 }
-.watermark-ghost {
+
+.footer-watermark::before {
+  /* cahaya kuningan samar di belakang watermark */
+  content: "";
   position: absolute;
-  inset: auto 0 0 0;
-  transform: translateY(66%);
+  left: 50%;
+  top: 50%;
+  width: min(860px, 96%);
+  height: 300px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(50% 55% at 50% 50%, rgba(224, 162, 60, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.watermark-ghost {
+  position: relative;
+  z-index: 0;
   font-family: "Fraunces", Georgia, serif;
   font-weight: 800;
-  font-size: clamp(3.2rem, 9vw, 6.5rem);
-  letter-spacing: 0.06em;
+  font-size: clamp(3rem, 11vw, 5.6rem);
+  letter-spacing: 0.12em;
   line-height: 1;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(217, 168, 63, 0.13);
-  pointer-events: none;
+  -webkit-text-stroke: 1.8px rgba(242, 194, 102, 0.62);
+  filter: drop-shadow(0 0 22px rgba(224, 162, 60, 0.16));
   user-select: none;
   white-space: nowrap;
+  transition: -webkit-text-stroke-color 0.35s ease;
 }
+
+.watermark-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+}
+
 .watermark-label {
   position: relative;
-  background: var(--footer, #0b2342);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
+  z-index: 1;
+  background: rgba(6, 18, 34, 0.85);
+  border: 1px solid rgba(224, 162, 60, 0.3);
+  border-radius: 999px;
+  padding: 0.55rem 1.4rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(244, 241, 231, 0.66);
+  color: rgba(244, 241, 231, 0.82);
+  transition: border-color 0.3s ease, transform 0.3s ease;
 }
+
 .watermark-label b {
-  color: var(--gold);
+  color: var(--ochre-bright);
   font-weight: 600;
-  transition: color 0.25s;
 }
-.watermark-link:hover .watermark-label b,
-.watermark-link:focus-visible .watermark-label b {
-  color: #f0d089;
+
+.watermark-link:hover .watermark-ghost {
+  -webkit-text-stroke-color: rgba(224, 162, 60, 0.65);
 }
-.watermark-link:hover .watermark-ghost,
-.watermark-link:focus-visible .watermark-ghost {
-  -webkit-text-stroke-color: rgba(217, 168, 63, 0.4);
+
+.watermark-link:hover .watermark-label {
+  border-color: rgba(224, 162, 60, 0.55);
+  transform: translateY(-2px);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .watermark-link,
+  .watermark-label,
+  .watermark-ghost {
+    transition: none;
+  }
 }
 
 /* --- cadangan slot rompi --- */
@@ -2324,7 +2387,7 @@ button {
 }
 .tier:hover {
   transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(11, 35, 66, 0.14);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2493,7 +2556,7 @@ button {
   border-radius: var(--radius, 14px);
   overflow: hidden;
   background: var(--river-deep, #0a1c33);
-  border: 1px solid rgba(11, 35, 66, 0.14);
+  border: 1px solid rgba(234, 241, 248, 0.14);
   box-shadow: 0 24px 60px rgba(4, 12, 26, 0.38);
 }
 .rb-carousel__slide[data-active="1"] {
@@ -2578,7 +2641,7 @@ button {
 }
 
 /* --- GoogleMapsEmbed: poster -> iframe, hemat & consent-friendly --- */
-.gme { border: 1px solid var(--line, rgba(11, 35, 66, 0.14)); border-radius: var(--radius, 14px); overflow: hidden; background: var(--card, #fff); }
+.gme { border: 1px solid var(--line, rgba(234, 241, 248, 0.14)); border-radius: var(--radius, 14px); overflow: hidden; background: var(--card, #16304b); }
 .gme__cover {
   position: relative;
   display: block;
@@ -2665,7 +2728,7 @@ button {
   padding: .6rem;
   box-sizing: border-box;
   border-radius: 10px;
-  background: #fff;
+  background: var(--surface-2);
 }
 .figure__sheet--tall { aspect-ratio: 3 / 4; }
 .figure figcaption { margin-top: .6rem; }
@@ -2682,3 +2745,164 @@ button {
 .wrap > .tbl { min-width: 0; max-width: 100%; }
 .tbl-scroll > .tbl { min-width: 560px; }
 
+/* =======================================================================
+   [KONSEP MALAM] Layer override -- 'Ekspedisi malam di hulu Kapuas'.
+   Diletakkan di ujung file: menang atas aturan lama yang masih berasumsi
+   kanvas kertas. Warna krem (--paper) kini hanya TULISAN di bidang gelap.
+   ======================================================================= */
+
+/* Hero: ruang bagi kapsul navbar + atmosfer malam berlapis */
+.hero {
+  background:
+    radial-gradient(760px 340px at 82% 4%, rgba(224, 162, 60, 0.12), transparent 62%),
+    radial-gradient(620px 420px at 6% 88%, rgba(18, 63, 52, 0.4), transparent 60%),
+    linear-gradient(180deg, #081a30 0%, var(--river) 55%, #071626 100%);
+  padding-top: clamp(96px, 13vh, 128px);
+}
+.hero__data > div,
+.hero__meta > div {
+  border-color: rgba(244, 241, 231, 0.16);
+}
+
+/* Page head (semua halaman dalam): transparan di atas latar malam */
+.page-head {
+  padding-block: clamp(112px, 17vh, 156px) clamp(1.5rem, 4vw, 2.6rem);
+  background:
+    radial-gradient(620px 260px at 88% 0%, rgba(224, 162, 60, 0.08), transparent 60%),
+    transparent;
+}
+
+/* Scrim saat panel mobile terbuka */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 59;
+  background: rgba(3, 10, 20, 0.6);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+/* Panel mobile: kaca penuh di bawah kapsul */
+.nav-panel {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  top: calc(100% + 10px);
+  border: 1px solid var(--line);
+  border-top: 1px solid rgba(224, 162, 60, 0.25);
+  border-radius: 22px;
+  background: rgba(6, 18, 34, 0.96);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.8);
+  padding: 0.9rem 1rem 1.4rem;
+  overflow: hidden;
+}
+.nav-panel[data-open="true"] {
+  display: block;
+  animation: panel-drop 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes panel-drop {
+  from { opacity: 0; transform: translateY(-10px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+.nav-toggle {
+  color: var(--paper);
+  border-color: rgba(244, 241, 231, 0.3);
+}
+.nav-toggle svg {
+  color: var(--paper);
+}
+
+/* Kartu: permukaan naik + bayangan dalam + glow kuningan saat hover */
+.card,
+.news-card,
+.eco-card,
+.notice {
+  background:
+    linear-gradient(180deg, rgba(234, 241, 248, 0.035), rgba(234, 241, 248, 0) 42%),
+    var(--surface);
+  border-color: rgba(234, 241, 248, 0.12);
+}
+.news-card:hover,
+.eco-card:hover,
+.card--hover:hover {
+  border-color: rgba(224, 162, 60, 0.38);
+  box-shadow:
+    0 26px 60px -28px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(224, 162, 60, 0.12);
+}
+
+/* Ticker: pita gelas dengan fade tepi */
+.ticker {
+  background: rgba(20, 48, 74, 0.42);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+/* Chip, badge, ledger */
+.chip {
+  color: var(--paper);
+  border-color: rgba(244, 241, 231, 0.26);
+}
+.chip[aria-pressed="true"] {
+  background: var(--ochre);
+  border-color: var(--ochre);
+  color: #0a1a2f;
+}
+.ledger summary {
+  color: var(--paper);
+}
+.ledger .prose,
+.l-detail {
+  color: var(--ink-soft);
+}
+
+/* Tier buana: formerly navy-on-cream -> glass-on-gold */
+.tier--buana .tier__name {
+  color: var(--ochre-bright);
+}
+.badge-tier[data-tier="Buana"] {
+  color: var(--ochre-bright);
+}
+
+/* News kicker */
+.news-card__kicker {
+  color: var(--ochre-bright);
+  background: rgba(224, 162, 60, 0.14);
+  border-color: rgba(224, 162, 60, 0.28);
+}
+.news-card__more {
+  color: var(--ochre-bright);
+}
+
+/* Article longform */
+.article__body blockquote {
+  color: var(--paper);
+  border-left-color: var(--ochre);
+}
+
+/* Footer: lebih gelap dari body, garis kuningan di tepi atas */
+.site-footer {
+  background:
+    linear-gradient(180deg, rgba(224, 162, 60, 0.06), transparent 130px),
+    #061221;
+  border-top: 1px solid rgba(224, 162, 60, 0.18);
+}
+
+/* Admin & login ikut malam */
+.admin-side {
+  background: #081c33;
+}
+figure .figure__sheet,
+[data-figure-sheet] {
+  background: var(--surface-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-panel[data-open="true"] {
+    animation: none;
+  }
+}

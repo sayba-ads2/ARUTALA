@@ -8,12 +8,29 @@ import { nav, site } from "@/lib/content";
 export default function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const lastY = useRef(0);
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  // Kapsul melayang: padat saat scroll, tersembunyi saat scroll turun,
+  // muncul lagi saat naik (ala Sayba Arc).
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      setHidden(y > 240 && y > lastY.current + 4 && !open);
+      lastY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -31,7 +48,7 @@ export default function SiteHeader() {
     pathname === href || (href !== "/" && pathname.startsWith(href + "/"));
 
   return (
-    <header className="site-header">
+    <header className={`site-header${scrolled ? " is-scrolled" : ""}${hidden ? " is-hidden" : ""}`}>
       <div className="wrap">
         <nav className="nav" aria-label="Navigasi utama">
           <Link href="/" className="brand" aria-label={`${site.name} ${site.year}, beranda`}>
@@ -74,6 +91,12 @@ export default function SiteHeader() {
         </nav>
       </div>
 
+      <div
+        className="nav-backdrop"
+        style={{ display: open ? "block" : "none" }}
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
       <div id="nav-panel" className="nav-panel" data-open={open} ref={panelRef}>
         {nav.map((item) => (
           <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
@@ -85,8 +108,8 @@ export default function SiteHeader() {
           Tautan resmi
           <span className="mono">IG / TikTok</span>
         </Link>
-        <Link href="/sponsor#paket" className="btn btn--primary" onClick={() => setOpen(false)}>
-          Lihat paket sponsor
+        <Link href="/sponsor" className="btn btn--primary" onClick={() => setOpen(false)}>
+          Halaman sponsor
         </Link>
       </div>
     </header>
