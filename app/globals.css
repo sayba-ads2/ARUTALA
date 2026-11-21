@@ -495,7 +495,7 @@ button {
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--on-dark);
+  color: rgba(244, 241, 231, 0.86);
 }
 .hero__title {
   margin: clamp(1.75rem, 6vw, 4.5rem) 0 0;
@@ -2188,6 +2188,10 @@ button {
   display: flex;
   justify-content: center;
   position: relative;
+  overflow: hidden;
+}
+.footer-watermark .watermark-ghost {
+  font-size: clamp(2.4rem, 11vw, 6.5rem);
 }
 .watermark-link {
   position: relative;
@@ -2290,3 +2294,318 @@ button {
 @media (prefers-reduced-motion: reduce) {
   .hero__name { color: #d9ac4f; -webkit-text-fill-color: #d9ac4f; }
 }
+
+
+/* ============================================================
+   REACT BITS v3 — port tanpa dependency (SplitText, ShinyText,
+   SpotlightCard, TiltedCard, Carousel, StarBorder, GoogleMaps,
+   ClickSpark). Semua gate reduced-motion.
+   ============================================================ */
+
+/* --- SplitText: per kata naik + blur ringan --- */
+.rb-split { display: inline; }
+.rb-split__w {
+  display: inline-block;
+  white-space: pre;
+  transform: translateY(0);
+  opacity: 1;
+}
+.rb-split:not(.no-anim) .rb-split__w { will-change: transform; }
+.rb-split .rb-split__w { animation: rb-split-in var(--sb-t, 720ms) cubic-bezier(.22,1,.36,1) var(--sb-d, 0ms) both; }
+@keyframes rb-split-in {
+  from { transform: translateY(0.7em); opacity: 0; filter: blur(4px); }
+  to   { transform: translateY(0); opacity: 1; filter: blur(0); }
+}
+
+/* --- ShinyText: kilau menyapu --- */
+.rb-shiny {
+  background: linear-gradient(110deg, var(--muted) 35%, #ffe9b8 50%, var(--muted) 65%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rb-shine 3.6s linear infinite;
+}
+@keyframes rb-shine { to { background-position: -220% 0; } }
+
+/* --- SpotlightCard: sorotan pointer + edge glow --- */
+.rb-spot { position: relative; isolation: isolate; overflow: hidden; }
+.rb-spot__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s ease;
+  background: radial-gradient(circle var(--rb-spot-r, 340px) at var(--rb-spot-x, -9999px) var(--rb-spot-y, -9999px),
+    rgba(217, 168, 63, 0.14), rgba(217, 168, 63, 0.05) 45%, transparent 70%);
+}
+.rb-spot:hover .rb-spot__glow, .rb-spot:focus-within .rb-spot__glow { opacity: 1; }
+.rb-spot > *:not(.rb-spot__glow) { position: relative; z-index: 1; }
+
+/* --- TiltedCard 3D + glare --- */
+.rb-tilt {
+  transform-style: preserve-3d;
+  transition: transform .45s cubic-bezier(.22,1,.36,1);
+  position: relative;
+}
+.rb-tilt__glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: var(--rb-glare-o, 0);
+  transition: opacity .35s ease;
+  background: radial-gradient(circle 320px at var(--rb-glare-x, 50%) var(--rb-glare-y, 50%),
+    rgba(255, 244, 214, 0.16), transparent 60%);
+}
+
+/* --- StarBorder: cahaya mengelilingi tepi --- */
+.rb-starborder {
+  position: relative;
+  display: inline-block;
+  border-radius: inherit;
+}
+.rb-starborder::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--rb-sb-a, 0deg),
+    rgba(244, 241, 231, 0.28) 0 70%, rgba(255, 240, 200, 0.15) 76%, #fff3d1 86%, #ffe4a1 90%, rgba(255, 240, 200, 0.15) 94%, rgba(244, 241, 231, 0.28) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: rb-sb-spin var(--rb-sb-speed, 4s) linear infinite;
+  pointer-events: none;
+}
+@property --rb-sb-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes rb-sb-spin { to { --rb-sb-a: 360deg; } }
+.rb-starborder > * { position: relative; }
+.rb-starborder::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--rb-sb-a, 0deg),
+    transparent 0 82%, rgba(255, 236, 180, 0.55) 88%, transparent 94%);
+  filter: blur(9px);
+  animation: rb-sb-spin var(--rb-sb-speed, 4s) linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Carousel: kartu geser dengan depth --- */
+.rb-carousel { position: relative; overflow: hidden; border-radius: var(--radius, 14px); padding: 4px 0; }
+.rb-carousel__viewport {
+  position: relative;
+  height: clamp(300px, 46vw, 460px);
+  perspective: 1100px;
+  touch-action: pan-y;
+  cursor: grab;
+  overflow: visible;
+}
+.rb-carousel__viewport:active { cursor: grabbing; }
+.rb-carousel__slide {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  transition: transform .65s cubic-bezier(.22,1,.36,1), opacity .55s ease, filter .55s ease;
+  transform: translateX(calc(var(--rb-ci, 0) * 62%)) scale(calc(1 - min(1, var(--rb-cia, 0)) * 0.18))
+             translateZ(calc(min(1, var(--rb-cia, 0)) * -140px));
+  opacity: calc(1 - min(1, var(--rb-cia, 0)) * 0.55);
+  filter: blur(calc(min(1, var(--rb-cia, 0)) * 1.5px));
+  pointer-events: none;
+  border-radius: var(--radius, 14px);
+  overflow: hidden;
+  background: var(--river-deep, #0a1c33);
+  border: 1px solid rgba(11, 35, 66, 0.14);
+  box-shadow: 0 24px 60px rgba(4, 12, 26, 0.38);
+}
+.rb-carousel__slide[data-active="1"] {
+  transform: translateX(0) scale(0.9) translateZ(0);
+  opacity: 1;
+  filter: none;
+  pointer-events: auto;
+  z-index: 2;
+  box-shadow: 0 0 0 2px rgba(11, 35, 66, 0.78), 0 24px 60px rgba(4, 12, 26, 0.38);
+}
+.rb-carousel__slide img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+.rb-carousel__cap {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.1rem 1.25rem 1.35rem;
+  display: flex;
+  gap: .75rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+  background: linear-gradient(180deg, transparent 0%, rgba(6, 16, 30, 0.55) 42%, rgba(6, 16, 30, 0.95) 100%);
+  color: var(--paper, #f4f1e7);
+  font-size: .92rem;
+}
+.rb-carousel__tag {
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  flex: none;
+  color: var(--gold, #d9ac4f);
+}
+.rb-carousel__nav {
+  position: absolute;
+  top: calc(clamp(300px, 46vw, 460px) / 2);
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 42px; height: 42px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(244, 241, 231, 0.75);
+  background: rgba(10, 26, 48, 0.72);
+  color: #f4f1e7;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background .25s ease, border-color .25s ease, transform .25s ease;
+}
+.rb-carousel__nav:hover { background: rgba(217, 168, 63, 0.85); color: #0b2342; border-color: transparent; }
+.rb-carousel__nav--prev { left: 10px; }
+.rb-carousel__nav--next { right: 10px; }
+.rb-carousel__dots {
+  display: flex; justify-content: center; gap: .5rem;
+  margin-top: 1.35rem;
+}
+.rb-carousel__dot {
+  width: 9px; height: 9px; padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(217, 168, 63, 0.6);
+  background: transparent;
+  cursor: pointer;
+  transition: width .3s ease, background .3s ease;
+}
+.rb-carousel__dot[data-on="1"] { width: 26px; background: var(--gold, #d9ac4f); }
+@media (max-width: 720px) {
+  .rb-carousel__nav { display: none; } /* sentuh: swipe + dots */
+  .rb-carousel__viewport { height: clamp(240px, 64vw, 340px); }
+  .rb-carousel__slide { transform: translateX(calc(var(--rb-ci, 0) * 82%)); }
+}
+.rb-carousel__slide img[data-fit="contain"] {
+  object-fit: contain;
+  background: #0a1c33;
+}
+.rb-carousel__slide img[data-fit="cover"] { object-fit: cover; }
+@media (prefers-reduced-motion: reduce) {
+  .rb-carousel__slide { transition: opacity .3s ease; transform: none; opacity: 0; }
+  .rb-carousel__slide[data-active="1"] { opacity: 1; }
+}
+
+/* --- GoogleMapsEmbed: poster -> iframe, hemat & consent-friendly --- */
+.gme { border: 1px solid var(--line, rgba(11, 35, 66, 0.14)); border-radius: var(--radius, 14px); overflow: hidden; background: var(--card, #fff); }
+.gme__cover {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: var(--river-deep, #0a1c33);
+}
+.gme__cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.92);
+  transition: transform .8s cubic-bezier(.22,1,.36,1), filter .4s ease;
+}
+.gme__cover:hover img { transform: scale(1.03); filter: saturate(1); }
+.gme__grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(217,168,63,.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217,168,63,.14) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+.gme__badge {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .7rem 1.1rem;
+  border-radius: 999px;
+  background: rgba(11, 35, 66, 0.82);
+  color: #f4f1e7;
+  font-size: .85rem;
+  letter-spacing: .04em;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  transition: background .25s ease, transform .25s ease;
+}
+.gme__cover:hover .gme__badge { background: var(--gold, #d9ac4f); color: #0b2342; transform: translate(-50%, -50%) scale(1.04); }
+.gme__coords {
+  position: absolute;
+  left: .8rem; bottom: .7rem;
+  font-size: .68rem;
+  letter-spacing: .08em;
+  color: rgba(244, 241, 231, 0.75);
+  background: rgba(6, 16, 30, 0.55);
+  padding: .25rem .5rem;
+  border-radius: 6px;
+}
+.gme--live iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  min-height: 300px;
+}
+.gme__foot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+  padding: .8rem 1rem;
+}
+
+/* --- ClickSpark canvas dkk ditiadakan utk reduced motion lewat JS; --- */
+@media (prefers-reduced-motion: reduce) {
+  .rb-split .rb-split__w, .rb-shiny, .rb-starborder::before { animation: none !important; }
+  .rb-shiny { color: var(--muted); -webkit-text-fill-color: var(--muted); }
+  .rb-spot__glow, .rb-tilt__glare { display: none; }
+  .rb-tilt { transition: none; }
+  .gme__cover img, .gme__badge { transition: none; }
+}
+
+/* --- tabel lebar: gulir internal, bukan dokumen --- */
+.tbl-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* --- lembar gambar teknis rapi (di card) --- */
+.figure__sheet {
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  padding: .6rem;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: #fff;
+}
+.figure__sheet--tall { aspect-ratio: 3 / 4; }
+.figure figcaption { margin-top: .6rem; }
+
+/* shiny utk baris meta hero (latar gelap) */
+.hero__top .rb-shiny {
+  background: linear-gradient(110deg, var(--on-dark) 35%, #ffe9b8 50%, var(--on-dark) 65%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* --- wrap lebar tabel: boleh digulir di dalam wrapper, dokumen tetap utuh --- */
+.wrap > .tbl { min-width: 0; max-width: 100%; }
+.tbl-scroll > .tbl { min-width: 560px; }
+

@@ -1,0 +1,192 @@
+[
+ {
+  "dev": "t768",
+  "rt": "/",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "t768",
+  "rt": "/berita",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "t768",
+  "rt": "/berita/rumah-betang-temu-akhir",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "t768",
+  "rt": "/dokumentasi",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "t768",
+  "rt": "/program",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "t768",
+  "rt": "/tentang",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "t768",
+  "rt": "/links",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "t768",
+  "rt": "/sosial",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1024",
+  "rt": "/",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1024",
+  "rt": "/berita",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1024",
+  "rt": "/berita/rumah-betang-temu-akhir",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1024",
+  "rt": "/dokumentasi",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1024",
+  "rt": "/program",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1024",
+  "rt": "/tentang",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1024",
+  "rt": "/links",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1024",
+  "rt": "/sosial",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1366",
+  "rt": "/",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1366",
+  "rt": "/berita",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1366",
+  "rt": "/berita/rumah-betang-temu-akhir",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1366",
+  "rt": "/dokumentasi",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1366",
+  "rt": "/program",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1366",
+  "rt": "/tentang",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1366",
+  "rt": "/links",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1366",
+  "rt": "/sosial",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1920",
+  "rt": "/",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1920",
+  "rt": "/program",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1920",
+  "rt": "/tentang",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1920",
+  "rt": "/links",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "dev": "d1920",
+  "rt": "/sosial",
+  "issue": "status",
+  "status": 304
+ },
+ {
+  "issue": "carousel",
+  "dots": 5,
+  "changed": true,
+  "from": "/img/foto/sungai-utik.webp",
+  "to": "/img/foto/betang-eksterior.webp"
+ },
+ {
+  "issue": "gmaps",
+  "poster": true,
+  "live": true
+ },
+ {
+  "issue": "mobile-carousel",
+  "toDot2": "/img/foto/survei-lapangan.webp"
+ }
+]

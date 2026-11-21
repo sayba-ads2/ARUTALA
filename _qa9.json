@@ -1,0 +1,796 @@
+[
+ {
+  "dev": "m390",
+  "rt": "/",
+  "status": 200,
+  "ovf": false,
+  "sw": 390,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/berita",
+  "status": 200,
+  "ovf": false,
+  "sw": 390,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/berita/rumah-betang-temu-akhir",
+  "status": 200,
+  "ovf": false,
+  "sw": 390,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/berita/survei-awal-jejak-menuju-hulu-kapuas",
+  "status": 200,
+  "ovf": false,
+  "sw": 390,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/dokumentasi",
+  "status": 200,
+  "ovf": false,
+  "sw": 390,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/program",
+  "status": 200,
+  "ovf": false,
+  "sw": 390,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/sponsor",
+  "status": 200,
+  "ovf": false,
+  "sw": 390,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/tentang",
+  "status": 200,
+  "ovf": false,
+  "sw": 390,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/links",
+  "status": 200,
+  "ovf": false,
+  "sw": 390,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/sosial",
+  "status": 200,
+  "ovf": false,
+  "sw": 390,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/rss.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/sitemap.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m390",
+  "rt": "/merch",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "m390",
+  "rt": "/keranjang",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "m390",
+  "rt": "/img/foto/sungai-utik.webp",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/berita",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/berita/rumah-betang-temu-akhir",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/berita/survei-awal-jejak-menuju-hulu-kapuas",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/dokumentasi",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/program",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/sponsor",
+  "status": 200,
+  "ovf": false,
+  "sw": 360,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m360",
+  "rt": "/tentang",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/links",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/sosial",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/rss.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m360",
+  "rt": "/sitemap.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "m360",
+  "rt": "/merch",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/keranjang",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "m360",
+  "rt": "/img/foto/sungai-utik.webp",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/berita",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/berita/rumah-betang-temu-akhir",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/berita/survei-awal-jejak-menuju-hulu-kapuas",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/dokumentasi",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/program",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/sponsor",
+  "status": 200,
+  "ovf": false,
+  "sw": 768,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "t768",
+  "rt": "/tentang",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/links",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/sosial",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/rss.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "t768",
+  "rt": "/sitemap.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "t768",
+  "rt": "/merch",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/keranjang",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "t768",
+  "rt": "/img/foto/sungai-utik.webp",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/berita",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/berita/rumah-betang-temu-akhir",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/berita/survei-awal-jejak-menuju-hulu-kapuas",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/dokumentasi",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/program",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/sponsor",
+  "status": 200,
+  "ovf": false,
+  "sw": 1024,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "d1024",
+  "rt": "/tentang",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/links",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/sosial",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/rss.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "d1024",
+  "rt": "/sitemap.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "d1024",
+  "rt": "/merch",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/keranjang",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "d1024",
+  "rt": "/img/foto/sungai-utik.webp",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/berita",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/berita/rumah-betang-temu-akhir",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/berita/survei-awal-jejak-menuju-hulu-kapuas",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/dokumentasi",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/program",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/sponsor",
+  "status": 200,
+  "ovf": false,
+  "sw": 1366,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "d1366",
+  "rt": "/tentang",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/links",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/sosial",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/rss.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "d1366",
+  "rt": "/sitemap.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "d1366",
+  "rt": "/merch",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/keranjang",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "d1366",
+  "rt": "/img/foto/sungai-utik.webp",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/berita",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/berita/rumah-betang-temu-akhir",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/berita/survei-awal-jejak-menuju-hulu-kapuas",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/dokumentasi",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/program",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/sponsor",
+  "status": 200,
+  "ovf": false,
+  "sw": 1920,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "d1920",
+  "rt": "/tentang",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/links",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/sosial",
+  "status": 304,
+  "ovf": false,
+  "errs": [],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/rss.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "d1920",
+  "rt": "/sitemap.xml",
+  "status": 200,
+  "ovf": false,
+  "errs": [],
+  "ok": true
+ },
+ {
+  "dev": "d1920",
+  "rt": "/merch",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/keranjang",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "dev": "d1920",
+  "rt": "/img/foto/sungai-utik.webp",
+  "status": 404,
+  "ovf": false,
+  "errs": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "ok": false
+ },
+ {
+  "issue": "maps",
+  "rt": "/",
+  "poster": true,
+  "live": true,
+  "errs": []
+ },
+ {
+  "issue": "maps",
+  "rt": "/program",
+  "poster": true,
+  "live": true,
+  "errs": []
+ },
+ {
+  "issue": "home-interact",
+  "errs": []
+ },
+ {
+  "issue": "admin",
+  "status": 200,
+  "url": "/admin/login"
+ }
+]

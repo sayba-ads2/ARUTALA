@@ -3,8 +3,12 @@ import TenunBand from "@/components/tenun-band";
 import ProgramList from "@/components/program-list";
 import FundingPanel from "@/components/funding-panel";
 import Ticker from "@/components/ticker";
-import SplitTitle from "@/components/split-title";
-import CountUp from "@/components/count-up";
+import CountUp from "@/components/bits/count-up";
+import SplitText from "@/components/bits/split-text";
+import ShinyText from "@/components/bits/shiny-text";
+import SpotlightCard from "@/components/bits/spotlight-card";
+import StarBorder from "@/components/bits/star-border";
+import GoogleMapsEmbed from "@/components/bits/google-maps-embed";
 import Reveal from "@/components/reveal";
 import MagneticLink from "@/components/magnetic-link";
 import { NewsCard } from "@/components/news";
@@ -29,13 +33,13 @@ export default async function Home() {
           <g fill="none" stroke="currentColor" strokeWidth="1.1">
             <path d="M-40 620C220 560 330 700 560 640S920 470 1160 540s280 30 340-10" />
             <path d="M-40 680C240 620 350 760 580 700s360-170 600-100 300 30 360-10" opacity=".6" />
-            <path d="M-40 740C260 680 380 820 600 760s340-170 580-100 320 30 380-10" opacity=".3" />
+            <path d="M-40 740C260 680 380 820 600 760s340-170 580-100 320 30 380-10" opacity=".16" />
           </g>
         </svg>
 
         <div className="wrap hero__inner">
           <div className="hero__top">
-            <span>PMKM Arutala 2027</span>
+            <span><ShinyText text="PMKM ARUTALA 2027" /></span>
             <span>{site.coords.dms}</span>
             <span>{site.dates.label}</span>
           </div>
@@ -43,7 +47,9 @@ export default async function Home() {
           <h1 className="hero__name" data-reveal>
             ARUTALA
           </h1>
-          <p className="hero__tagline">Menjejak bakti, menjaga lestari.</p>
+          <p className="hero__tagline">
+            <SplitText text="Menjejak bakti, menjaga lestari." />
+          </p>
 
           <div className="hero__grid">
             <p className="hero__desc">
@@ -79,9 +85,11 @@ export default async function Home() {
           </div>
 
           <div className="hero__actions">
-            <Link className="btn btn--primary" href="/sponsor#paket">
-              Lihat paket sponsor
-            </Link>
+            <StarBorder className="rb-star-c" speed={4.5}>
+              <Link className="btn btn--primary" href="/sponsor#paket">
+                Lihat paket sponsor
+              </Link>
+            </StarBorder>
             <a className="btn btn--on-dark" href={site.proposalPath} rel="noopener">
               Unduh proposal PDF
             </a>
@@ -147,34 +155,19 @@ export default async function Home() {
                   pengelolaan sampah dan sanitasi, serta akses air bersih di Desa Sebindang.
                 </p>
               </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: ".75rem", marginTop: "1.75rem" }}>
-                <a
-                  className="btn btn--ghost btn--sm"
-                  href={`https://www.openstreetmap.org/?mlat=${site.coords.lat}&mlon=${site.coords.lng}#map=13/${site.coords.lat}/${site.coords.lng}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Buka di OpenStreetMap
-                </a>
-                <span className="mono small muted" style={{ alignSelf: "center" }}>
-                  {site.coords.dms}
-                </span>
-              </div>
             </div>
 
-            <figure className="figure" data-reveal>
-              <img
-                src="/img/peta-lokasi.jpg"
-                alt="Peta denah lokasi kegiatan di Desa Batu Lintang, Kecamatan Embaloh Hulu, Kabupaten Kapuas Hulu"
-                width={1402}
-                height={988}
-                loading="lazy"
+            <div style={{ display: "grid", gap: "1.25rem" }}>
+              <GoogleMapsEmbed
+                lat={site.coords.lat}
+                lng={site.coords.lng}
+                zoom={13}
+                title="Peta lokasi kegiatan ARUTALA di Desa Batu Lintang, Kapuas Hulu (Google Maps)"
+                poster="/img/peta-lokasi.jpg"
+                posterAlt="Peta denah lokasi kegiatan di Desa Batu Lintang, Kecamatan Embaloh Hulu, Kabupaten Kapuas Hulu"
+                caption={`Denah proposal ${site.coords.dms}. Klik "Muat Google Maps" untuk peta interaktif.`}
               />
-              <figcaption>
-                Peta denah lokasi kegiatan, lampiran proposal. Basemap Google Earth Pro, skala 1:1.000, dengan
-                legenda jalan, rumah warga, lahan, pekarangan, posyandu, dan rumah ibadah.
-              </figcaption>
-            </figure>
+            </div>
           </div>
         </div>
       </section>
@@ -344,7 +337,7 @@ export default async function Home() {
             <div className="news-grid">
               {beritaCards.map((n, i) => (
                 <Reveal key={n.slug} delay={i * 90}>
-                  <div data-tilt><NewsCard item={n} /></div>
+                  <SpotlightCard className="news-spot"><NewsCard item={n} /></SpotlightCard>
                 </Reveal>
               ))}
             </div>

@@ -72,7 +72,7 @@ proxy.ts            perlindungan /admin dan refresh sesi (Next.js 16, pengganti 
 
 ## Catatan data
 
-Semua angka di `lib/content.ts` dikutip dari proposal: total anggaran Rp 106.352.644, kebutuhan dukungan Rp 103.312.644, 38 peserta, 40 rompi, koordinat 1°07'16.4"N 112°33'48.7"E. Proposal menulis kecamatan sebagai "Embaloh Hilir" pada beberapa bagian; dokumen peta dan hasil verifikasi OpenStreetMap menunjukkan **Embaloh Hulu**, dan itu yang dipakai di situs.
+Semua angka di `lib/content.ts` dikutip dari proposal: total anggaran Rp 106.352.644, kebutuhan dukungan Rp 103.312.644, 38 peserta, 38 rompi (slot logo), koordinat 1°07'16.4"N 112°33'48.7"E. Proposal menulis kecamatan sebagai "Embaloh Hilir" pada beberapa bagian; dokumen peta dan hasil verifikasi koordinat Google Maps menunjukkan **Embaloh Hulu**, dan itu yang dipakai di situs.
 
 Gambar yang dipakai berasal dari lampiran proposal (peta denah lokasi, gambar kerja TPS, desain plang, gambar kerja rompi). Tidak ada foto kegiatan yang direkayasa. Bingkai dokumentasi yang kosong ditandai sebagai slot belum terisi.
 

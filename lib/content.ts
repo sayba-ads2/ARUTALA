@@ -55,7 +55,7 @@ export const funding = {
     {
       label: "Perlengkapan dan aset",
       amount: 10956000,
-      note: "40 rompi, material TPS, tugu, plang",
+      note: "38 rompi, material TPS, tugu, plang",
       color: "rgba(244,241,231,0.32)",
     },
     {
@@ -69,7 +69,7 @@ export const funding = {
     { bidang: "Bidang Hubungan Masyarakat", amount: 37340000, note: "Bus perintis, bensin, spanduk, lisensi desain" },
     { bidang: "Bidang Konsumsi", amount: 35436000, note: "Bahan makanan, air, gas, konsumsi lapangan" },
     { bidang: "Dana Tak Terduga", amount: 13872084, note: "Cadangan sesuai proposal" },
-    { bidang: "Bidang Usaha Dana", amount: 8000000, note: "40 rompi panitia" },
+    { bidang: "Bidang Usaha Dana", amount: 8000000, note: "38 rompi panitia" },
     { bidang: "Bidang Perlengkapan", amount: 2956000, note: "Material TPS, tugu, plang, alat pengolahan air" },
     { bidang: "Tim Awal", amount: 2700000, note: "Bensin, konsumsi, penginapan tim pembuka" },
     { bidang: "Survey Awal", amount: 2212000, note: "Survei lokasi prakegiatan" },
@@ -159,7 +159,7 @@ export const vestCapacity = 38;
 
 export const adoption = [
   { name: "Bus perintis Pontianak ke Kapuas Hulu", detail: "2 unit, pulang pergi", amount: 34000000 },
-  { name: "40 rompi panitia", detail: "Identitas lapangan seluruh peserta", amount: 8000000 },
+  { name: "38 rompi panitia", detail: "Identitas lapangan seluruh peserta", amount: 8000000 },
   { name: "Konsumsi lapangan 15 hari", detail: "Bahan makanan, air, gas untuk 38 peserta", amount: 35436000 },
   { name: "Material TPS 2 x 4 meter", detail: "Bata, besi beton, semen, pasir, alat", amount: 2956000 },
 ];

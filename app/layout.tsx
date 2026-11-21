@@ -4,6 +4,7 @@ import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import SiteAmbience from "@/components/site-ambience";
 import Gestures from "@/components/gestures";
+import ClickSpark from "@/components/bits/click-spark";
 import { site } from "@/lib/content";
 import "./globals.css";
 
@@ -142,6 +143,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <SiteAmbience />
         <Gestures />
+        <ClickSpark />
         <SiteHeader />
         <main id="isi">{children}</main>
         <SiteFooter />

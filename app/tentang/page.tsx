@@ -136,7 +136,7 @@ export default function TentangPage() {
             </p>
           </div>
 
-          <div className="tbl-scroll">
+          <div className="tbl-scroll" role="region" aria-label="Tabel dapat digeser horizontal">
             <table className="tbl" style={{ minWidth: "560px" }}>
               <thead>
                 <tr>

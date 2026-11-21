@@ -3,6 +3,7 @@ import PageHead from "@/components/page-head";
 import ProgramList from "@/components/program-list";
 import DayTimeline from "@/components/day-timeline";
 import TenunBand from "@/components/tenun-band";
+import GoogleMapsEmbed from "@/components/bits/google-maps-embed";
 import { construction, programs, site } from "@/lib/content";
 import { listPrograms } from "@/lib/repo";
 
@@ -61,7 +62,8 @@ export default async function ProgramPage() {
                   width={1298}
                   height={787}
                   loading="lazy"
-                  style={{ background: "#fff" }}
+                  decoding="async"
+                  className="figure__sheet"
                 />
                 <figcaption style={{ color: "var(--on-dark)" }}>
                   Gambar kerja TPS dari lampiran proposal. Dinding bata, empat kolom beton bertulang, cor semen
@@ -75,6 +77,8 @@ export default async function ProgramPage() {
                   width={736}
                   height={1030}
                   loading="lazy"
+                  decoding="async"
+                  className="figure__sheet figure__sheet--tall"
                 />
                 <figcaption style={{ color: "var(--on-dark)" }}>
                   Desain plang larangan membuang sampah sembarangan, dipasang bersama plang petunjuk arah.
@@ -115,28 +119,16 @@ export default async function ProgramPage() {
                   <dd style={{ color: "var(--ink)" }}>Desa Sebindang, penyerahan alat pengolahan air</dd>
                 </div>
               </dl>
-              <a
-                className="btn btn--ghost btn--sm"
-                style={{ marginTop: "1.5rem" }}
-                href={`https://www.openstreetmap.org/?mlat=${site.coords.lat}&mlon=${site.coords.lng}#map=14/${site.coords.lat}/${site.coords.lng}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Buka peta interaktif
-              </a>
             </div>
-            <figure className="figure">
-              <img
-                src="/img/peta-lokasi.jpg"
-                alt="Peta denah lokasi kegiatan Desa Batu Lintang dengan legenda jalan, rumah warga, dan fasilitas"
-                width={1402}
-                height={988}
-                loading="lazy"
-              />
-              <figcaption>
-                Lampiran proposal: peta denah lokasi kegiatan, skala 1:1.000. Sumber basemap Google Earth Pro.
-              </figcaption>
-            </figure>
+            <GoogleMapsEmbed
+              lat={site.coords.lat}
+              lng={site.coords.lng}
+              zoom={14}
+              title="Peta lokasi kegiatan program ARUTALA di Desa Batu Lintang (Google Maps)"
+              poster="/img/peta-lokasi.jpg"
+              posterAlt="Peta denah lokasi kegiatan Desa Batu Lintang dengan legenda jalan, rumah warga, dan fasilitas"
+              caption="Lampiran proposal: denah lokasi skala 1:1.000, basemap Google Earth Pro."
+            />
           </div>
         </div>
       </section>

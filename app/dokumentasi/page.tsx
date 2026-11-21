@@ -2,6 +2,8 @@ import Link from "next/link";
 import PageHead from "@/components/page-head";
 import DayTimeline from "@/components/day-timeline";
 import TenunBand from "@/components/tenun-band";
+import Carousel, { type Slide } from "@/components/bits/carousel";
+import Reveal from "@/components/reveal";
 import { rundown, site } from "@/lib/content";
 import { listDokumentasi } from "@/lib/repo";
 import { formatDate } from "@/lib/format";
@@ -22,10 +24,68 @@ const targets = [
   { name: "Alat pengolahan air Sebindang", note: "Serah terima dan pelatihan pengoperasian" },
 ];
 
+/** Galeri acuan dari lampiran proposal (pra-kegiatan), dipakai bila
+ *  dokumentasi lapangan belum diunggah admin. */
+const acuan: Slide[] = [
+  {
+    src: "/img/arsip/peta-rute.webp",
+    srcSm: "/img/arsip/peta-rute-640.webp",
+    alt: "Peta rute perjalanan dari Kota Pontianak menuju lokasi kegiatan di Kapuas Hulu",
+    caption: "Peta rute: Pontianak - Putussibau, jalur darat lintas Kalimantan Barat.",
+    tag: "Lampiran proposal",
+  },
+  {
+    src: "/img/arsip/peta-denah.webp",
+    srcSm: "/img/arsip/peta-denah-640.webp",
+    alt: "Peta denah lokasi kegiatan PMKM di Desa Batu Lintang berbasis citra satelit",
+    caption: "Peta denah lokasi kegiatan, Desa Batu Lintang (skala 1:1.000).",
+    tag: "Lampiran proposal",
+  },
+  {
+    src: "/img/arsip/rompi-depan.webp",
+    srcSm: "/img/arsip/rompi-depan-640.webp",
+    alt: "Desain bagian depan rompi lapangan ARUTALA dengan bordir logo",
+    caption: "Rancangan rompi lapangan - bagian depan (bordir logo dan nama).",
+    tag: "Lampiran proposal",
+  },
+  {
+    src: "/img/arsip/rompi-belakang.webp",
+    srcSm: "/img/arsip/rompi-belakang-640.webp",
+    alt: "Desain bagian belakang rompi ARUTALA dengan area logo peserta",
+    caption: "Rancangan rompi - bagian belakang, slot logo peserta.",
+    tag: "Lampiran proposal",
+  },
+  {
+    src: "/img/arsip/gambar-tps.webp",
+    srcSm: "/img/arsip/gambar-tps-640.webp",
+    alt: "Gambar teknik tiga tampak desain TPS skala 1:50",
+    caption: "Gambar kerja TPS 2 x 4 m, tiga tampak skala 1:50.",
+    tag: "Lampiran proposal",
+  },
+  {
+    src: "/img/arsip/plang-sampah.webp",
+    srcSm: "/img/arsip/plang-sampah-640.webp",
+    alt: "Desain plang imbauan jaga kebersihan dan buang sampah pada tempatnya",
+    caption: "Draf plang edukasi: jaga kebersihan, buang sampah pada tempatnya.",
+    tag: "Lampiran proposal",
+    fit: "contain",
+  
+  },
+];
+
 export default async function DokumentasiPage() {
   const entries = await listDokumentasi(true);
   const photos = entries.filter((e) => e.gambar_url);
   const notes = entries.filter((e) => !e.gambar_url);
+  const slides: Slide[] =
+    photos.length > 0
+      ? photos.map((p) => ({
+          src: p.gambar_url as string,
+          alt: p.judul,
+          caption: `${formatDate(p.tanggal)} - ${p.judul}`,
+          tag: p.fase || "Dokumentasi",
+        }))
+      : acuan;
 
   return (
     <>
@@ -65,21 +125,11 @@ export default async function DokumentasiPage() {
             </div>
           ) : (
             <>
-              {photos.length > 0 && (
-                <div className="frame-grid" style={{ marginBottom: "2.5rem" }}>
-                  {photos.map((p) => (
-                    <figure key={p.id} style={{ margin: 0 }}>
-                      <img
-                        src={p.gambar_url as string}
-                        alt={p.judul}
-                        loading="lazy"
-                        style={{ border: "1px solid var(--line)", width: "100%" }}
-                      />
-                      <figcaption className="small muted" style={{ marginTop: ".5rem" }}>
-                        {formatDate(p.tanggal)} · {p.judul}
-                      </figcaption>
-                    </figure>
-                  ))}
+              {slides.length > 0 && (
+                <div style={{ marginBottom: "2.5rem" }}>
+                  <Reveal>
+                    <Carousel slides={slides} />
+                  </Reveal>
                 </div>
               )}
 

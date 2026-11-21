@@ -107,7 +107,7 @@ export default async function SponsorPage() {
           <h3 className="display" style={{ fontSize: "1.35rem", margin: "3rem 0 1rem" }}>
             Matriks fasilitas
           </h3>
-          <div className="tbl-scroll">
+          <div className="tbl-scroll" role="region" aria-label="Tabel dapat digeser horizontal">
             <table className="tbl" style={{ minWidth: "620px" }}>
               <caption className="sr-only">Fasilitas yang diterima setiap tingkat sponsor</caption>
               <thead>
@@ -156,7 +156,7 @@ export default async function SponsorPage() {
             </p>
           </div>
 
-          <div className="tbl-scroll">
+          <div className="tbl-scroll" role="region" aria-label="Tabel dapat digeser horizontal">
             <table className="tbl" style={{ minWidth: "560px" }}>
               <thead>
                 <tr>
