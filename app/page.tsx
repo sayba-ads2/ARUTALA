@@ -8,6 +8,7 @@ import CountUp from "@/components/count-up";
 import Reveal from "@/components/reveal";
 import MagneticLink from "@/components/magnetic-link";
 import { NewsCard } from "@/components/news";
+import BetangIllustration from "@/components/betang";
 import { programs, site, tiers } from "@/lib/content";
 import { listSponsors, listBerita } from "@/lib/repo";
 import { compactRupiah, formatDate } from "@/lib/format";
@@ -39,7 +40,9 @@ export default async function Home() {
             <span>{site.dates.label}</span>
           </div>
 
-          <SplitTitle text="Arutala" />
+          <h1 className="hero__name" data-reveal>
+            ARUTALA
+          </h1>
           <p className="hero__tagline">Menjejak bakti, menjaga lestari.</p>
 
           <div className="hero__grid">
@@ -95,7 +98,7 @@ export default async function Home() {
           { strong: "Pendaftaran mitra", label: "empat tingkat dukungan dibuka sampai keberangkatan", href: "/sponsor" },
           { strong: "Kabar terbaru", label: latest[0]?.judul ?? "ruang kabar redaksi humas", href: "/berita" },
           { strong: "Logbook", label: "15 hari dijadwalkan, foto menyusul dari lapangan", href: "/dokumentasi" },
-          { strong: "Merch", label: "sebagian hasil penjualan menyokong kegiatan", href: "/merch" },
+          { strong: "Rumah Betang", label: "ruang temu akhir ekspedisi, di Dusun Sungai Utik", href: "/berita/rumah-betang-temu-akhir" },
         ]}
       />
 
@@ -176,6 +179,23 @@ export default async function Home() {
         </div>
       </section>
 
+      <section className="section section--betang" aria-labelledby="betang-judul">
+        <div className="wrap">
+          <div className="betang-head" data-reveal>
+            <p className="eyebrow">Rumah Betang</p>
+            <h2 className="section-title" id="betang-judul">
+              Satu rumah panjang, satu ruang untuk semua kabar.
+            </h2>
+            <p className="lede" style={{ marginTop: "1.25rem", maxWidth: "62ch" }}>
+              Di Dusun Sungai Utik, rumah betang adalah pusat musyawarah: tiap tiangnya ditopang banyak keluarga,
+              ruang tengahnya tidak pernah dipakai satu pihak sendirian. Ilustrasi garis di bawah merujuk denah dan
+              foto betang pada lampiran proposal.
+            </p>
+          </div>
+          <BetangIllustration />
+        </div>
+      </section>
+
       <section className="section section--paper2" aria-labelledby="program-judul">
         <div className="wrap">
           <div className="section-head">
@@ -232,7 +252,7 @@ export default async function Home() {
               </div>
             </div>
 
-            <div className="tier-list" data-reveal>
+            <div className="tier-list" data-reveal data-parallax="0.04">
               {tiers.map((t) => (
                 <div className={`tier tier--${t.name.toLowerCase().replace(/\s+/g, "-")}`} key={t.name}>
                   <div>
@@ -315,7 +335,7 @@ export default async function Home() {
               <h2 className="section-title" id="berita-judul">Kabar dari panitia, langsung dari sumbernya.</h2>
             </div>
             <p className="lede" data-reveal>
-              Ditulis Divisi Humas: persiapan, catatan lapangan, kemitraan, dan merch. Berita baru dari panel
+              Ditulis Divisi Humas: persiapan, catatan lapangan, dan kemitraan. Berita baru dari panel
               admin muncul di sini tanpa perlu mengubah kode.
             </p>
           </div>
@@ -324,7 +344,7 @@ export default async function Home() {
             <div className="news-grid">
               {beritaCards.map((n, i) => (
                 <Reveal key={n.slug} delay={i * 90}>
-                  <NewsCard item={n} />
+                  <div data-tilt><NewsCard item={n} /></div>
                 </Reveal>
               ))}
             </div>
@@ -352,10 +372,10 @@ export default async function Home() {
               { no: "02", t: "Kemitraan", p: "Tingkatan sponsor adil: logo, fasilitas, dan slot rompi.", d: "Matriks fasilitas dan papan peringkat mitra.", h: "/sponsor" },
               { no: "03", t: "Berita", p: "Kabar resmi tertulis, bukan berantai dari grup tak jelas.", d: "Kategori Kabar hingga Pasca, dikelola Humas.", h: "/berita" },
               { no: "04", t: "Dokumentasi", p: "Logbook harian dan bukti foto sebelum–sesudah.", d: "Sinkron dengan status pekerjaan lapangan.", h: "/dokumentasi" },
-              { no: "05", t: "Merch", p: "Penjualan mendukung dana kegiatan, konfirmasi via panitia.", d: "Keranjang, kode pesanan, dan status pengiriman.", h: "/merch" },
+              { no: "05", t: "Tautan & Sosial", p: "Semu kanal resmi dalam satu daftar terpelihara.", d: "Instagram, TikTok, WhatsApp, dan proposal.", h: "/links" },
               { no: "06", t: "Tentang", p: "Anggaran terbuka dan susunan panitia penuh.", d: "Semua angka dari proposal resmi.", h: "/tentang" },
             ].map((c) => (
-              <Link key={c.no} href={c.h} className="eco-card">
+              <Link key={c.no} href={c.h} className="eco-card" data-tilt>
                 <span className="eco-card__no">{c.no} · ARUTALA</span>
                 <h3>{c.t}</h3>
                 <p>{c.p}</p>

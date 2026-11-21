@@ -22,7 +22,7 @@ export default async function AdminLoginPage() {
           Masuk untuk mengelola konten.
         </h1>
         <p className="page-lede">
-          Panel ini mengelola sponsor, produk merch, pesanan, dokumentasi, dan status publikasi program.
+          Panel ini mengelola sponsor, dokumentasi, berita, dan status publikasi program.
         </p>
         <div style={{ marginTop: "2rem" }}>
           <AdminLoginForm configured={isServerSupabaseConfigured} />

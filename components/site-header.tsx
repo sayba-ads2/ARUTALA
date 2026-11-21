@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { nav, site } from "@/lib/content";
-import CartCount from "./cart-count";
 
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -36,10 +35,7 @@ export default function SiteHeader() {
       <div className="wrap">
         <nav className="nav" aria-label="Navigasi utama">
           <Link href="/" className="brand" aria-label={`${site.name} ${site.year}, beranda`}>
-            <svg className="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M3 17 12 6l9 11" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-              <path d="M6.5 20 12 12.5 17.5 20" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-            </svg>
+            <img className="brand__logo" src="/img/logo-arutala-alpha.png" alt="Logo ARUTALA" width={44} height={44} />
             <span>Arutala</span>
             <span className="brand__year">{site.year}</span>
           </Link>
@@ -53,7 +49,6 @@ export default function SiteHeader() {
           </div>
 
           <div className="nav-actions">
-            <CartCount />
             <Link href="/links" className="btn btn--ghost btn--sm">
               Tautan resmi
             </Link>

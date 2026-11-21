@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import SiteAmbience from "@/components/site-ambience";
+import Gestures from "@/components/gestures";
 import { site } from "@/lib/content";
 import "./globals.css";
 
@@ -11,7 +12,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: "#0e2e38",
+  themeColor: "#0b2342",
 };
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://arutala.web.id";
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s · ARUTALA 2027",
   },
   description:
-    "PMKM ARUTALA 2027, Menjejak Bakti Menjaga Lestari. Empat program kerja Teknik Lingkungan Universitas Tanjungpura di Desa Batu Lintang, Kapuas Hulu, 7 sampai 21 Januari 2027.",
+    "Situs publikasi dan dokumentasi PMKM ARUTALA 2027, Menjejak Bakti Menjaga Lestari. Empat program kerja Teknik Lingkungan Universitas Tanjungpura bersama 38 mahasiswa di Desa Batu Lintang, Kapuas Hulu, 7 sampai 21 Januari 2027.",
   keywords: [
     "ARUTALA 2027",
     "PMKM Teknik Lingkungan",
@@ -41,27 +42,51 @@ export const metadata: Metadata = {
     siteName: "ARUTALA 2027",
     title: "ARUTALA 2027 · Menjejak Bakti, Menjaga Lestari",
     description:
-      "Empat program kerja, 38 mahasiswa, 15 hari di Desa Batu Lintang, Kapuas Hulu. Program Pengabdian Mahasiswa Kepada Masyarakat Teknik Lingkungan Untan.",
+      "Publikasi dan dokumentasi PMKM ARUTALA 2027: empat program kerja, 38 mahasiswa, 15 hari di Desa Batu Lintang, Kapuas Hulu. Rubrik kabar, arsip lapangan, dan kemitraan sponsor.",
     images: [
       {
         url: "/img/og-arutala.jpg",
         width: 1200,
         height: 630,
-        alt: "ARUTALA 2027, Menjejak Bakti Menjaga Lestari",
+        alt: "Lambang ARUTALA 2027 di atas latar biru dongkel dengan aksen emas: Menjejak Bakti, Menjaga Lestari.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "ARUTALA 2027 · Menjejak Bakti, Menjaga Lestari",
-    description: "PMKM Teknik Lingkungan Universitas Tanjungpura di Desa Batu Lintang, Kapuas Hulu.",
+    description:
+      "Publikasi dan dokumentasi PMKM Teknik Lingkungan Universitas Tanjungpura di Desa Batu Lintang, Kapuas Hulu, 7 sampai 21 Januari 2027.",
     images: ["/img/og-arutala.jpg"],
   },
+  icons: { icon: ["/favicon.ico"], apple: "/apple-icon.png" },
   robots: { index: true, follow: true },
   alternates: {
     canonical: "/",
     types: { rss: "/rss.xml" },
   },
+};
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.organizer,
+  alternateName: `ARUTALA ${site.year}`,
+  url: siteUrl,
+  logo: `${siteUrl}/img/logo-arutala-kotak.png`,
+  description:
+    "Program Pengabdian Mahasiswa Kepada Masyarakat Jurusan Teknik Lingkungan, Fakultas Teknik, Universitas Tanjungpura.",
+};
+
+const webSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: `ARUTALA ${site.year}`,
+  url: siteUrl,
+  description:
+    "Situs publikasi dan dokumentasi PMKM ARUTALA 2027: program kerja, rubrik kabar, arsip lapangan, dan kemitraan sponsor.",
+  inLanguage: "id-ID",
+  publisher: { "@id": `${siteUrl}/#organization` },
 };
 
 const eventSchema = {
@@ -85,7 +110,18 @@ const eventSchema = {
     },
     geo: { "@type": "GeoCoordinates", latitude: site.coords.lat, longitude: site.coords.lng },
   },
-  organizer: { "@type": "Organization", name: site.organizer },
+  organizer: {
+    "@type": "Organization",
+    name: site.organizer,
+    url: siteUrl,
+    logo: `${siteUrl}/img/logo-arutala-kotak.png`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: site.regency,
+      addressRegion: site.province,
+      addressCountry: "ID",
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -105,10 +141,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Lompat ke konten utama
         </a>
         <SiteAmbience />
+        <Gestures />
         <SiteHeader />
         <main id="isi">{children}</main>
         <SiteFooter />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              { ...orgSchema, "@id": `${siteUrl}/#organization` },
+              webSchema,
+              { ...eventSchema, organizer: { "@id": `${siteUrl}/#organization` } },
+            ]),
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){if(!('IntersectionObserver' in window))return;var els=document.querySelectorAll('[data-reveal]');if(!els.length)return;var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-in');io.unobserve(en.target);}});},{rootMargin:'0px 0px -8% 0px'});els.forEach(function(el){io.observe(el);});})();`,

@@ -6,22 +6,34 @@ type Props = { sponsors: Sponsor[] };
 
 // Simulasi urutan logo pada punggung rompi. Slot 1 adalah area VIP
 // (2x2) untuk akumulasi nominal tertinggi, sisanya mengalir kiri atas
-// ke kanan bawah sesuai aturan proposal.
+// ke kanan bawah sesuai aturan proposal. Kapasitas = 38 slot rompi.
 export default function VestPreview({ sponsors }: Props) {
   const ordered = [...sponsors].sort((a, b) => b.nominal_akumulasi - a.nominal_akumulasi);
   const filled = ordered.slice(0, vestCapacity);
   const slots = Array.from({ length: vestCapacity }, (_, i) => filled[i] ?? null);
+  // VIP memakai 4 sel (2x2) sehingga 38 slot butuh 41 sel.
+  // Kisi 8 kolom x 6 baris = 48 sel; 7 sel sisa ditandai cadangan.
+  const ghostCount = 8 * 6 - (slots.length + 3);
 
   return (
     <div className="vest-grid">
       <div>
-        <div className="slots" role="img" aria-label={`Simulasi 40 slot logo pada rompi, ${filled.length} terisi`}>
+        <div
+          className="slots"
+          role="img"
+          aria-label={`Simulasi ${vestCapacity} slot logo pada rompi, ${filled.length} terisi`}
+        >
           {slots.map((s, i) => (
             <div
               key={i}
               className={`slot ${i === 0 ? "slot--vip" : ""} ${s ? "slot--filled" : ""}`}
             >
               {s ? (s.tampilkan_nama ? s.nama_sponsor : "Sahabat Lestari") : String(i + 1).padStart(2, "0")}
+            </div>
+          ))}
+          {Array.from({ length: ghostCount }, (_, i) => (
+            <div key={`c${i}`} className="slot slot--ghost" aria-hidden="true">
+              cadangan
             </div>
           ))}
         </div>

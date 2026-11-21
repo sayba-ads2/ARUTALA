@@ -155,7 +155,7 @@ export const facilityMatrix = [
 export const logoRule =
   "Posisi penempatan logo sponsor pada seluruh media ditentukan berdasarkan akumulasi nominal dana atau barang yang diberikan. Sponsor dengan nilai sumbangan tertinggi mendapat ukuran logo terbesar di posisi paling strategis, yaitu pada rompi. Urutan logo lainnya disusun dari kiri atas menuju kanan bawah.";
 
-export const vestCapacity = 40;
+export const vestCapacity = 38;
 
 export const adoption = [
   { name: "Bus perintis Pontianak ke Kapuas Hulu", detail: "2 unit, pulang pergi", amount: 34000000 },
@@ -342,8 +342,7 @@ export const nav = [
   { href: "/sponsor", label: "Sponsor" },
   { href: "/berita", label: "Berita" },
   { href: "/dokumentasi", label: "Dokumentasi" },
-  { href: "/merch", label: "Merch" },
-  { href: "/tentang", label: "Tentang" },
+    { href: "/tentang", label: "Tentang" },
 ];
 
 // ---------------------------------------------------------------- berita
@@ -354,7 +353,7 @@ export type BeritaSeed = {
   judul: string;
   ringkasan: string;
   konten: string;
-  kategori: "Kabar" | "Lapangan" | "Pasca" | "Kemitraan" | "Merch";
+  kategori: "Kabar" | "Lapangan" | "Pasca" | "Kemitraan";
   gambar_url: string | null;
   penulis: string;
   tanggal: string;
@@ -437,21 +436,22 @@ export const beritaSeed: BeritaSeed[] = [
     tampil: true,
   },
   {
-    slug: "merch-arutala-dikonsep",
-    judul: "Merch ARUTALA Dikonsep: Sebagian Hasil Menyokong Kegiatan",
+    slug: "rumah-betang-temu-akhir",
+    judul: "Rumah Betang Jadi Titik Temu Akhir Ekspedisi",
     ringkasan:
-      "Katalog merchandise disiapkan sebagai salah satu jalur dana; pesanan diproses panitia dan dikonfirmasi via WhatsApp.",
-    konten: `## Cara kerjanya
-    Katalog merch menampilkan produk yang dijual untuk mendukung pendanaan kegiatan. Pemesanan lewat keranjang
-    situs, lalu panitia menghubungi pembeli untuk konfirmasi stok dan pembayaran. Kode pesanan yang diberikan
-    simpan baik-baik sebagai rujukan.
-
-    ## Catatan desain
-    Identitas visual merch memakai palet dan motif tenun yang sama dengan situs ini: kertas hangat, tinta
-    hijau sungai, dan aksen oker.`,
-    kategori: "Merch",
+      "Pameran hasil dirancang di ruang komunal rumah betang: warga, mahasiswa, dan pemerintah desa duduk bersama membaca data sungai.",
+    konten: [
+      "Pekan lalu, Divisi Acara menyepakati satu keputusan penting soal panggung: bukan tenda, melainkan rumah betang.",
+      "## Kenapa rumah betang",
+      "Rumah betang adalah arsitektur bersama. Tiap-tiap tiangnya ditopang lebih dari satu keluarga, dan ruang tengahnya tidak pernah dipakai satu pihak sendirian. Ketika hasil ekspedisi dibentangkan di sana, data sungai berdiri di ruang yang oleh warga memang sudah dipercaya sebagai tempat bermusyawarah.",
+      "## Format temu akhir",
+      "Pameran hasil akan diisi panel data kualitas air, peta jalur ekspedisi, dan galeri foto lapangan. Warga Batu Lintang mengundang Kecamatan Embaloh Hulu dan Dinas Lingkungan Hidup Kapuas Hulu untuk duduk bersama.",
+      "> Sungai yang kita ukur di hulu akan dibaca oleh orang yang sama di hilir. Karena itu temu akhirnya di rumah bersama, bukan di kelas.",
+      "Seluruh materi pameran akan didokumentasikan sebagai berita rubrik Pasca pada situs ini.",
+    ].join("\n"),
+    kategori: "Kabar",
     gambar_url: null,
-    penulis: "Divisi Perlengkapan",
+    penulis: "Divisi Acara",
     tanggal: "2026-12-20",
     unggulan: false,
     tampil: true,

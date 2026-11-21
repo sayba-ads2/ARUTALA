@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PageHead from "@/components/page-head";
 import TenunBand from "@/components/tenun-band";
+import BetangIllustration from "@/components/betang";
 import { funding, panitia, site } from "@/lib/content";
 import { percentLabel, rupiah } from "@/lib/format";
 
@@ -237,6 +238,21 @@ export default function TentangPage() {
           </div>
         </div>
       </section>
+      <section className="section section--betang" aria-labelledby="betang-tentang">
+        <div className="wrap">
+          <div className="betang-head" data-reveal>
+            <p className="eyebrow">Rumah Betang</p>
+            <h2 className="section-title" id="betang-tentang">Rumah panjang tempat semua kabar bermuara.</h2>
+            <p className="lede" style={{ marginTop: "1.25rem", maxWidth: "62ch" }}>
+              Dusun Sungai Utik dikenal karena rumah betang dan hutan adat yang dijaga turun temurun. Bagi ARUTALA,
+              betang adalah titik temu: tempat data sungai dibaca bersama warga, tempat pameran hasil digelar, dan
+              tempat program diuji apakah benar berguna.
+            </p>
+          </div>
+          <BetangIllustration />
+        </div>
+      </section>
+
     </>
   );
 }

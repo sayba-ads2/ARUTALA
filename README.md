@@ -2,7 +2,7 @@
 
 Situs publikasi PMKM ARUTALA 2027 (Jurusan Teknik Lingkungan, Fakultas Teknik, Universitas Tanjungpura) di Desa Batu Lintang, Kecamatan Embaloh Hulu, Kabupaten Kapuas Hulu.
 
-Struktur proyek mengikuti pola SAYBA ARC: Next.js App Router, Supabase untuk data dan autentikasi, panel admin di `/admin`, serta modul penjualan merch seperti contoh Hima-merch.
+Struktur proyek mengikuti pola SAYBA ARC: Next.js App Router, Supabase untuk data dan autentikasi, panel admin di `/admin`.
 
 ## Halaman publik
 
@@ -15,8 +15,7 @@ Struktur proyek mengikuti pola SAYBA ARC: Next.js App Router, Supabase untuk dat
 | `/sosial` | Rencana publikasi Instagram dan TikTok |
 | `/links` | Halaman tautan bio, pengganti Linktree |
 | `/tentang` | Susunan 38 panitia, rekapitulasi anggaran, dokumen proposal |
-| `/merch`, `/merch/[slug]` | Katalog dan detail produk |
-| `/keranjang` | Keranjang dan formulir pesanan |
+| `/berita`, `/berita/[slug]` | Rubrik kabar dan detail artikel |
 
 ## Menjalankan
 
@@ -26,7 +25,7 @@ cp .env.local.example .env.local   # lalu isi nilainya
 npm run dev
 ```
 
-Tanpa kredensial Supabase, seluruh halaman publik tetap tampil memakai data proposal. Panel admin dan pesanan merch menampilkan status belum aktif sampai env diisi.
+Tanpa kredensial Supabase, seluruh halaman publik tetap tampil memakai data proposal. Panel admin menampilkan status belum aktif sampai env diisi.
 
 ## Supabase
 
@@ -51,8 +50,8 @@ Service role key hanya dipakai di server (API route). Jangan pernah memasukkanny
 `/admin` mengelola:
 
 - Sponsor: nama, jenis dukungan, nominal, logo, tautan, status anonim
-- Produk merch: harga, stok, gambar, status aktif
-- Pesanan: status baru, dikonfirmasi, dikirim, selesai, batal, plus tautan WhatsApp pembeli
+- Berita rubrik: judul, kategori, unggulan, status tampil
+- Dokumentasi: catatan lapangan per fase (Pra, Lapangan, Pasca)
 - Program: status publikasi dan teks inti
 - Dokumentasi: catatan dan foto lapangan
 
@@ -62,10 +61,10 @@ Service role key hanya dipakai di server (API route). Jangan pernah memasukkanny
 app/
   admin/            panel admin dan login
   api/admin/        CRUD per resource (service role + sesi admin)
-  api/orders/       pembuatan pesanan publik
-  program|sponsor|dokumentasi|sosial|links|tentang|merch|keranjang/
-components/         header, footer, ledger program, papan sponsor, rompi, keranjang
-lib/                data proposal, repo Supabase, format, keranjang, auth admin
+  berita/           rubrik kabar (daftar + detail, SSG)
+  program|sponsor|berita|dokumentasi|sosial|links|tentang/
+components/         header, footer, ledger program, papan sponsor, rompi, rubrik berita, ilustrasi betang
+lib/                data proposal, repo Supabase, format, auth admin
 public/             font, gambar dari proposal, dokumen PDF
 supabase/schema.sql
 proxy.ts            perlindungan /admin dan refresh sesi (Next.js 16, pengganti middleware)

@@ -11,7 +11,7 @@ export const revalidate = 60;
 export const metadata = {
   title: "Berita & Kabar Terkini",
   description:
-    "Kabar resmi PMKM ARUTALA 2027: persiapan, kegiatan lapangan, pasca-kegiatan, kemitraan, dan merchandise. Ditulis oleh Divisi Humas Teknik Lingkungan Untan.",
+    "Kabar resmi PMKM ARUTALA 2027: persiapan, kegiatan lapangan, pasca-kegiatan, kemitraan. Ditulis oleh Divisi Humas Teknik Lingkungan Untan.",
   alternates: { canonical: "/berita" },
 };
 
@@ -39,7 +39,7 @@ export default async function BeritaPage() {
                 <p className="eyebrow" style={{ margin: 0 }}>Tentang rubrik ini</p>
                 <p style={{ margin: 0, color: "var(--ink-soft)" }}>
                   Berita ditulis oleh Divisi Humas dan dapat langsung ditayangkan lewat panel admin,
-                  tanpa perlu menyentuh kode. Kategori: Kabar, Lapangan, Pasca, Kemitraan, Merch.
+                  tanpa perlu menyentuh kode. Kategori: Kabar, Lapangan, Pasca, Kemitraan.
                 </p>
                 <p className="small muted" style={{ margin: 0 }}>
                   {isSeed

@@ -34,37 +34,6 @@ create table if not exists public.programs (
   created_at timestamptz not null default now()
 );
 
--- ---------------------------------------------------------------- produk
-create table if not exists public.produk (
-  id uuid primary key default gen_random_uuid(),
-  slug text not null unique,
-  nama text not null,
-  deskripsi text,
-  harga integer not null default 0 check (harga >= 0),
-  stok integer not null default 0 check (stok >= 0),
-  gambar_url text,
-  kategori text,
-  aktif boolean not null default true,
-  created_at timestamptz not null default now()
-);
-
--- ---------------------------------------------------------------- pesanan
-create table if not exists public.pesanan (
-  id uuid primary key default gen_random_uuid(),
-  kode text not null unique,
-  nama text not null,
-  whatsapp text not null,
-  alamat text,
-  catatan text,
-  total integer not null default 0,
-  status text not null default 'baru'
-    check (status in ('baru', 'dikonfirmasi', 'dikirim', 'selesai', 'batal')),
-  items jsonb not null default '[]'::jsonb,
-  created_at timestamptz not null default now()
-);
-
-create index if not exists pesanan_created_idx on public.pesanan (created_at desc);
-
 -- ---------------------------------------------------------------- dokumentasi
 create table if not exists public.dokumentasi (
   id uuid primary key default gen_random_uuid(),
@@ -97,8 +66,6 @@ create table if not exists public.berita (
 -- ---------------------------------------------------------------- RLS
 alter table public.sponsors enable row level security;
 alter table public.programs enable row level security;
-alter table public.produk enable row level security;
-alter table public.pesanan enable row level security;
 alter table public.dokumentasi enable row level security;
 alter table public.berita enable row level security;
 
@@ -109,23 +76,24 @@ create policy "sponsors read" on public.sponsors for select using (true);
 drop policy if exists "programs read publik" on public.programs;
 create policy "programs read publik" on public.programs for select using (publikasi = true);
 
-drop policy if exists "produk read aktif" on public.produk;
-create policy "produk read aktif" on public.produk for select using (aktif = true);
-
 drop policy if exists "berita read tampil" on public.berita;
 create policy "berita read tampil" on public.berita for select using (tampil = true);
 
 drop policy if exists "dokumentasi read tampil" on public.dokumentasi;
 create policy "dokumentasi read tampil" on public.dokumentasi for select using (tampil = true);
 
--- Pesanan tidak dapat dibaca publik. Dibuat dan dibaca lewat service role.
--- Tidak ada policy select/insert untuk anon pada tabel pesanan.
 
 -- ---------------------------------------------------------------- storage (opsional)
--- Buat bucket publik bernama "arutala" untuk gambar dokumentasi dan produk.
+-- Buat bucket publik bernama "arutala" untuk gambar dokumentasi.
 -- insert into storage.buckets (id, name, public) values ('arutala', 'arutala', true)
 -- on conflict (id) do nothing;
 
 -- ---------------------------------------------------------------- contoh program
 -- Halaman program memakai data proposal sebagai fallback bila tabel kosong.
 -- Setelah baris pertama ditambahkan lewat panel admin, tabel menjadi sumber data.
+
+-- ---------------------------------------------------------------- migrasi
+-- Fitur merchandise dihentikan. Untuk basis data lama, jalankan sekali:
+-- drop table if exists public.pesanan;
+-- drop table if exists public.produk;
+-- delete from public.berita where kategori = 'Merch';

@@ -15,3 +15,16 @@ next-env.d.ts
 
 .pptr-*.js
 .tmp-home.html
+
+# QA helper lokal (jangan di-commit)
+_libsupa.py
+.lib-*.py
+
+# QA sementara
+_qa*.js
+_crop.py
+_qa_out.json
+.nextstart.log
+__pycache__/
+_libsupa.py
+tools_sync_db.py

@@ -13,7 +13,6 @@ const links = [
   { href: "/sponsor#adopsi", title: "Adopsi pos kebutuhan", note: "Bus perintis, konsumsi, rompi, material TPS", no: "02" },
   { href: "/dokumentasi", title: "Jurnal dokumentasi", note: "Foto dan catatan 15 hari di lapangan", no: "03" },
   { href: "/program#peta", title: "Peta lokasi kegiatan", note: "Batu Lintang dan Dusun Sungai Utik", no: "04" },
-  { href: "/merch", title: "Merchandise", note: "Katalog resmi, pembayaran dikonfirmasi panitia", no: "05" },
 ];
 
 export default function LinksPage() {

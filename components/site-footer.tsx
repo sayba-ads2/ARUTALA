@@ -24,7 +24,6 @@ export default function SiteFooter() {
               <Link href="/sponsor">Sponsor dan mitra</Link>
               <Link href="/berita">Berita &amp; kabar</Link>
               <Link href="/dokumentasi">Dokumentasi lapangan</Link>
-              <Link href="/merch">Merchandise</Link>
               <Link href="/tentang">Tentang dan anggaran</Link>
             </div>
           </div>
@@ -51,6 +50,23 @@ export default function SiteFooter() {
           <span>
             {site.shortOrganizer} · <Link href="/admin">Panel admin</Link>
           </span>
+        </div>
+
+        <div className="footer-watermark">
+          <a
+            href="https://sayba.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="watermark-link"
+            aria-label="Powered by Sayba Arc, buka situs sayba.id"
+          >
+            <span className="watermark-ghost" aria-hidden="true">
+              SAYBA ARC
+            </span>
+            <span className="watermark-label mono">
+              Powered by <b>Sayba Arc</b>
+            </span>
+          </a>
         </div>
       </div>
     </footer>

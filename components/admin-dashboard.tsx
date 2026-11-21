@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { rupiah } from "@/lib/format";
 
-type Tab = "ringkasan" | "sponsors" | "produk" | "pesanan" | "programs" | "dokumentasi" | "berita";
+type Tab = "ringkasan" | "sponsors" | "programs" | "dokumentasi" | "berita";
 type Row = Record<string, unknown>;
 
 type Field = {
@@ -20,14 +20,12 @@ type Field = {
 const TABS: { id: Tab; label: string }[] = [
   { id: "ringkasan", label: "Ringkasan" },
   { id: "sponsors", label: "Sponsor" },
-  { id: "produk", label: "Produk" },
-  { id: "pesanan", label: "Pesanan" },
   { id: "programs", label: "Program" },
   { id: "dokumentasi", label: "Dokumentasi" },
   { id: "berita", label: "Berita" },
 ];
 
-const FIELDS: Record<Exclude<Tab, "ringkasan" | "pesanan">, Field[]> = {
+const FIELDS: Record<Exclude<Tab, "ringkasan">, Field[]> = {
   sponsors: [
     { key: "nama_sponsor", label: "Nama sponsor", type: "text", required: true },
     { key: "jenis_dukungan", label: "Jenis dukungan", type: "select", options: ["Dana", "Barang", "Jasa", "Konsumsi"], half: true },
@@ -36,16 +34,6 @@ const FIELDS: Record<Exclude<Tab, "ringkasan" | "pesanan">, Field[]> = {
     { key: "logo_url", label: "URL logo", type: "text", half: true, placeholder: "/img/sponsor/nama.svg" },
     { key: "tautan_mitra", label: "Tautan mitra", type: "text", placeholder: "https://instagram.com/..." },
     { key: "tampilkan_nama", label: "Tampilkan nama (matikan untuk anonim)", type: "checkbox" },
-  ],
-  produk: [
-    { key: "nama", label: "Nama produk", type: "text", required: true },
-    { key: "kategori", label: "Kategori", type: "text", half: true },
-    { key: "slug", label: "Slug URL (opsional)", type: "text", half: true, placeholder: "otomatis dari nama" },
-    { key: "harga", label: "Harga (Rp)", type: "number", required: true, half: true },
-    { key: "stok", label: "Stok", type: "number", required: true, half: true },
-    { key: "gambar_url", label: "URL gambar", type: "text" },
-    { key: "deskripsi", label: "Deskripsi", type: "textarea" },
-    { key: "aktif", label: "Tampilkan di katalog", type: "checkbox" },
   ],
   programs: [
     { key: "no", label: "Nomor urut", type: "text", required: true, half: true },
@@ -68,7 +56,7 @@ const FIELDS: Record<Exclude<Tab, "ringkasan" | "pesanan">, Field[]> = {
   ],
   berita: [
     { key: "judul", label: "Judul berita", type: "text", required: true },
-    { key: "kategori", label: "Kategori", type: "select", options: ["Kabar", "Lapangan", "Pasca", "Kemitraan", "Merch"], half: true },
+    { key: "kategori", label: "Kategori", type: "select", options: ["Kabar", "Lapangan", "Pasca", "Kemitraan"], half: true },
     { key: "tanggal", label: "Tanggal terbit", type: "date", required: true, half: true },
     { key: "ringkasan", label: "Ringkasan (tampil di kartu)", type: "textarea", required: true },
     { key: "konten", label: "Isi berita (baris kosong = paragraf baru; awali baris dengan ## untuk subjudul, > untuk kutipan)", type: "textarea" },
@@ -81,7 +69,6 @@ const FIELDS: Record<Exclude<Tab, "ringkasan" | "pesanan">, Field[]> = {
 
 const DEFAULTS: Record<string, Row> = {
   sponsors: { nama_sponsor: "", jenis_dukungan: "Dana", nominal_akumulasi: 0, tanggal_masuk: "", logo_url: "", tautan_mitra: "", tampilkan_nama: true },
-  produk: { nama: "", kategori: "", slug: "", harga: 0, stok: 0, gambar_url: "", deskripsi: "", aktif: true },
   programs: { no: "05", slug: "", title: "", faction: "", lead: "", body: "", output: "", publikasi: true },
   dokumentasi: { tanggal: "", fase: "Lapangan", judul: "", keterangan: "", program_slug: "", gambar_url: "", tampil: true },
   berita: { judul: "", kategori: "Kabar", tanggal: "", ringkasan: "", konten: "", penulis: "Humas ARUTALA", gambar_url: "", unggulan: false, tampil: true },
@@ -96,26 +83,22 @@ export default function AdminDashboard({ email }: { email: string }) {
   const [notice, setNotice] = useState<string | null>(null);
   const [form, setForm] = useState<Row>({});
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [counts, setCounts] = useState({ sponsors: 0, produk: 0, pesanan: 0, omzet: 0 });
+  const [counts, setCounts] = useState({ sponsors: 0, dokumentasi: 0, berita: 0 });
 
   const load = useCallback(
     async (which: Tab) => {
       if (which === "ringkasan") {
         setLoading(true);
         try {
-          const [s, p, o] = await Promise.all([
+          const [sp, dk, br] = await Promise.all([
             fetch("/api/admin/sponsors").then((r) => r.json()),
-            fetch("/api/admin/produk").then((r) => r.json()),
-            fetch("/api/admin/pesanan").then((r) => r.json()),
+            fetch("/api/admin/dokumentasi").then((r) => r.json()),
+            fetch("/api/admin/berita").then((r) => r.json()),
           ]);
-          const orders: Row[] = o.data ?? [];
           setCounts({
-            sponsors: (s.data ?? []).length,
-            produk: (p.data ?? []).length,
-            pesanan: orders.length,
-            omzet: orders
-              .filter((r) => r.status !== "batal")
-              .reduce((n: number, r) => n + (Number(r.total) || 0), 0),
+            sponsors: (sp.data ?? []).length,
+            dokumentasi: (dk.data ?? []).length,
+            berita: (br.data ?? []).length,
           });
         } finally {
           setLoading(false);
@@ -193,27 +176,13 @@ export default function AdminDashboard({ email }: { email: string }) {
     void load(tab);
   };
 
-  const setStatus = async (id: string, status: string) => {
-    const res = await fetch("/api/admin/pesanan", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, status }),
-    });
-    if (!res.ok) {
-      const data = await res.json();
-      setError(data.error ?? "Gagal mengubah status.");
-      return;
-    }
-    void load("pesanan");
-  };
-
   const logout = async () => {
     await fetch("/api/admin/logout", { method: "POST" });
     router.replace("/admin/login");
     router.refresh();
   };
 
-  const fields = tab === "ringkasan" || tab === "pesanan" ? [] : FIELDS[tab];
+  const fields = tab === "ringkasan" ? [] : FIELDS[tab];
 
   return (
     <div className="admin-shell">
@@ -261,81 +230,19 @@ export default function AdminDashboard({ email }: { email: string }) {
                 <span>Mitra</span>
               </div>
               <div className="card">
-                <b>{counts.produk}</b>
-                <span>Produk</span>
+                <b>{counts.berita}</b>
+                <span>Kabar berita</span>
               </div>
               <div className="card">
-                <b>{counts.pesanan}</b>
-                <span>Pesanan</span>
-              </div>
-              <div className="card">
-                <b style={{ fontSize: "1.4rem" }}>{rupiah(counts.omzet)}</b>
-                <span>Nilai pesanan aktif</span>
+                <b>{counts.dokumentasi}</b>
+                <span>Catatan dokumentasi</span>
               </div>
             </div>
             {loading && <p className="small muted">Memuat ringkasan...</p>}
             <div className="notice">
               <b>Alur kerja.</b> Tambahkan sponsor di tab Sponsor agar papan peringkat dan simulasi rompi ikut
-              berubah. Produk yang ditambahkan di tab Produk langsung muncul di katalog merch.
+              berubah. Berita dan dokumentasi yang ditambahkan muncul otomatis di halaman rubrik serta sitemap.
             </div>
-          </>
-        )}
-
-        {tab === "pesanan" && (
-          <>
-            {loading ? (
-              <p className="small muted">Memuat pesanan...</p>
-            ) : rows.length === 0 ? (
-              <div className="empty">
-                <h3>Belum ada pesanan</h3>
-                <p>Pesanan dari halaman keranjang akan muncul di sini.</p>
-              </div>
-            ) : (
-              <div className="admin-rows">
-                {rows.map((r) => (
-                  <div className="admin-row" key={String(r.id)}>
-                    <div className="admin-row__main">
-                      <b>
-                        {String(r.kode)} · {String(r.nama)}
-                      </b>
-                      <small>
-                        {String(r.whatsapp)} · {rupiah(Number(r.total))} ·{" "}
-                        {new Date(String(r.created_at)).toLocaleString("id-ID")}
-                      </small>
-                      <small style={{ display: "block", marginTop: ".2rem" }}>
-                        {(r.items as { nama: string; qty: number }[] | undefined)
-                          ?.map((i) => `${i.nama} x${i.qty}`)
-                          .join(", ")}
-                        {r.alamat ? ` · ${String(r.alamat)}` : ""}
-                      </small>
-                    </div>
-                    <div className="admin-actions">
-                      <select
-                        className="select"
-                        value={String(r.status)}
-                        aria-label={`Status pesanan ${String(r.kode)}`}
-                        onChange={(e) => setStatus(String(r.id), e.target.value)}
-                        style={{ width: "auto" }}
-                      >
-                        <option value="baru">Baru</option>
-                        <option value="dikonfirmasi">Dikonfirmasi</option>
-                        <option value="dikirim">Dikirim</option>
-                        <option value="selesai">Selesai</option>
-                        <option value="batal">Batal</option>
-                      </select>
-                      <a
-                        className="btn btn--ghost btn--sm"
-                        href={`https://wa.me/${String(r.whatsapp).replace(/^0/, "62")}`}
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        WhatsApp
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
           </>
         )}
 
@@ -436,23 +343,18 @@ export default function AdminDashboard({ email }: { email: string }) {
                           `${String(r.jenis_dukungan)} · ${rupiah(Number(r.nominal_akumulasi))} · ${
                             r.tampilkan_nama ? "nama tampil" : "anonim"
                           }`}
-                        {tab === "produk" && `${rupiah(Number(r.harga))} · stok ${String(r.stok)} · ${r.aktif ? "aktif" : "nonaktif"}`}
                         {tab === "programs" && `${String(r.slug)} · ${r.publikasi ? "publik" : "draf"}`}
                         {tab === "dokumentasi" && `${String(r.tanggal)} · ${String(r.fase)} · ${r.tampil ? "tampil" : "disembunyikan"}`}
                         {tab === "berita" && `${String(r.tanggal)} · ${String(r.kategori)}${r.unggulan ? " · unggulan" : ""} · ${r.tampil ? "tampil" : "disembunyikan"}`}
                       </small>
                     </div>
                     <div className="admin-actions">
-                      {tab !== "pesanan" && (
-                        <>
-                          <button className="btn btn--ghost btn--sm" type="button" onClick={() => startEdit(r)}>
-                            Ubah
-                          </button>
-                          <button className="btn btn--ghost btn--sm" type="button" onClick={() => remove(String(r.id))}>
-                            Hapus
-                          </button>
-                        </>
-                      )}
+                      <button className="btn btn--ghost btn--sm" type="button" onClick={() => startEdit(r)}>
+                        Ubah
+                      </button>
+                      <button className="btn btn--ghost btn--sm" type="button" onClick={() => remove(String(r.id))}>
+                        Hapus
+                      </button>
                     </div>
                   </div>
                 ))}

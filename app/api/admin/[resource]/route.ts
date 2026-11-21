@@ -3,9 +3,9 @@ import { z } from "zod";
 import { requireAdmin } from "@/lib/admin-auth";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
-type Res = "sponsors" | "programs" | "produk" | "pesanan" | "dokumentasi" | "berita";
+type Res = "sponsors" | "programs" | "dokumentasi" | "berita";
 
-const TABLES: Res[] = ["sponsors", "programs", "produk", "pesanan", "dokumentasi", "berita"];
+const TABLES: Res[] = ["sponsors", "programs", "dokumentasi", "berita"];
 
 const sponsorSchema = z.object({
   nama_sponsor: z.string().trim().min(1).max(160),
@@ -15,17 +15,6 @@ const sponsorSchema = z.object({
   tautan_mitra: z.string().trim().max(500).nullable().optional(),
   tampilkan_nama: z.coerce.boolean().optional().default(true),
   tanggal_masuk: z.string().trim().max(20).nullable().optional(),
-});
-
-const produkSchema = z.object({
-  nama: z.string().trim().min(1).max(160),
-  slug: z.string().trim().max(160).optional(),
-  deskripsi: z.string().trim().max(2000).nullable().optional(),
-  harga: z.coerce.number().int().min(0),
-  stok: z.coerce.number().int().min(0),
-  gambar_url: z.string().trim().max(500).nullable().optional(),
-  kategori: z.string().trim().max(80).nullable().optional(),
-  aktif: z.coerce.boolean().optional().default(true),
 });
 
 const programSchema = z.object({
@@ -62,26 +51,18 @@ const beritaSchema = z.object({
   tampil: z.coerce.boolean().optional().default(true),
 });
 
-const pesananPatch = z.object({
-  status: z.enum(["baru", "dikonfirmasi", "dikirim", "selesai", "batal"]),
-});
-
 const SCHEMAS: Record<string, z.ZodTypeAny> = {
   sponsors: sponsorSchema,
   programs: programSchema,
-  produk: produkSchema,
   dokumentasi: dokumentasiSchema,
   berita: beritaSchema,
-  pesanan: pesananPatch,
 };
 
 const PATCH_SCHEMAS: Record<string, z.ZodTypeAny> = {
   sponsors: sponsorSchema.partial(),
   programs: programSchema.partial(),
-  produk: produkSchema.partial(),
   dokumentasi: dokumentasiSchema.partial(),
   berita: beritaSchema.partial(),
-  pesanan: pesananPatch,
 };
 
 type Params = { params: Promise<{ resource: string }> };
@@ -112,7 +93,6 @@ export async function GET(_req: Request, ctx: Params) {
   let q = g.db!.from(g.resource!).select("*");
   if (g.resource === "sponsors") q = q.order("nominal_akumulasi", { ascending: false });
   else if (g.resource === "programs") q = q.order("no", { ascending: true });
-  else if (g.resource === "pesanan") q = q.order("created_at", { ascending: false });
   else if (g.resource === "dokumentasi" || g.resource === "berita") q = q.order("tanggal", { ascending: false });
   else q = q.order("created_at", { ascending: false });
 
@@ -125,9 +105,6 @@ export async function POST(req: Request, ctx: Params) {
   const { resource } = await ctx.params;
   const g = await guard(resource);
   if (g.error) return g.error;
-  if (g.resource === "pesanan") {
-    return NextResponse.json({ error: "Pesanan dibuat dari halaman checkout." }, { status: 400 });
-  }
 
   const schema = SCHEMAS[g.resource!] as z.ZodTypeAny;
   const parsed = schema.safeParse(await req.json().catch(() => null));
@@ -136,11 +113,6 @@ export async function POST(req: Request, ctx: Params) {
   }
 
   const row = { ...parsed.data };
-  if (g.resource === "produk") {
-    const nama = row.nama as string;
-    row.slug = row.slug || nama.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-    row.aktif = row.aktif ?? true;
-  }
   if (g.resource === "berita") {
     const judul = row.judul as string;
     row.slug = row.slug || judul.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 90);
@@ -161,16 +133,6 @@ export async function PATCH(req: Request, ctx: Params) {
     return NextResponse.json({ error: "ID baris wajib dikirim." }, { status: 400 });
   }
   const { id, ...rest } = body;
-
-  if (g.resource === "pesanan") {
-    const parsed = pesananPatch.safeParse(rest);
-    if (!parsed.success) {
-      return NextResponse.json({ error: "Status tidak valid." }, { status: 400 });
-    }
-    const { data, error } = await g.db!.from("pesanan").update(parsed.data).eq("id", id).select().single();
-    if (error) return NextResponse.json({ error: error.message }, { status: 400 });
-    return NextResponse.json({ data });
-  }
 
   const parsed = PATCH_SCHEMAS[g.resource!].safeParse(rest);
   if (!parsed.success) {
