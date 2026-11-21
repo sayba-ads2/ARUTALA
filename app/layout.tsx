@@ -148,11 +148,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="isi">{children}</main>
         <SiteFooter />
         <script
-          dangerouslySetInnerHTML={{
-            __html: `if('serviceWorker' in navigator){addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})});}`,
-          }}
-        />
-        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify([
