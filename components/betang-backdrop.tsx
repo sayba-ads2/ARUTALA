@@ -19,7 +19,12 @@ export default function BetangBackdrop() {
   const [drawn, setDrawn] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    // Parallax pointer hanya untuk perangkat bermouse. Di layar sentuh listener
+    // ini tidak berguna (pointermove ikut terpicu saat menggulir) jadi lebih
+    // baik tidak dipasang sama sekali.
+    const finePointer = window.matchMedia?.("(hover: hover) and (pointer: fine)").matches;
+    if (reduce || !finePointer) {
       setDrawn(true);
       return;
     }

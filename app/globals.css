@@ -2294,105 +2294,12 @@ button {
   to { transform: scale(1.045) translate(1.2%, -1%); }
 }
 
-/* --- ilustrasi rumah betang --- */
-.section--betang {
-  background:
-    radial-gradient(120% 60% at 50% 100%, rgba(167, 182, 201, 0.16), transparent 60%),
-    linear-gradient(180deg, #142540 0%, var(--river) 45%, var(--river-deep) 100%);
-  color: var(--paper);
-  padding-top: var(--section-y);
-  position: relative;
-  overflow: hidden;
-}
-.section--betang .eyebrow {
-  color: #e6bd6a;
-}
-.section--betang .lede {
-  color: rgba(237, 233, 228, 0.9);
-}
-.section--betang .eyebrow::before {
-  background: var(--gold);
-}
-.section--betang .section-title {
-  color: #ede9e4;
-}
+
+/* Sisa aturan yang masih dipakai halaman /tentang. Blok ilustrasi betang
+   lama dibuang: markup-nya sudah tidak dirender, dan animasi betang-flow
+   memakai stroke-dashoffset yang memaksa repaint tiap frame. */
 .betang-head {
   max-width: 62ch;
-}
-.betang {
-  margin-top: clamp(2rem, 5vw, 4rem);
-  position: relative;
-}
-.betang svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.betang svg * {
-  fill: none;
-  stroke: rgba(217, 168, 63, 0.86);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.betang__back path {
-  stroke: rgba(122, 162, 200, 0.5);
-  stroke-width: 1.2;
-}
-.betang__river {
-  stroke: rgba(148, 190, 228, 0.85) !important;
-  stroke-width: 2.4 !important;
-  animation: betang-flow 12s linear infinite;
-  stroke-dasharray: 6 10;
-}
-@keyframes betang-flow {
-  to { stroke-dashoffset: -160; }
-}
-.betang__house {
-  transform: translate3d(calc(var(--bx, 0) * -10px), calc(var(--by, 0) * -6px), 0);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.betang__poles {
-  transform: translate3d(calc(var(--bx, 0) * 14px), 0, 0);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.betang__back {
-  transform: translate3d(calc(var(--bx, 0) * -20px), calc(var(--by, 0) * -10px), 0);
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.betang__detail {
-  transform: translate3d(calc(var(--bx, 0) * 18px), 0, 0);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.betang svg path,
-.betang svg line,
-.betang svg rect,
-.betang svg circle {
-  stroke-dasharray: 1400;
-  stroke-dashoffset: 1400;
-  transition: stroke-dashoffset 1.6s ease;
-}
-.betang.is-drawn svg path,
-.betang.is-drawn svg line,
-.betang.is-drawn svg rect,
-.betang.is-drawn svg circle {
-  stroke-dashoffset: 0;
-}
-.betang.is-drawn .betang__back path,
-.betang.is-drawn .betang__river {
-  transition-delay: 0.9s;
-}
-.betang.is-drawn .betang__roof * {
-  transition-delay: 0.2s;
-}
-.betang__label {
-  display: block;
-  margin-top: 0.8rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(217, 168, 63, 0.75);
-  text-align: center;
 }
 
 /* --- watermark Sayba Arc di footer --- */
