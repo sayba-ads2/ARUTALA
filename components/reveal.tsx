@@ -25,6 +25,10 @@ export default function Reveal({
       setShown(true);
       return;
     }
+    // CATATAN: RevealDriver (komponen global) juga menandai elemen ini.
+    // IntersectionObserver di sini tetap dipertahankan untuk waktu muncul
+    // yang lebih halus, tetapi jaring aman memastikan isi tidak pernah
+    // tertinggal tersembunyi setelah navigasi sisi klien.
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -38,7 +42,7 @@ export default function Reveal({
       { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
     );
     io.observe(el);
-    const fb = setTimeout(() => setShown(true), 1600);
+    const fb = setTimeout(() => setShown(true), 1200);
     return () => {
       clearTimeout(fb);
       io.disconnect();
