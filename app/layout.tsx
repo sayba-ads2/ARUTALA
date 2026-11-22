@@ -1,12 +1,5 @@
 import type React from "react";
 import type { Metadata, Viewport } from "next";
-import SiteHeader from "@/components/site-header";
-import SiteFooter from "@/components/site-footer";
-import SiteAmbience from "@/components/site-ambience";
-import ScrollManager from "@/components/scroll-manager";
-import RevealDriver from "@/components/reveal-driver";
-import Gestures from "@/components/gestures";
-import ClickSpark from "@/components/bits/click-spark";
 import { site } from "@/lib/content";
 import "./globals.css";
 
@@ -139,30 +132,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body>
-        <a href="#isi" className="sr-only">
-          Lompat ke konten utama
-        </a>
-        <SiteAmbience />
-        <ScrollManager />
-        <RevealDriver />
-        <Gestures />
-        <ClickSpark />
-        <SiteHeader />
-        <main id="isi">{children}</main>
-        <SiteFooter />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              { ...orgSchema, "@id": `${siteUrl}/#organization` },
-              webSchema,
-              { ...eventSchema, organizer: { "@id": `${siteUrl}/#organization` } },
-            ]),
-          }}
-        />
-
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
+
+export { orgSchema, webSchema, eventSchema, siteUrl };

@@ -1714,28 +1714,155 @@ button {
   color: var(--ink-soft);
 }
 
-/* ---------- admin ---------- */
+/* ---------- panel admin ---------- */
+/* Panel berada di grup rute (panel) yang tidak memakai kerangka situs publik.
+   Bilah atas di bawah ini menggantikan navbar agar panel tidak tertimpa. */
+.panel-bar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(12, 26, 43, 0.92);
+  border-bottom: 1px solid var(--line);
+  transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+.panel-bar.is-scrolled {
+  background: rgba(12, 26, 43, 0.98);
+  box-shadow: 0 8px 24px rgba(6, 16, 28, 0.45);
+}
+.panel-bar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem clamp(1rem, 3vw, 2rem);
+  max-width: 1500px;
+  margin-inline: auto;
+}
+.panel-bar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--ink);
+  min-width: 0;
+}
+.panel-bar__mark {
+  width: 10px;
+  height: 22px;
+  flex: none;
+  border-radius: 1px;
+  background: linear-gradient(180deg, var(--ochre-bright), var(--ochre-ink));
+}
+.panel-bar__brand b {
+  display: block;
+  font-family: "Plex Mono", ui-monospace, monospace;
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+}
+.panel-bar__brand small {
+  display: block;
+  font-size: 0.6875rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+.panel-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: none;
+}
+.panel-bar__link,
+.panel-bar__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 0.9rem;
+  border-radius: var(--r);
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.8125rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.panel-bar__link:hover,
+.panel-bar__btn:hover {
+  border-color: var(--ochre);
+  background: rgba(200, 164, 100, 0.1);
+}
+.panel-bar__btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* Halaman masuk panel: kartu tunggal di tengah, tanpa navbar situs. */
+.panel-login {
+  min-height: calc(100vh - 60px);
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 5vw, 4rem) var(--gutter);
+}
+.panel-login__card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+}
+.panel-login__title {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.35rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: balance;
+}
+.panel-login__lede {
+  margin: 0.75rem 0 1.5rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  max-width: 46ch;
+}
+
 .admin-shell {
   display: grid;
   grid-template-columns: 210px minmax(0, 1fr);
   gap: 0;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
 }
 .admin-side {
   border-right: 1px solid var(--line);
   background: var(--surface-2);
   padding: 1.25rem 1rem;
   position: sticky;
-  top: 0;
+  top: 60px;
   align-self: start;
-  height: 100vh;
+  max-height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
   overflow-y: auto;
 }
-.admin-side a,
-.admin-side button {
+.admin-side__title {
+  margin: 0 0 0.1rem;
+  padding: 0 0.6rem;
+  font-family: "Plex Mono", ui-monospace, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.admin-side__nav {
+  display: grid;
+  gap: 0.15rem;
+}
+.admin-side__item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1744,19 +1871,20 @@ button {
   border: 0;
   border-radius: var(--r);
   background: none;
+  color: var(--ink);
   text-align: left;
   font-size: 0.9375rem;
   cursor: pointer;
   width: 100%;
+  transition: background 0.15s ease, color 0.15s ease;
 }
-.admin-side a[aria-current="true"],
-.admin-side button[aria-current="true"] {
+.admin-side__item:hover {
+  background: rgba(237, 233, 228, 0.08);
+}
+.admin-side__item[aria-current="page"] {
   background: var(--river);
   color: var(--paper);
-}
-.admin-side a:hover,
-.admin-side button:hover {
-  background: rgba(237, 233, 228, 0.07);
+  font-weight: 500;
 }
 .admin-main {
   padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem;
@@ -1788,10 +1916,26 @@ button {
 .admin-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 1rem;
+  gap: 0.5rem 1rem;
   align-items: center;
-  padding: 0.75rem 0;
+  padding: 0.85rem 0;
   border-bottom: 1px solid var(--line);
+}
+@media (max-width: 560px) {
+  /* di ponsel judul panjang + dua tombol tidak muat sebaris: tumpuk aksi
+     ke bawah judul agar tidak berdesakan */
+  .admin-row {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+  .admin-actions {
+    justify-self: start;
+  }
+  .admin-actions .btn {
+    min-height: 34px;
+    font-size: 0.8125rem;
+    padding: 0 0.75rem;
+  }
 }
 .admin-row__main b {
   display: block;
@@ -1808,7 +1952,9 @@ button {
 }
 .admin-kpi {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* tiga kartu statistik: jumlah kolom mengikuti isi, bukan dipaksa empat
+     (dulu menyisakan satu kolom kosong di kanan) */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
   margin-bottom: 2rem;
 }
@@ -1829,22 +1975,42 @@ button {
 @media (max-width: 900px) {
   .admin-shell {
     grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
   }
   .admin-side {
     position: static;
-    height: auto;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.35rem;
+    max-height: none;
     border-right: 0;
     border-bottom: 1px solid var(--line);
+    padding: 0.75rem clamp(1rem, 3vw, 2rem);
   }
-  .admin-side a,
-  .admin-side button {
+  .admin-side__title {
+    padding: 0;
+    margin-bottom: 0.35rem;
+  }
+  .admin-side__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  .admin-side__item {
     width: auto;
   }
   .admin-kpi {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .admin-kpi .card {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .admin-kpi {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .admin-kpi .card b {
+    font-size: 1.6rem;
   }
 }
 

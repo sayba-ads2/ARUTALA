@@ -15,19 +15,15 @@ export default async function AdminLoginPage() {
   }
 
   return (
-    <section className="section">
-      <div className="wrap wrap--narrow">
+    <div className="panel-login">
+      <div className="panel-login__card">
         <p className="eyebrow">Panel admin</p>
-        <h1 className="page-title" style={{ fontSize: "clamp(2rem,1.2rem+2.4vw,3rem)" }}>
-          Masuk untuk mengelola konten.
-        </h1>
-        <p className="page-lede">
-          Panel ini mengelola sponsor, dokumentasi, berita, dan status publikasi program.
+        <h1 className="panel-login__title">Masuk untuk mengelola konten.</h1>
+        <p className="panel-login__lede">
+          Satu tempat untuk sponsor, berita, dokumentasi lapangan, dan status publikasi program.
         </p>
-        <div style={{ marginTop: "2rem" }}>
-          <AdminLoginForm configured={isServerSupabaseConfigured} />
-        </div>
+        <AdminLoginForm configured={isServerSupabaseConfigured} />
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { rupiah } from "@/lib/format";
 
 type Tab = "ringkasan" | "sponsors" | "programs" | "dokumentasi" | "berita";
@@ -75,7 +74,6 @@ const DEFAULTS: Record<string, Row> = {
 };
 
 export default function AdminDashboard({ email }: { email: string }) {
-  const router = useRouter();
   const [tab, setTab] = useState<Tab>("ringkasan");
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(false);
@@ -130,18 +128,33 @@ export default function AdminDashboard({ email }: { email: string }) {
     void load(tab);
   }, [tab, load]);
 
-  const reset = () => {
+  // Isi form dengan nilai awal tiap kali tab berganti, supaya pilihan
+  // (jenis dukungan, fase, kategori) dan checkbox tidak kosong saat pertama dibuka.
+  const reset = useCallback(() => {
     setEditingId(null);
     setForm(tab in DEFAULTS ? { ...DEFAULTS[tab] } : {});
-  };
+  }, [tab]);
+
+  useEffect(() => {
+    reset();
+  }, [reset]);
 
   const startEdit = (row: Row) => {
     setEditingId(String(row.id));
     const next: Row = {};
     for (const f of FIELDS[tab as keyof typeof FIELDS]) next[f.key] = row[f.key] ?? "";
     setForm(next);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setError(null);
+    setNotice(null);
+    document.querySelector(".admin-section")?.scrollIntoView({ block: "start", behavior: "smooth" });
   };
+
+  // Pesan sukses hilang sendiri agar tidak menumpuk saat menginput banyak data.
+  useEffect(() => {
+    if (!notice) return;
+    const id = window.setTimeout(() => setNotice(null), 4000);
+    return () => window.clearTimeout(id);
+  }, [notice]);
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -176,32 +189,32 @@ export default function AdminDashboard({ email }: { email: string }) {
     void load(tab);
   };
 
-  const logout = async () => {
-    await fetch("/api/admin/logout", { method: "POST" });
-    router.replace("/admin/login");
-    router.refresh();
-  };
-
   const fields = tab === "ringkasan" ? [] : FIELDS[tab];
 
   return (
     <div className="admin-shell">
-      <aside className="admin-side">
-        <p className="mono small" style={{ padding: "0 .6rem .75rem", color: "var(--ink-soft)" }}>
-          ARUTALA ADMIN
-        </p>
-        {TABS.map((t) => (
-          <button key={t.id} type="button" aria-current={tab === t.id} onClick={() => { setTab(t.id); reset(); window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }); }}>
-            {t.label}
-          </button>
-        ))}
-        <div style={{ marginTop: "auto", paddingTop: "1rem" }}>
-          <a href="/" target="_blank" rel="noopener">
-            Lihat situs
-          </a>
-          <button type="button" onClick={logout}>
-            Keluar
-          </button>
+      <aside className="admin-side" aria-label="Navigasi panel">
+        <p className="admin-side__title">Bagian</p>
+        <div className="admin-side__nav" role="tablist" aria-label="Bagian panel admin">
+          {TABS.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              role="tab"
+              aria-selected={tab === t.id}
+              aria-current={tab === t.id ? "page" : undefined}
+              className="admin-side__item"
+              onClick={() => {
+                setTab(t.id);
+                reset();
+                setError(null);
+                setNotice(null);
+                window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+              }}
+            >
+              {t.label}
+            </button>
+          ))}
         </div>
       </aside>
 
