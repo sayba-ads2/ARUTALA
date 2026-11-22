@@ -12,7 +12,7 @@ export default function SiteFooter() {
             <p className="footer-word">
               {site.name} {site.year}
             </p>
-            <p style={{ color: "rgba(244,241,231,0.76)", maxWidth: "34ch", margin: 0 }}>
+            <p style={{ color: "rgba(237,233,228,0.76)", maxWidth: "34ch", margin: 0 }}>
               {site.tagline}. Program Pengabdian Mahasiswa Kepada Masyarakat {site.organizer}.
             </p>
           </div>
@@ -33,12 +33,11 @@ export default function SiteFooter() {
             <div className="footer-list">
               <a href={`mailto:${site.email}`}>{site.email}</a>
               <a href={`https://wa.me/${site.whatsapp}`} rel="noopener">WhatsApp {site.whatsappLabel}</a>
-              <span style={{ color: "rgba(244,241,231,0.6)" }}>
+              <span style={{ color: "rgba(237,233,228,0.6)" }}>
                 {site.village}, {site.district}
                 <br />
                 {site.regency}, {site.province}
               </span>
-              <a href={site.proposalPath} rel="noopener">Unduh proposal (PDF)</a>
             </div>
           </div>
         </div>
@@ -52,20 +51,21 @@ export default function SiteFooter() {
           </span>
         </div>
 
-        <div className="footer-watermark">
+        <div className="footer-legal">
+          <span>
+            &copy; {new Date().getFullYear()} {site.name} {site.year}.
+            <span aria-hidden="true">/</span>
+            <Link href="/privasi">Kebijakan Privasi</Link>
+            <span aria-hidden="true">/</span>
+            <Link href="/syarat">Syarat &amp; Ketentuan</Link>
+          </span>
           <a
             href="https://sayba.id"
             target="_blank"
             rel="noopener noreferrer"
-            className="watermark-link"
-            aria-label="Powered by Sayba Arc, buka situs sayba.id"
+            className="site-watermark"
           >
-            <span className="watermark-ghost" aria-hidden="true">
-              SAYBA ARC
-            </span>
-            <span className="watermark-label mono">
-              Powered by <b>Sayba Arc</b>
-            </span>
+            Powered By Sayba Arc
           </a>
         </div>
       </div>

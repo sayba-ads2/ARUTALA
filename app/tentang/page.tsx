@@ -7,7 +7,7 @@ import { percentLabel, rupiah } from "@/lib/format";
 export const metadata = {
   title: "Tentang dan anggaran",
   description:
-    "Susunan 38 panitia PMKM ARUTALA 2027, rekapitulasi anggaran Rp 106.352.644, dan unduhan proposal kegiatan.",
+    "Susunan 38 panitia PMKM ARUTALA 2027, rekapitulasi anggaran Rp 106.352.644, sebagaimana tertulis pada proposal resmi.",
   alternates: { canonical: "/tentang" },
 };
 
@@ -191,12 +191,11 @@ export default function TentangPage() {
             <div className="card">
               <span className="mono small muted">Dokumen sumber</span>
               <p className="display" style={{ fontSize: "1.5rem", margin: ".3rem 0" }}>
-                Proposal
+                Proposal resmi
               </p>
               <p className="small muted" style={{ margin: 0 }}>
-                <a className="textlink" href={site.proposalPath} rel="noopener">
-                  Unduh PDF 31 halaman
-                </a>
+                Angka pada halaman ini dikutip dari proposal PMKM 2027 yang dikirim ke
+                Kemendikbudristek. Berkas lengkapnya bukan dokumen publik.
               </p>
             </div>
           </div>

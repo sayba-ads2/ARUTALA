@@ -1,0 +1,31 @@
+:root {
+  /* ARUTALA -- Ekspedisi malam di hulu Kapuas.
+     Permukaan gelap bertingkat; teks krem; aksen kuningan.
+     --paper kini warna TEKS krem, bukan latar kertas. */
+  --night: #0a1a2f;
+  --surface: #0e2238;
+  --surface-2: #12293f;
+  --paper: #f4f1e7;
+  --paper-2: #16304b;
+  --raise: #14304a;
+  --ink: #eaf1f8;
+  --ink-soft: #9fb3c8;
+  --muted: #9fb3c8;
+  --river: #0b2342;
+  --river-2: #081d36;
+  --forest: #123f34;
+  --ochre: #e0a23c;
+  --ochre-ink: #f2c266;
+  --ochre-bright: #f2c266;
+  --gold: #e0a23c;
+  --gold-deep: #a87c22;
+  --line: rgba(234, 241, 248, 0.13);
+  --line-strong: rgba(234, 241, 248, 0.32);
+  --on-dark: rgba(244, 241, 231, 0.84);
+  --on-dark-line: rgba(244, 241, 231, 0.16);
+  --glass: rgba(8, 24, 43, 0.66);
+  --gutter: clamp(20px, 5vw, 64px);
+  --section-y: clamp(56px, 8vw, 112px);
+  --max: 1240px;
+  --r: 14px;
+}

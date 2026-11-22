@@ -4,7 +4,7 @@ const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://arutala.web.id";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [{ userAgent: "*", allow: "/", disallow: ["/admin", "/api/"] }],
+    rules: [{ userAgent: "*", allow: "/", disallow: ["/admin", "/api/", "/docs/"] }],
     sitemap: `${base}/sitemap.xml`,
   };
 }

@@ -14,7 +14,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: "#0b2342",
+  themeColor: "#1c3555",
 };
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://arutala.web.id";

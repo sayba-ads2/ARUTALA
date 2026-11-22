@@ -84,9 +84,9 @@ export default async function Home() {
                 Lihat paket sponsor
               </Link>
             </StarBorder>
-            <a className="btn btn--on-dark" href={site.proposalPath} rel="noopener">
-              Unduh proposal PDF
-            </a>
+            <Link className="btn btn--on-dark" href="/dokumentasi">
+              Dokumentasi lapangan
+            </Link>
             <Link className="btn btn--on-dark" href="/program">
               Empat program kerja
             </Link>

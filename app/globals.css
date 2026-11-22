@@ -36,51 +36,52 @@
 }
 
 @theme {
-  --color-paper: #f4f1e7;
-  --color-paper2: #16304b;
-  --color-raise: #14304a;
-  --color-ink: #eaf1f8;
-  --color-inksoft: #9fb3c8;
-  --color-river: #0b2342;
-  --color-forest: #123f34;
-  --color-ochre: #e0a23c;
-  --color-ochreink: #f2c266;
-  --color-night: #0a1a2f;
-  --color-surface: #0e2238;
-  --color-surface2: #12293f;
-  --color-river2: #081d36;
-  --color-ochrebright: #f2c266;
+  --color-paper: #ede9e4;
+  --color-paper2: #1e3a5c;
+  --color-raise: #22406b;
+  --color-ink: #ede9e4;
+  --color-inksoft: #a7b6c9;
+  --color-river: #1c3555;
+  --color-river2: #142540;
+  --color-forest: #2f4f43;
+  --color-ochre: #c8a464;
+  --color-ochreink: #e2c185;
+  --color-ochrebright: #e2c185;
+  --color-night: #0e1e34;
+  --color-surface: #14263f;
+  --color-surface2: #1c3555;
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
   --font-body: "Jakarta", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Plex Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
 :root {
-  /* ARUTALA -- Ekspedisi malam di hulu Kapuas.
-     Permukaan gelap bertingkat; teks krem; aksen kuningan.
-     --paper kini warna TEKS krem, bukan latar kertas. */
-  --night: #0a1a2f;
-  --surface: #0e2238;
-  --surface-2: #12293f;
-  --paper: #f4f1e7;
-  --paper-2: #16304b;
-  --raise: #14304a;
-  --ink: #eaf1f8;
-  --ink-soft: #9fb3c8;
-  --muted: #9fb3c8;
-  --river: #0b2342;
-  --river-2: #081d36;
-  --forest: #123f34;
-  --ochre: #e0a23c;
-  --ochre-ink: #f2c266;
-  --ochre-bright: #f2c266;
-  --gold: #e0a23c;
-  --gold-deep: #a87c22;
-  --line: rgba(234, 241, 248, 0.13);
-  --line-strong: rgba(234, 241, 248, 0.32);
-  --on-dark: rgba(244, 241, 231, 0.84);
-  --on-dark-line: rgba(244, 241, 231, 0.16);
-  --glass: rgba(8, 24, 43, 0.66);
+  /* Palet resmi ARUTALA: warna inti diambil dari dokumen proposal
+     (navy #1c3555, krem #ede9e4, tan kuning #bead97) dan emas logo.
+     Konsep 'malam di hulu Kapuas': permukaan navy bertingkat,
+     teks krem proposal, aksen kuningan. */
+  --night: #0e1e34;
+  --surface: #14263f;
+  --surface-2: #1c3555;
+  --paper: #ede9e4;
+  --paper-2: #1e3a5c;
+  --raise: #22406b;
+  --ink: #ede9e4;
+  --ink-soft: #a7b6c9;
+  --muted: #a7b6c9;
+  --river: #1c3555;
+  --river-2: #142540;
+  --forest: #2f4f43;
+  --ochre: #c8a464;
+  --ochre-ink: #e2c185;
+  --ochre-bright: #e2c185;
+  --gold: #c8a464;
+  --gold-deep: #8f7a4e;
+  --line: rgba(237, 233, 228, 0.14);
+  --line-strong: rgba(237, 233, 228, 0.34);
+  --on-dark: rgba(237, 233, 228, 0.84);
+  --on-dark-line: rgba(237, 233, 228, 0.16);
+  --glass: rgba(14, 30, 52, 0.68);
   --gutter: clamp(20px, 5vw, 64px);
   --section-y: clamp(56px, 8vw, 112px);
   --max: 1240px;
@@ -102,8 +103,8 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(1200px 560px at 86% -8%, rgba(224, 162, 60, 0.09), transparent 62%),
-    radial-gradient(1000px 720px at -14% 30%, rgba(18, 63, 52, 0.3), transparent 58%),
+    radial-gradient(1200px 560px at 86% -8%, rgba(200, 164, 100, 0.09), transparent 62%),
+    radial-gradient(1000px 720px at -14% 30%, rgba(47, 79, 67, 0.3), transparent 58%),
     var(--night);
   background-attachment: fixed;
   color: var(--ink);
@@ -305,28 +306,28 @@ button {
 }
 .btn--dark {
   background: var(--paper);
-  color: #0a1a2f;
+  color: #0e1e34;
 }
 .btn--dark:hover {
-  background: #fffdf6;
+  background: #f4f0ea;
 }
 .btn--ghost {
-  border-color: rgba(244, 241, 231, 0.34);
+  border-color: rgba(237, 233, 228, 0.34);
   color: var(--paper);
   background: transparent;
 }
 .btn--ghost:hover {
   border-color: var(--paper);
-  background: rgba(244, 241, 231, 0.08);
+  background: rgba(237, 233, 228, 0.08);
 }
 .btn--on-dark {
-  border-color: rgba(244, 241, 231, 0.34);
+  border-color: rgba(237, 233, 228, 0.34);
   color: var(--paper);
   background: transparent;
 }
 .btn--on-dark:hover {
   border-color: var(--paper);
-  background: rgba(244, 241, 231, 0.08);
+  background: rgba(237, 233, 228, 0.08);
 }
 .btn:disabled {
   opacity: 0.55;
@@ -521,7 +522,7 @@ button {
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(244, 241, 231, 0.86);
+  color: rgba(237, 233, 228, 0.86);
 }
 
 .hero__title {
@@ -587,7 +588,7 @@ button {
   font-size: 0.625rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(244, 241, 231, 0.95);
+  color: rgba(237, 233, 228, 0.95);
   padding-top: 0.22rem;
 }
 
@@ -627,7 +628,7 @@ button {
 }
 .hero__betang svg * {
   fill: none;
-  stroke: rgba(238, 206, 138, 0.85);
+  stroke: rgba(226, 193, 133, 0.85);
   stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -636,11 +637,11 @@ button {
 .hero__betang .hbg--far {
   transform: translate3d(calc(var(--bt, 0) * -6px), calc(var(--bt, 0) * -2px), 0);
 }
-.hero__betang .hbg--far path { stroke: rgba(148, 190, 228, 0.55); stroke-width: 1.6; }
+.hero__betang .hbg--far path { stroke: rgba(167, 182, 201, 0.55); stroke-width: 1.6; }
 .hero__betang .hbg--house {
   transform: translate3d(calc(var(--bt, 0) * 6px), 0, 0);
 }
-.hero__betang .hbg--water path { stroke: rgba(182, 214, 242, 0.75); }
+.hero__betang .hbg--water path { stroke: rgba(205, 220, 236, 0.75); }
 .hero__betang .hbg--water {
   transform: translate3d(calc(var(--bt, 0) * 10px), 0, 0);
 }
@@ -953,7 +954,7 @@ button {
 .progress {
   height: 8px;
   margin-top: 1.6rem;
-  background: rgba(244, 241, 231, 0.16);
+  background: rgba(237, 233, 228, 0.16);
   border-radius: 99px;
   overflow: hidden;
 }
@@ -980,7 +981,7 @@ button {
   margin-bottom: 1.25rem;
   border-radius: 2px;
   overflow: hidden;
-  background: rgba(244, 241, 231, 0.12);
+  background: rgba(237, 233, 228, 0.12);
 }
 .stack-bar span {
   display: block;
@@ -1217,8 +1218,8 @@ button {
 }
 .section--river .notice,
 .section--forest .notice {
-  background: rgba(244, 241, 231, 0.06);
-  border-color: rgba(244, 241, 231, 0.22);
+  background: rgba(237, 233, 228, 0.06);
+  border-color: rgba(237, 233, 228, 0.22);
   color: var(--on-dark);
 }
 .section--river .notice b,
@@ -1264,7 +1265,7 @@ button {
 .textarea {
   width: 100%;
   padding: 0.6rem 0.7rem;
-  background: #0d2540;
+  background: #122c4d;
   border: 1px solid var(--line-strong);
   border-radius: var(--r);
   font-size: 0.9375rem;
@@ -1414,8 +1415,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px dashed rgba(244, 241, 231, 0.35);
-  color: rgba(244, 241, 231, 0.82);
+  border: 1px dashed rgba(237, 233, 228, 0.35);
+  color: rgba(237, 233, 228, 0.82);
   font-family: "Plex Mono", ui-monospace, monospace;
   font-size: 0.625rem;
   overflow: hidden;
@@ -1438,8 +1439,8 @@ button {
 }
 .slot--ghost {
   border-style: dotted;
-  border-color: rgba(244, 241, 231, 0.16);
-  color: rgba(244, 241, 231, 0.34);
+  border-color: rgba(237, 233, 228, 0.16);
+  color: rgba(237, 233, 228, 0.34);
 }
 @media (max-width: 860px) {
   .vest-grid {
@@ -1514,7 +1515,7 @@ button {
   border: 1px solid var(--line-strong);
   background: repeating-linear-gradient(
     135deg,
-    rgba(234, 241, 248, 0.05) 0 8px,
+    rgba(237, 233, 228, 0.05) 0 8px,
     transparent 8px 16px
   );
   display: grid;
@@ -1640,7 +1641,7 @@ button {
 }
 .admin-side a:hover,
 .admin-side button:hover {
-  background: rgba(234, 241, 248, 0.07);
+  background: rgba(237, 233, 228, 0.07);
 }
 .admin-main {
   padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 4rem;
@@ -1750,7 +1751,7 @@ button {
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(244, 241, 231, 0.8);
+  color: rgba(237, 233, 228, 0.8);
   margin: 0 0 0.75rem;
 }
 .footer-grid a {
@@ -1783,7 +1784,7 @@ button {
   font-family: "Plex Mono", ui-monospace, monospace;
   font-size: 0.6875rem;
   letter-spacing: 0.06em;
-  color: rgba(244, 241, 231, 0.8);
+  color: rgba(237, 233, 228, 0.8);
 }
 @media (max-width: 780px) {
   .footer-grid {
@@ -1835,16 +1836,18 @@ button {
    ============================================================ */
 
 /* --- overlay grain halus di seluruh situs, di atas semua --- */
+/* Grain statis (dulu animasi steps 6s pada layer 200% viewport:
+   repaint fullscreen tiap 1s tanpa manfaat visual berarti). */
 .grain-layer {
   position: fixed;
-  inset: -50%;
+  inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.045;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain-shift 6s steps(6) infinite;
-  will-change: transform;
+  background-size: 140px 140px;
 }
+
 @keyframes grain-shift {
   0% { transform: translate(0, 0); }
   20% { transform: translate(-4%, 3%); }
@@ -1887,11 +1890,17 @@ button {
 @keyframes split-rise { to { transform: translateY(0); } }
 
 /* --- ticker / marquee --- */
+/* --- pita berjalan: berita & logbook (kaca tipis, TANPA backdrop-blur
+   karena kontennya bergerak terus; blur akan dipaksa render ulang tiap frame) --- */
 .ticker {
+  position: relative;
+  z-index: 2;
   overflow: hidden;
-  border-block: 1px solid var(--line);
-  background: var(--surface);
+  background: rgba(14, 30, 52, 0.72);
+  border-top: 1px solid var(--on-dark-line);
+  border-bottom: 1px solid var(--on-dark-line);
 }
+
 .ticker__track {
   display: flex;
   gap: 2.5rem;
@@ -1906,12 +1915,12 @@ button {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: var(--ink-soft);
+  color: rgba(237, 233, 228, 0.88);
   display: inline-flex;
   align-items: center;
   gap: 0.9rem;
 }
-.ticker__item b { color: var(--forest); font-weight: 600; }
+.ticker__item b { color: var(--ochre-bright); font-weight: 600; }
 .ticker__item::before {
   content: "";
   width: 6px; height: 6px;
@@ -2082,7 +2091,7 @@ button {
 }
 .news-card__ph span {
   font-family: "Plex Mono", ui-monospace, monospace; font-size: 0.66rem; letter-spacing: 0.14em;
-  text-transform: uppercase; color: #0a1a2f; background: rgba(244,241,231,.92);
+  text-transform: uppercase; color: #0e1e34; background: rgba(244,241,231,.92);
   padding: 0.3rem 0.7rem; border: 1px solid rgba(14,46,56,.25); border-radius: 999px;
 }
 .news-hero { align-items: start; }
@@ -2101,7 +2110,7 @@ button {
   height: 40px;
   border-radius: 4px;
   object-fit: cover;
-  box-shadow: 0 0 0 1px var(--line-strong), 0 2px 10px rgba(234, 241, 248, 0.22);
+  box-shadow: 0 0 0 1px var(--line-strong), 0 2px 10px rgba(237, 233, 228, 0.22);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
 }
 .brand:hover .brand__logo,
@@ -2173,9 +2182,8 @@ button {
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* --- ken-burns untuk banner unggulan & media kartu --- */
-.news-hero img,
-.news-card__media img {
+/* --- ken-burns HANYA banner unggulan (optimasi: kartu grid statis) --- */
+.news-hero img {
   animation: ken-burns 18s ease-in-out infinite alternate;
   transform-origin: 55% 45%;
 }
@@ -2187,8 +2195,8 @@ button {
 /* --- ilustrasi rumah betang --- */
 .section--betang {
   background:
-    radial-gradient(120% 60% at 50% 100%, rgba(122, 162, 200, 0.16), transparent 60%),
-    linear-gradient(180deg, #0a1c33 0%, var(--river) 45%, var(--river-deep) 100%);
+    radial-gradient(120% 60% at 50% 100%, rgba(167, 182, 201, 0.16), transparent 60%),
+    linear-gradient(180deg, #142540 0%, var(--river) 45%, var(--river-deep) 100%);
   color: var(--paper);
   padding-top: var(--section-y);
   position: relative;
@@ -2198,13 +2206,13 @@ button {
   color: #e6bd6a;
 }
 .section--betang .lede {
-  color: rgba(244, 241, 231, 0.9);
+  color: rgba(237, 233, 228, 0.9);
 }
 .section--betang .eyebrow::before {
   background: var(--gold);
 }
 .section--betang .section-title {
-  color: #f4f1e7;
+  color: #ede9e4;
 }
 .betang-head {
   max-width: 62ch;
@@ -2286,97 +2294,50 @@ button {
 }
 
 /* --- watermark Sayba Arc di footer --- */
-.footer-watermark {
-  margin-top: 2.5rem;
-  padding: 4.2rem 0 3.6rem;
+/* --- baris legal footer + watermark kecil ala HIMA --- */
+.footer-legal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.6rem;
+  padding-block: 1.35rem 1.6rem;
   border-top: 1px solid var(--on-dark-line);
-  display: flex;
-  flex-direction: column;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: rgba(237, 233, 228, 0.72);
+}
+.footer-legal > span {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 1.7rem;
-  position: relative;
-  overflow: visible;
+  gap: 0.7rem;
+  flex-wrap: wrap;
 }
-
-.footer-watermark::before {
-  /* cahaya kuningan samar di belakang watermark */
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(860px, 96%);
-  height: 300px;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(50% 55% at 50% 50%, rgba(224, 162, 60, 0.12), transparent 70%);
-  pointer-events: none;
+.footer-legal [aria-hidden="true"] {
+  opacity: 0.45;
 }
-
-.watermark-ghost {
-  position: relative;
-  z-index: 0;
-  font-family: "Fraunces", Georgia, serif;
-  font-weight: 800;
-  font-size: clamp(3rem, 11vw, 5.6rem);
-  letter-spacing: 0.12em;
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1.8px rgba(242, 194, 102, 0.62);
-  filter: drop-shadow(0 0 22px rgba(224, 162, 60, 0.16));
-  user-select: none;
-  white-space: nowrap;
-  transition: -webkit-text-stroke-color 0.35s ease;
+.footer-legal a {
+  color: inherit;
+  text-decoration-color: rgba(237, 233, 228, 0.3);
+  text-underline-offset: 3px;
+  transition: color 0.25s ease;
 }
-
-.watermark-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.35rem;
-}
-
-.watermark-label {
-  position: relative;
-  z-index: 1;
-  background: rgba(6, 18, 34, 0.85);
-  border: 1px solid rgba(224, 162, 60, 0.3);
-  border-radius: 999px;
-  padding: 0.55rem 1.4rem;
-  font-size: 0.74rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(244, 241, 231, 0.82);
-  transition: border-color 0.3s ease, transform 0.3s ease;
-}
-
-.watermark-label b {
+.footer-legal a:hover {
   color: var(--ochre-bright);
-  font-weight: 600;
 }
-
-.watermark-link:hover .watermark-ghost {
-  -webkit-text-stroke-color: rgba(224, 162, 60, 0.65);
+.site-watermark {
+  color: rgba(237, 233, 228, 0.55);
+  letter-spacing: 0.16em;
+  transition: color 0.25s ease;
 }
-
-.watermark-link:hover .watermark-label {
-  border-color: rgba(224, 162, 60, 0.55);
-  transform: translateY(-2px);
+.site-watermark:hover {
+  color: var(--gold);
 }
-
-
-@media (prefers-reduced-motion: reduce) {
-  .watermark-link,
-  .watermark-label,
-  .watermark-ghost {
-    transition: none;
-  }
-}
-
 /* --- cadangan slot rompi --- */
 .slot--ghost {
   border-style: dotted;
-  border-color: rgba(244, 241, 231, 0.14);
-  color: rgba(244, 241, 231, 0.3);
+  border-color: rgba(237, 233, 228, 0.14);
+  color: rgba(237, 233, 228, 0.3);
   font-size: 0.5rem;
 }
 
@@ -2455,7 +2416,7 @@ button {
 
 /* --- ShinyText: kilau menyapu --- */
 .rb-shiny {
-  background: linear-gradient(110deg, var(--muted) 35%, #ffe9b8 50%, var(--muted) 65%);
+  background: linear-gradient(110deg, var(--muted) 35%, #f0d9a8 50%, var(--muted) 65%);
   background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -2509,7 +2470,7 @@ button {
   border-radius: inherit;
   padding: 1px;
   background: conic-gradient(from var(--rb-sb-a, 0deg),
-    rgba(244, 241, 231, 0.28) 0 70%, rgba(255, 240, 200, 0.15) 76%, #fff3d1 86%, #ffe4a1 90%, rgba(255, 240, 200, 0.15) 94%, rgba(244, 241, 231, 0.28) 100%);
+    rgba(237, 233, 228, 0.28) 0 70%, rgba(240, 217, 168, 0.15) 76%, #f3ddb0 86%, #eccb8f 90%, rgba(240, 217, 168, 0.15) 94%, rgba(237, 233, 228, 0.28) 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -2526,7 +2487,7 @@ button {
   border-radius: inherit;
   background: conic-gradient(from var(--rb-sb-a, 0deg),
     transparent 0 82%, rgba(255, 236, 180, 0.55) 88%, transparent 94%);
-  filter: blur(9px);
+  /* (optimasi) filter blur dibuang; kelembutan lewat alpha gradient */
   animation: rb-sb-spin var(--rb-sb-speed, 4s) linear infinite;
   pointer-events: none;
   z-index: 0;
@@ -2555,8 +2516,8 @@ button {
   pointer-events: none;
   border-radius: var(--radius, 14px);
   overflow: hidden;
-  background: var(--river-deep, #0a1c33);
-  border: 1px solid rgba(234, 241, 248, 0.14);
+  background: var(--river-deep, #142540);
+  border: 1px solid rgba(237, 233, 228, 0.14);
   box-shadow: 0 24px 60px rgba(4, 12, 26, 0.38);
 }
 .rb-carousel__slide[data-active="1"] {
@@ -2583,7 +2544,7 @@ button {
   align-items: baseline;
   flex-wrap: wrap;
   background: linear-gradient(180deg, transparent 0%, rgba(6, 16, 30, 0.55) 42%, rgba(6, 16, 30, 0.95) 100%);
-  color: var(--paper, #f4f1e7);
+  color: var(--paper, #ede9e4);
   font-size: .92rem;
 }
 .rb-carousel__tag {
@@ -2600,16 +2561,16 @@ button {
   z-index: 3;
   width: 42px; height: 42px;
   border-radius: 999px;
-  border: 1.5px solid rgba(244, 241, 231, 0.75);
+  border: 1.5px solid rgba(237, 233, 228, 0.75);
   background: rgba(10, 26, 48, 0.72);
-  color: #f4f1e7;
+  color: #ede9e4;
   font-size: 1.4rem;
   line-height: 1;
   cursor: pointer;
   backdrop-filter: blur(4px);
   transition: background .25s ease, border-color .25s ease, transform .25s ease;
 }
-.rb-carousel__nav:hover { background: rgba(217, 168, 63, 0.85); color: #0b2342; border-color: transparent; }
+.rb-carousel__nav:hover { background: rgba(217, 168, 63, 0.85); color: #1c3555; border-color: transparent; }
 .rb-carousel__nav--prev { left: 10px; }
 .rb-carousel__nav--next { right: 10px; }
 .rb-carousel__dots {
@@ -2632,7 +2593,7 @@ button {
 }
 .rb-carousel__slide img[data-fit="contain"] {
   object-fit: contain;
-  background: #0a1c33;
+  background: #142540;
 }
 .rb-carousel__slide img[data-fit="cover"] { object-fit: cover; }
 @media (prefers-reduced-motion: reduce) {
@@ -2641,7 +2602,7 @@ button {
 }
 
 /* --- GoogleMapsEmbed: poster -> iframe, hemat & consent-friendly --- */
-.gme { border: 1px solid var(--line, rgba(234, 241, 248, 0.14)); border-radius: var(--radius, 14px); overflow: hidden; background: var(--card, #16304b); }
+.gme { border: 1px solid var(--line, rgba(237, 233, 228, 0.14)); border-radius: var(--radius, 14px); overflow: hidden; background: var(--card, #1e3a5c); }
 .gme__cover {
   position: relative;
   display: block;
@@ -2650,7 +2611,7 @@ button {
   border: 0;
   padding: 0;
   cursor: pointer;
-  background: var(--river-deep, #0a1c33);
+  background: var(--river-deep, #142540);
 }
 .gme__cover img {
   width: 100%; height: 100%;
@@ -2675,19 +2636,19 @@ button {
   padding: .7rem 1.1rem;
   border-radius: 999px;
   background: rgba(11, 35, 66, 0.82);
-  color: #f4f1e7;
+  color: #ede9e4;
   font-size: .85rem;
   letter-spacing: .04em;
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
   transition: background .25s ease, transform .25s ease;
 }
-.gme__cover:hover .gme__badge { background: var(--gold, #d9ac4f); color: #0b2342; transform: translate(-50%, -50%) scale(1.04); }
+.gme__cover:hover .gme__badge { background: var(--gold, #d9ac4f); color: #1c3555; transform: translate(-50%, -50%) scale(1.04); }
 .gme__coords {
   position: absolute;
   left: .8rem; bottom: .7rem;
   font-size: .68rem;
   letter-spacing: .08em;
-  color: rgba(244, 241, 231, 0.75);
+  color: rgba(237, 233, 228, 0.75);
   background: rgba(6, 16, 30, 0.55);
   padding: .25rem .5rem;
   border-radius: 6px;
@@ -2735,7 +2696,7 @@ button {
 
 /* shiny utk baris meta hero (latar gelap) */
 .hero__top .rb-shiny {
-  background: linear-gradient(110deg, var(--on-dark) 35%, #ffe9b8 50%, var(--on-dark) 65%);
+  background: linear-gradient(110deg, var(--on-dark) 35%, #f0d9a8 50%, var(--on-dark) 65%);
   background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -2754,21 +2715,21 @@ button {
 /* Hero: ruang bagi kapsul navbar + atmosfer malam berlapis */
 .hero {
   background:
-    radial-gradient(760px 340px at 82% 4%, rgba(224, 162, 60, 0.12), transparent 62%),
-    radial-gradient(620px 420px at 6% 88%, rgba(18, 63, 52, 0.4), transparent 60%),
-    linear-gradient(180deg, #081a30 0%, var(--river) 55%, #071626 100%);
+    radial-gradient(760px 340px at 82% 4%, rgba(200, 164, 100, 0.12), transparent 62%),
+    radial-gradient(620px 420px at 6% 88%, rgba(47, 79, 67, 0.4), transparent 60%),
+    linear-gradient(180deg, #0e1e34 0%, var(--river) 55%, #071626 100%);
   padding-top: clamp(96px, 13vh, 128px);
 }
 .hero__data > div,
 .hero__meta > div {
-  border-color: rgba(244, 241, 231, 0.16);
+  border-color: rgba(237, 233, 228, 0.16);
 }
 
 /* Page head (semua halaman dalam): transparan di atas latar malam */
 .page-head {
   padding-block: clamp(112px, 17vh, 156px) clamp(1.5rem, 4vw, 2.6rem);
   background:
-    radial-gradient(620px 260px at 88% 0%, rgba(224, 162, 60, 0.08), transparent 60%),
+    radial-gradient(620px 260px at 88% 0%, rgba(200, 164, 100, 0.08), transparent 60%),
     transparent;
 }
 
@@ -2789,9 +2750,9 @@ button {
   right: var(--gutter);
   top: calc(100% + 10px);
   border: 1px solid var(--line);
-  border-top: 1px solid rgba(224, 162, 60, 0.25);
+  border-top: 1px solid rgba(200, 164, 100, 0.25);
   border-radius: 22px;
-  background: rgba(6, 18, 34, 0.96);
+  background: rgba(9, 21, 38, 0.96);
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
   box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.8);
@@ -2808,7 +2769,7 @@ button {
 }
 .nav-toggle {
   color: var(--paper);
-  border-color: rgba(244, 241, 231, 0.3);
+  border-color: rgba(237, 233, 228, 0.3);
 }
 .nav-toggle svg {
   color: var(--paper);
@@ -2820,24 +2781,22 @@ button {
 .eco-card,
 .notice {
   background:
-    linear-gradient(180deg, rgba(234, 241, 248, 0.035), rgba(234, 241, 248, 0) 42%),
+    linear-gradient(180deg, rgba(237, 233, 228, 0.035), rgba(237, 233, 228, 0) 42%),
     var(--surface);
-  border-color: rgba(234, 241, 248, 0.12);
+  border-color: rgba(237, 233, 228, 0.12);
 }
 .news-card:hover,
 .eco-card:hover,
 .card--hover:hover {
-  border-color: rgba(224, 162, 60, 0.38);
+  border-color: rgba(200, 164, 100, 0.38);
   box-shadow:
     0 26px 60px -28px rgba(0, 0, 0, 0.85),
-    0 0 0 1px rgba(224, 162, 60, 0.12);
+    0 0 0 1px rgba(200, 164, 100, 0.12);
 }
 
-/* Ticker: pita gelas dengan fade tepi */
+/* Ticker: pita padat (OPTIMASI: backdrop-blur dibuang — konten bergerak) */
 .ticker {
-  background: rgba(20, 48, 74, 0.42);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  background: rgba(14, 30, 52, 0.78);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
@@ -2845,12 +2804,12 @@ button {
 /* Chip, badge, ledger */
 .chip {
   color: var(--paper);
-  border-color: rgba(244, 241, 231, 0.26);
+  border-color: rgba(237, 233, 228, 0.26);
 }
 .chip[aria-pressed="true"] {
   background: var(--ochre);
   border-color: var(--ochre);
-  color: #0a1a2f;
+  color: #0e1e34;
 }
 .ledger summary {
   color: var(--paper);
@@ -2871,8 +2830,8 @@ button {
 /* News kicker */
 .news-card__kicker {
   color: var(--ochre-bright);
-  background: rgba(224, 162, 60, 0.14);
-  border-color: rgba(224, 162, 60, 0.28);
+  background: rgba(200, 164, 100, 0.14);
+  border-color: rgba(200, 164, 100, 0.28);
 }
 .news-card__more {
   color: var(--ochre-bright);
@@ -2887,9 +2846,9 @@ button {
 /* Footer: lebih gelap dari body, garis kuningan di tepi atas */
 .site-footer {
   background:
-    linear-gradient(180deg, rgba(224, 162, 60, 0.06), transparent 130px),
-    #061221;
-  border-top: 1px solid rgba(224, 162, 60, 0.18);
+    linear-gradient(180deg, rgba(200, 164, 100, 0.06), transparent 130px),
+    #091426;
+  border-top: 1px solid rgba(200, 164, 100, 0.18);
 }
 
 /* Admin & login ikut malam */
@@ -2905,4 +2864,43 @@ figure .figure__sheet,
   .nav-panel[data-open="true"] {
     animation: none;
   }
+}
+
+/* ===== OPTIMASI PERFORMA (lapis override akhir) ===== */
+
+/* Hemat render: section panjang di luar layar dilewati layout & paint.
+   contain-intrinsic-size = estimasi tinggi agar scrollbar tidak melompat. */
+main > section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
+}
+
+/* Matikan animasi tak terlihat: saat section di-skip layout di atas,
+   animasi infinite di dalamnya otomatis berhenti — ini yang paling
+   mengurangi beban GPU/CPU pada halaman panjang. */
+
+/* Ticker: perlambat & percepat hemat — 32s sudah ringan; pastikan
+   track hanya di-composite, bukan re-layout */
+.ticker__track {
+  will-change: transform;
+}
+
+/* Hero crest & betang flow: transform/opacity saja, tanpa filter berat */
+.hero__crest img {
+  animation: crest-float 9s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Ken-burns kartu: sepenuhnya dimatikan (hanya transform scale halus on-hover) */
+.news-card__media img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.news-card:hover .news-card__media img {
+  transform: scale(1.04);
+}
+
+/* Hover shadow besar -> lebih ringan: kurangi radius blur shadow */
+.card:hover,
+.spot-card:hover {
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
 }

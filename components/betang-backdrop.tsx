@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Latar hero: rumah betang garis penuh (panoramik), mengacu denah &
 // foto lampiran proposal. viewBox tetap + slice => tidak gepeng saat
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 export default function BetangBackdrop() {
   const [drawn, setDrawn] = useState(false);
-  const [tilt, setTilt] = useState(0);
+  const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
@@ -17,18 +17,25 @@ export default function BetangBackdrop() {
       return;
     }
     const t = setTimeout(() => setDrawn(true), 260);
+    // OPTIMASI: tilt pointer ditulis langsung ke CSS variable (bukan setState),
+    // jadi tidak ada re-render React per frame; transform GPU tetap halus.
     let raf = 0;
+    let last = -1;
     const onMove = (e: PointerEvent) => {
-      cancelAnimationFrame(raf);
+      if (raf) return; // batasi 1 update/frame
       raf = requestAnimationFrame(() => {
-        const w = window.innerWidth || 1;
-        setTilt((e.clientX / w - 0.5) * 2); // -1 .. 1
+        raf = 0;
+        const vw = window.innerWidth || 1;
+        const v = Math.round((e.clientX / vw - 0.5) * 100) / 50; // -1..1, kuantisasi
+        if (v === last) return;
+        last = v;
+        svgRef.current?.style.setProperty("--bt", v.toFixed(3));
       });
     };
     window.addEventListener("pointermove", onMove, { passive: true });
     return () => {
       clearTimeout(t);
-      cancelAnimationFrame(raf);
+      if (raf) cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", onMove);
     };
   }, []);
@@ -40,9 +47,10 @@ export default function BetangBackdrop() {
   return (
     <div className={`hero__betang ${drawn ? "is-drawn" : ""}`} aria-hidden="true">
       <svg
+        ref={svgRef}
         viewBox="0 0 1440 620"
         preserveAspectRatio="xMidYMax slice"
-        style={{ ["--bt" as string]: tilt.toFixed(3) }}
+        style={{ ["--bt" as string]: "0" }}
       >
         {/* bukit jauh */}
         <g className="hbg hbg--far">

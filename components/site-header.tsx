@@ -20,15 +20,29 @@ export default function SiteHeader() {
 
   // Kapsul melayang: padat saat scroll, tersembunyi saat scroll turun,
   // muncul lagi saat naik (ala Sayba Arc).
+  // OPTIMASI: setState hanya saat boolean BERUBAH (bukan tiap frame scroll),
+  // supaya React tidak me-re-render header 60x/detik saat pengguna scrolling.
   useEffect(() => {
-    const onScroll = () => {
+    let ticking = false;
+    const apply = () => {
+      ticking = false;
       const y = window.scrollY;
-      setScrolled(y > 24);
-      setHidden(y > 240 && y > lastY.current + 4 && !open);
+      const down = y > lastY.current + 4;
       lastY.current = y;
+      setScrolled((prev) => (prev !== y > 24 ? y > 24 : prev));
+      setHidden((prev) => {
+        const next = y > 240 && down && !open;
+        return prev !== next ? next : prev;
+      });
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(apply);
+      }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    apply();
     return () => window.removeEventListener("scroll", onScroll);
   }, [open]);
 

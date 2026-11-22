@@ -37,6 +37,7 @@ export default function ClickSpark() {
     };
 
     let raf = 0;
+    let running = false;
     const tick = () => {
       ctx.clearRect(0, 0, w, h);
       for (let i = sparks.length - 1; i >= 0; i--) {
@@ -58,10 +59,23 @@ export default function ClickSpark() {
         ctx.lineTo(x + Math.cos(a) * 6, y + Math.sin(a) * 6);
         ctx.stroke();
       }
-      raf = requestAnimationFrame(tick);
+      // HEMAT CPU: loop berhenti sendiri saat tak ada spark tersisa,
+      // lalu dinyalakan lagi hanya ketika ada klik.
+      if (sparks.length > 0) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        running = false;
+        raf = 0;
+      }
     };
-    raf = requestAnimationFrame(tick);
+    const kick = () => {
+      if (!running) {
+        running = true;
+        raf = requestAnimationFrame(tick);
+      }
+    };
     window.addEventListener("click", onClick, { passive: true });
+    window.addEventListener("pointerdown", kick, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);

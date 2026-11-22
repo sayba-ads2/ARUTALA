@@ -6,7 +6,7 @@ const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://arutala.web.id";
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const routes = ["", "/program", "/sponsor", "/berita", "/dokumentasi", "/sosial", "\/links", "/tentang"];
+  const routes = ["", "/program", "/sponsor", "/berita", "/dokumentasi", "/sosial", "/links", "/tentang", "/privasi", "/syarat"];
   const now = new Date();
   const statis = routes.map((r) => ({
     url: base + r,

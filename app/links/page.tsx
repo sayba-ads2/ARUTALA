@@ -55,11 +55,11 @@ export default function LinksPage() {
           <span aria-hidden="true">›</span>
         </a>
 
-        <a className="link-btn" href={site.proposalPath} rel="noopener">
+        <a className="link-btn" href="/syarat" rel="noopener">
           <span aria-hidden="true">07</span>
           <span>
-            <b>Proposal kegiatan</b>
-            <small>Dokumen PDF, 31 halaman</small>
+            <b>Syarat &amp; ketentuan</b>
+            <small>Aturan, privasi, penafian</small>
           </span>
           <span aria-hidden="true">›</span>
         </a>
