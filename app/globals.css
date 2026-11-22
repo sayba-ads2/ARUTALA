@@ -1132,10 +1132,12 @@ button {
 }
 .tier {
   display: grid;
-  grid-template-columns: 180px minmax(0, 1fr) auto;
-  gap: 1.25rem;
-  align-items: start;
-  padding: 1.4rem 0;
+  /* kolom nama dilebarkan: "Rp 2.000.000 sampai Rp 4.999.000" tidak lagi
+     terbelah dua baris sehingga judul tier sejajar dengan daftar fasilitas */
+  grid-template-columns: minmax(215px, 250px) minmax(0, 1fr) auto;
+  gap: 1.25rem 2rem;
+  align-items: baseline;
+  padding: 1.5rem 0;
   border-bottom: 1px solid var(--line);
 }
 .tier__name {
@@ -1167,11 +1169,13 @@ button {
 }
 .tier__range {
   display: block;
-  margin-top: 0.3rem;
+  margin-top: 0.35rem;
   font-family: "Plex Mono", ui-monospace, monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.02em;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
   color: var(--ink-soft);
+  text-wrap: balance;
 }
 .tier__fac {
   margin: 0;
@@ -1182,17 +1186,21 @@ button {
 }
 .tier__count {
   font-family: "Plex Mono", ui-monospace, monospace;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
+  line-height: 1.5;
   color: var(--ink-soft);
   white-space: nowrap;
+  text-align: right;
 }
 @media (max-width: 860px) {
   .tier {
     grid-template-columns: minmax(0, 1fr);
-    gap: 0.5rem;
+    gap: 0.6rem;
+    padding: 1.25rem 0;
   }
   .tier__count {
-    display: none;
+    text-align: left;
+    opacity: 0.75;
   }
 }
 
@@ -1520,11 +1528,16 @@ button {
   border: 1px dashed rgba(237, 233, 228, 0.35);
   color: rgba(237, 233, 228, 0.82);
   font-family: "Plex Mono", ui-monospace, monospace;
-  font-size: 0.625rem;
+  /* 0.625rem membuat nama sponsor terpotong di dalam kotak 3:2; 0.6rem
+     dengan tracking rapat masih terbaca untuk singkatan 2-4 huruf. */
+  font-size: clamp(0.55rem, 0.52rem + 0.18vw, 0.66rem);
+  letter-spacing: 0.01em;
   overflow: hidden;
   text-align: center;
-  padding: 2px;
-  line-height: 1.15;
+  padding: 3px;
+  line-height: 1.1;
+  word-break: break-word;
+  hyphens: auto;
 }
 .slot--filled {
   border-style: solid;
@@ -2610,70 +2623,36 @@ button {
   .rb-carousel__slide[data-active="1"] { opacity: 1; }
 }
 
-/* --- GoogleMapsEmbed: poster -> iframe, hemat & consent-friendly --- */
-.gme { border: 1px solid var(--line, rgba(237, 233, 228, 0.14)); border-radius: var(--radius, 14px); overflow: hidden; background: var(--card, #1e3a5c); }
-.gme__cover {
-  position: relative;
+/* --- GoogleMapsEmbed: iframe satelit langsung tampil --- */
+.gme {
+  border: 1px solid rgba(237, 233, 228, 0.14);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #142540;
+}
+.gme iframe {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
+  min-height: 320px;
   border: 0;
-  padding: 0;
-  cursor: pointer;
-  background: var(--river-deep, #142540);
+  /* Google Maps memakai placeholder abu-abu sebelum tile siap; samakan
+     dengan warna permukaan gelap agar tidak berkedip putih. */
+  background: #142540;
 }
-.gme__cover img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: saturate(0.92);
-  transition: transform .8s cubic-bezier(.22,1,.36,1), filter .4s ease;
-}
-.gme__cover:hover img { transform: scale(1.03); filter: saturate(1); }
-.gme__grid {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(217,168,63,.14) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(217,168,63,.14) 1px, transparent 1px);
-  background-size: 44px 44px;
-}
-.gme__badge {
-  position: absolute;
-  left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  display: inline-flex; align-items: center; gap: .55rem;
-  padding: .7rem 1.1rem;
-  border-radius: 999px;
-  background: rgba(11, 35, 66, 0.82);
-  color: #ede9e4;
-  font-size: .85rem;
-  letter-spacing: .04em;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-  transition: background .25s ease, transform .25s ease;
-}
-.gme__cover:hover .gme__badge { background: var(--gold, #d9ac4f); color: #1c3555; transform: translate(-50%, -50%) scale(1.04); }
-.gme__coords {
-  position: absolute;
-  left: .8rem; bottom: .7rem;
-  font-size: .68rem;
-  letter-spacing: .08em;
-  color: rgba(237, 233, 228, 0.75);
-  background: rgba(6, 16, 30, 0.55);
-  padding: .25rem .5rem;
-  border-radius: 6px;
-}
-.gme--live iframe {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border: 0;
-  min-height: 300px;
+@media (max-width: 720px) {
+  .gme iframe { aspect-ratio: 4 / 3; min-height: 260px; }
 }
 .gme__foot {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 1rem; flex-wrap: wrap;
-  padding: .8rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem 1rem;
+  flex-wrap: wrap;
+  padding: 0.8rem 1rem;
+  border-top: 1px solid rgba(237, 233, 228, 0.1);
 }
+.gme__foot .small { margin: 0; text-transform: none; letter-spacing: 0; }
 
 /* --- ClickSpark canvas dkk ditiadakan utk reduced motion lewat JS; --- */
 @media (prefers-reduced-motion: reduce) {
@@ -2681,7 +2660,7 @@ button {
   .rb-shiny { color: var(--muted); -webkit-text-fill-color: var(--muted); }
   .rb-spot__glow, .rb-tilt__glare { display: none; }
   .rb-tilt { transition: none; }
-  .gme__cover img, .gme__badge { transition: none; }
+  
 }
 
 /* --- tabel lebar: gulir internal, bukan dokumen --- */
@@ -2689,6 +2668,68 @@ button {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
+}
+
+/* Tabel data yang terlalu lebar di ponsel: alih-alih digeser horizontal
+   (menyembunyikan separuh kolom), setiap baris jadi blok bertumpuk dengan
+   label kolom di kiri. Tabel di layar lebar tetap seperti biasa. */
+@media (max-width: 640px) {
+  .tbl--stack {
+    min-width: 0 !important;
+    display: block;
+  }
+  .tbl--stack thead {
+    display: none;
+  }
+  .tbl--stack tbody,
+  .tbl--stack tfoot {
+    display: block;
+  }
+  .tbl--stack tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.25rem 0.75rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .tbl--stack tr:last-child {
+    border-bottom: 0;
+  }
+  .tbl--stack th,
+  .tbl--stack td {
+    display: block;
+    width: auto;
+    padding: 0;
+    border: 0;
+    white-space: normal;
+    text-align: left;
+  }
+  /* kolom judul baris memenuhi lebar penuh */
+  .tbl--stack th[scope="row"],
+  .tbl--stack tr > td:first-child {
+    grid-column: 1 / -1;
+    font-weight: 500;
+  }
+  /* label kolom muncul sebagai teks kecil di atas nilainya */
+  .tbl--stack td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-family: "Plex Mono", ui-monospace, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.62;
+    margin-bottom: 0.1rem;
+    color: currentColor;
+  }
+  /* "Ada"/"Tidak" berdampingan hemat ruang */
+  .tbl--stack td.check,
+  .tbl--stack td.dash {
+    grid-column: auto;
+  }
+  .tbl--stack .num {
+    text-align: right;
+  }
 }
 
 /* --- lembar gambar teknis rapi (di card) --- */

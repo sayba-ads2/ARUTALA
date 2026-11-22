@@ -3,7 +3,7 @@ import PageHead from "@/components/page-head";
 import SponsorBoard from "@/components/sponsor-board";
 import VestPreview from "@/components/vest-preview";
 import TenunBand from "@/components/tenun-band";
-import { adoption, facilityMatrix, logoRule, site, tiers } from "@/lib/content";
+import { adoption, facilityMatrix, logoRule, site, tiers, vestCapacity } from "@/lib/content";
 import { listSponsors } from "@/lib/repo";
 import { rupiah } from "@/lib/format";
 
@@ -58,7 +58,7 @@ export default async function SponsorPage() {
             <div>
               <p className="eyebrow">Simulasi rompi</p>
               <h2 className="section-title" id="rompi">
-                40 slot logo, satu aturan urutan.
+                {`${vestCapacity} slot logo, satu aturan urutan.`}
               </h2>
             </div>
             <p className="lede">{logoRule}</p>
@@ -108,7 +108,7 @@ export default async function SponsorPage() {
             Matriks fasilitas
           </h3>
           <div className="tbl-scroll" role="region" aria-label="Tabel dapat digeser horizontal">
-            <table className="tbl" style={{ minWidth: "620px" }}>
+            <table className="tbl tbl--stack" style={{ minWidth: "620px" }}>
               <caption className="sr-only">Fasilitas yang diterima setiap tingkat sponsor</caption>
               <thead>
                 <tr>
@@ -122,13 +122,13 @@ export default async function SponsorPage() {
               <tbody>
                 {facilityMatrix.map((row) => (
                   <tr key={row.label}>
-                    <th scope="row" style={{ fontWeight: 400, textTransform: "none", letterSpacing: 0, fontFamily: "inherit", fontSize: ".9375rem", color: "var(--ink)" }}>
+                    <th scope="row" className="tbl__rowhead" data-label="Fasilitas">
                       {row.label}
                     </th>
-                    <td className={row.buana ? "check" : "dash"}>{row.buana ? "Ada" : "Tidak"}</td>
-                    <td className={row.wana ? "check" : "dash"}>{row.wana ? "Ada" : "Tidak"}</td>
-                    <td className={row.tirta ? "check" : "dash"}>{row.tirta ? "Ada" : "Tidak"}</td>
-                    <td className={row.reguler ? "check" : "dash"}>{row.reguler ? "Ada" : "Tidak"}</td>
+                    <td data-label="Buana" className={row.buana ? "check" : "dash"}>{row.buana ? "Ada" : "Tidak"}</td>
+                    <td data-label="Wana" className={row.wana ? "check" : "dash"}>{row.wana ? "Ada" : "Tidak"}</td>
+                    <td data-label="Tirta" className={row.tirta ? "check" : "dash"}>{row.tirta ? "Ada" : "Tidak"}</td>
+                    <td data-label="Reguler" className={row.reguler ? "check" : "dash"}>{row.reguler ? "Ada" : "Tidak"}</td>
                   </tr>
                 ))}
               </tbody>
@@ -157,7 +157,7 @@ export default async function SponsorPage() {
           </div>
 
           <div className="tbl-scroll" role="region" aria-label="Tabel dapat digeser horizontal">
-            <table className="tbl" style={{ minWidth: "560px" }}>
+            <table className="tbl tbl--stack" style={{ minWidth: "560px" }}>
               <thead>
                 <tr>
                   <th scope="col">Pos kebutuhan</th>
@@ -168,11 +168,11 @@ export default async function SponsorPage() {
               <tbody>
                 {adoption.map((a) => (
                   <tr key={a.name}>
-                    <td style={{ color: "var(--paper)" }}>{a.name}</td>
-                    <td className="small" style={{ color: "var(--on-dark)" }}>
+                    <td data-label="Pos kebutuhan" style={{ color: "var(--paper)" }}>{a.name}</td>
+                    <td data-label="Keterangan" className="small" style={{ color: "var(--on-dark)" }}>
                       {a.detail}
                     </td>
-                    <td className="num" style={{ color: "var(--paper)" }}>
+                    <td data-label="Nilai" className="num" style={{ color: "var(--paper)" }}>
                       {rupiah(a.amount)}
                     </td>
                   </tr>

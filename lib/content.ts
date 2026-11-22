@@ -416,17 +416,17 @@ export const beritaSeed: BeritaSeed[] = [
     tampil: true,
   },
   {
-    slug: "pamflet-unduhan-kampanye-dana-dibuka",
-    judul: "Pamflet dan Proposal Unduhan Dibuka untuk Calon Mitra",
+    slug: "pamflet-kampanye-dana-dibuka",
+    judul: "Pamflet Kemitraan Dibuka untuk Calon Mitra",
     ringkasan:
-      "Matriks fasilitas sponsor, simulasi peletakan logo di rompi panitia, dan tautan unduh proposal tersedia publik.",
+      "Matriks fasilitas sponsor, simulasi peletakan logo di rompi panitia, dan kanal resmi kemitraan tersedia publik.",
     konten: `## Kemudahan bagi mitra
     Halaman Sponsor kini menampilkan empat tingkatan dukungan, matriks fasilitas yang jelas per tingkatan,
-    serta simulasi tata letak logo mitra pada rompi panitia. Kapasitas slot logo dibatasi empat puluh posisi
+    serta simulasi tata letak logo mitra pada rompi panitia. Kapasitas slot logo dibatasi tiga puluh delapan posisi
     agar setiap mitra mendapat tempat yang terbaca.
 
     ## Kanal resmi
-    Dokumen proposal dapat diunduh langsung dari situs. Setiap penawaran resmi selalu mencantumkan kontak
+    Ringkasan proposal dan data kegiatan dibuka di halaman Tautan. Setiap penawaran resmi selalu mencantumkan kontak
     panitia yang tercantum di halaman Tautan; di luar kanal itu bukan wewenang kepanitiaan.`,
     kategori: "Kemitraan",
     gambar_url: null,

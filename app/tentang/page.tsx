@@ -136,7 +136,7 @@ export default function TentangPage() {
           </div>
 
           <div className="tbl-scroll" role="region" aria-label="Tabel dapat digeser horizontal">
-            <table className="tbl" style={{ minWidth: "560px" }}>
+            <table className="tbl tbl--stack" style={{ minWidth: "560px" }}>
               <thead>
                 <tr>
                   <th scope="col">Pos</th>
@@ -152,18 +152,18 @@ export default function TentangPage() {
               <tbody>
                 {funding.rows.map((r) => (
                   <tr key={r.bidang}>
-                    <td>{r.bidang}</td>
-                    <td className="small muted">{r.note}</td>
-                    <td className="num">{rupiah(r.amount)}</td>
-                    <td className="num muted">{percentLabel(r.amount, funding.total)}</td>
+                    <td data-label="Pos">{r.bidang}</td>
+                    <td data-label="Keterangan" className="small muted">{r.note}</td>
+                    <td data-label="Jumlah" className="num">{rupiah(r.amount)}</td>
+                    <td data-label="Porsi" className="num muted">{percentLabel(r.amount, funding.total)}</td>
                   </tr>
                 ))}
               </tbody>
               <tfoot>
                 <tr>
-                  <td colSpan={2}>Total pengeluaran</td>
-                  <td className="num">{rupiah(funding.total)}</td>
-                  <td className="num">100%</td>
+                  <td colSpan={2} data-label="Total">Total pengeluaran</td>
+                  <td data-label="Jumlah" className="num">{rupiah(funding.total)}</td>
+                  <td data-label="Porsi" className="num">100%</td>
                 </tr>
               </tfoot>
             </table>

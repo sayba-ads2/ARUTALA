@@ -156,10 +156,8 @@ export default async function Home() {
                 lat={site.coords.lat}
                 lng={site.coords.lng}
                 zoom={13}
-                title="Peta lokasi kegiatan ARUTALA di Desa Batu Lintang, Kapuas Hulu (Google Maps)"
-                poster="/img/peta-lokasi.jpg"
-                posterAlt="Peta denah lokasi kegiatan di Desa Batu Lintang, Kecamatan Embaloh Hulu, Kabupaten Kapuas Hulu"
-                caption={`Denah proposal ${site.coords.dms}. Klik "Muat Google Maps" untuk peta interaktif.`}
+                title="Citra satelit lokasi kegiatan ARUTALA di Desa Batu Lintang, Kapuas Hulu (Google Maps)"
+                caption={`Citra satelit \u00b7 ${site.coords.dms}`}
               />
             </div>
           </div>

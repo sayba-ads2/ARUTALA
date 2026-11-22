@@ -100,8 +100,8 @@ export default async function ProgramPage() {
               </h2>
               <p className="lede" style={{ marginTop: "1.25rem" }}>
                 Program Geo-Digital Initiative menghasilkan peta wisata daerah dan pendampingan pemetaan bagi
-                perangkat desa. Peta di samping adalah denah lokasi dari proposal, menjadi dasar titik kegiatan
-                lapangan.
+                perangkat desa. Peta di samping menampilkan citra satelit lokasi kegiatan dan bisa digeser langsung
+                untuk menelusuri dusun, jalan, serta titik kerja lapangan.
               </p>
               <dl className="hero__data" style={{ marginTop: "1.5rem", borderColor: "var(--line)" }}>
                 <div style={{ borderColor: "var(--line)" }}>
@@ -124,10 +124,8 @@ export default async function ProgramPage() {
               lat={site.coords.lat}
               lng={site.coords.lng}
               zoom={14}
-              title="Peta lokasi kegiatan program ARUTALA di Desa Batu Lintang (Google Maps)"
-              poster="/img/peta-lokasi.jpg"
-              posterAlt="Peta denah lokasi kegiatan Desa Batu Lintang dengan legenda jalan, rumah warga, dan fasilitas"
-              caption="Lampiran proposal: denah lokasi skala 1:1.000, basemap Google Earth Pro."
+              title="Citra satelit lokasi kegiatan program ARUTALA di Desa Batu Lintang (Google Maps)"
+              caption={`Citra satelit \u00b7 ${site.coords.dms}`}
             />
           </div>
         </div>

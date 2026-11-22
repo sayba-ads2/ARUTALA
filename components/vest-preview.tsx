@@ -7,6 +7,23 @@ type Props = { sponsors: Sponsor[] };
 // Simulasi urutan logo pada punggung rompi. Slot 1 adalah area VIP
 // (2x2) untuk akumulasi nominal tertinggi, sisanya mengalir kiri atas
 // ke kanan bawah sesuai aturan proposal. Kapasitas = 38 slot rompi.
+/**
+ * Nama instansi sering panjang ("Perusahaan Daerah Air Minum Kapuas"), jauh
+ * lebih lebar dari slot 3:2. Untuk di dalam kotak dipakai bentuk pendek:
+ * singkatan huruf kapital bila ada, kalau tidak potongan kata pertama.
+ * Nama lengkap tetap muncul di daftar urutan dan atribut title.
+ */
+function shortName(nama: string): string {
+  const acronym = nama
+    .split(/[\s/]+/)
+    .filter((w) => w.length > 2 && /^[A-Z]/.test(w))
+    .map((w) => w[0])
+    .join("");
+  if (acronym.length >= 2 && acronym.length <= 4) return acronym;
+  const words = nama.split(/\s+/);
+  return words.length > 1 ? words.slice(0, 2).join(" ") : nama;
+}
+
 export default function VestPreview({ sponsors }: Props) {
   const ordered = [...sponsors].sort((a, b) => b.nominal_akumulasi - a.nominal_akumulasi);
   const filled = ordered.slice(0, vestCapacity);
@@ -28,7 +45,13 @@ export default function VestPreview({ sponsors }: Props) {
               key={i}
               className={`slot ${i === 0 ? "slot--vip" : ""} ${s ? "slot--filled" : ""}`}
             >
-              {s ? (s.tampilkan_nama ? s.nama_sponsor : "Sahabat Lestari") : String(i + 1).padStart(2, "0")}
+              {s ? (
+                <span title={s.tampilkan_nama ? s.nama_sponsor : "Sahabat Lestari"}>
+                  {shortName(s.tampilkan_nama ? s.nama_sponsor : "Sahabat Lestari")}
+                </span>
+              ) : (
+                String(i + 1).padStart(2, "0")
+              )}
             </div>
           ))}
           {Array.from({ length: ghostCount }, (_, i) => (
